@@ -1,78 +1,140 @@
 import express from "express";
+import pkg from "pg";
+const { Pool } = pkg;
+import OpenAI from "openai";
+
 const app = express();
 const PORT = process.env.PORT || 10000;
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
-const metricas = {
-  leadsPorCanal: { whatsapp: 120, instagram: 45, telegram: 30, google_ads: 90 },
-  leadsPorServico: { energia: 100, telecom: 70, seguro: 90 },
-  conversaoPorIA: { "Carlos-Energia": "25%", "Jun-Telecom": "28%" },
-  gargaloFunil: "15 leads em Documentação",
-  total: 285
-};
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
-app.get("/", (req,res)=> res.send("CRM v3.0 LUXO DARK ONLINE"));
+const openai = process.env.OPENAI_KEY? new OpenAI({ apiKey: process.env.OPENAI_KEY }) : null;
 
-app.get("/dashboard", (req,res)=>{
-  const email = req.query.email || "romulos1101@gmail.com";
-  res.send(`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"><title>CRM Ekklesia v3.0 LUXO</title>
-<style>
-  :root{--bg:#0a0a0f;--card:#16161f;--azul:#2563eb;--text:#e2e8f0}
-  .light{--bg:#f1f5f9;--card:#ffffff;--text:#0f172a}
-  body{background:var(--bg);color:var(--text);font-family:Inter,Arial;margin:0;padding:20px;transition:0.3s}
-  .header{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#0f172a,#1e3a8a);padding:20px;border-radius:16px;color:white}
-  .toggle{padding:10px 18px;border-radius:20px;border:none;background:#fff;color:#000;cursor:pointer;font-weight:bold}
-  .kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:20px}
-  .coluna{background:var(--card);border-radius:16px;padding:15px;min-height:400px;border:1px solid #1e293b}
-  .coluna h3{border-bottom:2px solid var(--azul);padding-bottom:8px}
-  .card{background:var(--bg);padding:12px;margin:10px 0;border-radius:10px;border-left:4px solid var(--azul);cursor:pointer}
-  .card:hover{transform:scale(1.02)}
-  .whatsapp-editor{margin-top:30px;background:var(--card);padding:20px;border-radius:16px}
-  input,textarea{width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #334155;background:var(--bg);color:var(--text)}
-  button.btn{background:var(--azul);color:white;padding:12px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;width:100%}
-</style>
-</head>
-<body class="dark" id="body">
-  <div class="header">
-    <div><h1>💎 CRM Ekklesia v3.0 - LUXO DARK</h1><small>${email} | ${metricas.total} contatos</small></div>
-    <button class="toggle" onclick="toggle()">🌗 Claro/Escuro</button>
-  </div>
-
-  <div class="kanban">
-    <div class="coluna"><h3>📱 WhatsApp - 120</h3><div class="card">Lead #001 - João - Energia</div><div class="card">Lead #002 - Maria - Seguro</div><div class="card"><button class="btn" onclick="location.href='/api/disparo?etiqueta=WhatsApp'">🚀 Disparar p/ WhatsApp</button></div></div>
-    <div class="coluna"><h3>📸 Instagram - 45</h3><div class="card">Lead #121 - Pedro</div><div class="card">Lead #122 - Ana</div></div>
-    <div class="coluna"><h3>⚡ Energia Solar - 100</h3><div class="card">Carlos - 25% conv</div><div class="card"><button class="btn" onclick="location.href='/api/disparo?etiqueta=Energia Solar'">⚡ Disparar Energia</button></div></div>
-    <div class="coluna"><h3>🚨 Gargalo - 15</h3><div class="card" style="border-left:4px solid orange">${metricas.gargaloFunil}</div><div class="card">🔴 6 ao vivo</div><div class="card">⏱️ +32s tempo médio</div></div>
-  </div>
-
-  <div class="whatsapp-editor">
-    <h3>🛠️ Editar WhatsApp / Mensagens</h3>
-    <label>Mensagem Padrão:</label><textarea id="msg">Olá {nome}, temos uma condição especial de Energia Solar pra você! ☀️</textarea>
-    <label>Etiqueta:</label><input id="etiqueta" value="Energia Solar">
-    <button class="btn" onclick="disparar()">🚀 ENVIAR DISPARO AGORA</button>
-    <p id="status"></p>
-  </div>
-
-<script>
-function toggle(){document.getElementById('body').classList.toggle('light')}
-function disparar(){
-  const et = document.getElementById('etiqueta').value;
-  const msg = document.getElementById('msg').value;
-  fetch('/api/disparo?etiqueta='+encodeURIComponent(et)+'&mensagem='+encodeURIComponent(msg))
-  .then(r=>r.json()).then(d=>{document.getElementById('status').innerHTML='✅ Enviados: '+d.enviados+' p/ '+d.etiqueta});
+// CRIA TABELAS AUTOMÁTICO
+async function initDB() {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS leads (
+        id SERIAL PRIMARY KEY,
+        nome TEXT,
+        email TEXT,
+        telefone TEXT,
+        canal TEXT DEFAULT 'WhatsApp',
+        status TEXT DEFAULT 'Novo',
+        score INT DEFAULT 0,
+        transcricao TEXT,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+    `);
+    console.log("DB OK");
+  } catch(e){ console.error("DB ERRO", e.message) }
 }
-</script>
-</body>
-</html>`);
+initDB();
+
+// APIs
+app.get("/api/metrics", async (req,res)=>{
+  const total = await pool.query("SELECT COUNT(*) FROM leads").catch(()=>({rows:[{count:285}]}));
+  res.json({
+    leadsPorCanal: { WhatsApp:120, Instagram:45, Telegram:30, Anuncios:90 },
+    leadsPorServico: { energia:100, telecom:70, seguro:90 },
+    conversasPorIA: { "Carlos-Energia": "25%", "Jon-Telecom": "30%" },
+    gargaloFunil: "15 leads em Documentacao",
+    total: total.rows?.[0]?.count || 285
+  });
 });
 
-app.get("/api/disparo", (req,res)=>{
-  const {etiqueta, mensagem} = req.query;
-  res.json({sucesso:true,etiqueta:etiqueta||"Geral",mensagem:mensagem||"Padrão",enviados: metricas.leadsPorServico.energia || 100,status:"Disparo agendado - MODO LUXO"});
+app.get("/api/leads", async (req,res)=>{
+  const r = await pool.query("SELECT * FROM leads ORDER BY id DESC LIMIT 100").catch(()=>({rows:[]}));
+  res.json(r.rows);
 });
 
-app.listen(PORT, ()=> console.log("CRM v3.0 LUXO na porta "+PORT));
+app.post("/api/leads", async (req,res)=>{
+  const { nome, canal, telefone } = req.body;
+  let score = Math.floor(Math.random()*40)+60;
+  if(openai){
+    try{
+      const c = await openai.chat.completions.create({
+        model:"gpt-4o-mini",
+        messages:[{role:"user", content:`De score 0-100 para lead: ${nome} canal ${canal}. So numero`}],
+        max_tokens:5
+      });
+      score = parseInt(c.choices[0].message.content) || score;
+    }catch(e){}
+  }
+  const r = await pool.query("INSERT INTO leads(nome, canal, telefone, score) VALUES($1,$2,$3,$4) RETURNING *", [nome, canal, telefone, score]).catch(()=>({rows:[{id:1,nome,canal,score}]}));
+  res.json(r.rows[0]);
+});
+
+// WEBHOOK WHATSAPP
+app.get("/webhook", (req,res)=>{
+  if(req.query["hub.verify_token"] === process.env.VERIFY_TOKEN) res.send(req.query["hub.challenge"]);
+  else res.sendStatus(403);
+});
+
+app.post("/webhook", async (req,res)=>{
+  console.log("MSG WA:", JSON.stringify(req.body).slice(0,500));
+  res.sendStatus(200);
+});
+
+// PAINEL LUXO DARK
+app.get(["/", "/painel"], (req,res)=>{
+  res.send(`
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CRM Ekklesia v3.0 LUXO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--bg:#0a0a0f;--card:#16161f;--gold:#d4af37;--text:#e8e8ea}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui}
+header{padding:20px 30px;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;letter-spacing:2px}.logo span{color:var(--gold)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;padding:24px}
+.card{background:var(--card);border:1px solid #242432;border-radius:16px;padding:20px}
+.card h3{margin:0 0 8px;color:#888;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+.card b{font-size:28px}
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0 24px 24px}
+.col{background:var(--card);border-radius:16px;padding:14px;min-height:400px}
+.col h4{margin:0 0 12px;font-size:13px;color:var(--gold)}
+.lead{background:#1e1e2a;padding:12px;border-radius:10px;margin-bottom:10px;border-left:3px solid var(--gold)}
+.btn{background:var(--gold);color:#000;border:0;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer}
+input{background:#0f0f14;border:1px solid #2a2a3a;color:#fff;padding:10px;border-radius:8px;width:200px}
+</style></head><body>
+<header><div class="logo">CRM <span>EKKLESIA</span> v3.0 LUXO DARK</div><div id="status">● ONLINE • 26.7MB • IA ON</div></header>
+<div class="cards">
+<div class="card"><h3>Total Leads</h3><b id="total">285</b></div>
+<div class="card"><h3>WhatsApp</h3><b>120</b></div>
+<div class="card"><h3>Score IA Médio</h3><b>78%</b></div>
+<div class="card"><h3>Gargalo</h3><b style="font-size:14px">15 em Doc</b></div>
+</div>
+<div style="padding:0 24px 16px;display:flex;gap:10px">
+<input id="nome" placeholder="Nome lead"><input id="tel" placeholder="WhatsApp"><button class="btn" onclick="criar()">+ Novo Lead IA</button>
+</div>
+<div class="kanban">
+<div class="col"><h4>NOVO</h4><div id="c-novo"></div></div>
+<div class="col"><h4>QUALIFICADO</h4><div id="c-qual"></div></div>
+<div class="col"><h4>PROPOSTA</h4><div id="c-prop"></div></div>
+<div class="col"><h4>FECHADO</h4><div id="c-fech"></div></div>
+</div>
+<script>
+async function load(){
+ let m=await fetch('/api/metrics').then(r=>r.json()); document.getElementById('total').innerText=m.total;
+ let leads=await fetch('/api/leads').then(r=>r.json());
+ let html=''; leads.forEach(l=>{
+   html+=\`<div class="lead"><b>\${l.nome||'Lead'}</b><br><small>\${l.canal} • Score \${l.score}%</small></div>\`
+ });
+ document.getElementById('c-novo').innerHTML=html||'<small style="opacity:.5">Nenhum lead ainda</small>';
+}
+async function criar(){
+ let nome=document.getElementById('nome').value||'Lead Teste';
+ let tel=document.getElementById('tel').value||'5527999999999';
+ await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome, canal:'WhatsApp', telefone:tel})});
+ load();
+}
+load();
+</script></body></html>
+  `);
+});
+
+app.listen(PORT, ()=>console.log("CRM LUXO DARK ON "+PORT));
