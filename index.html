@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRM EKKLESIA v3.2 LUXO</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial}
+body{background:#0f0f14;color:#fff;padding:20px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.header h1{color:#facc15;font-size:22px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.card-stat{background:#1e1e2a;padding:16px;border-radius:12px;border:1px solid #2a2a3a}
+.card-stat b{font-size:12px;color:#aaa;display:block;margin-bottom:6px}
+.card-stat span{font-size:26px;font-weight:800}
+.form{display:flex;gap:10px;margin-bottom:18px}
+.form input{padding:12px;border-radius:10px;border:1px solid #333;background:#1e1e2a;color:#fff;flex:1}
+.form button{padding:12px 18px;border-radius:10px;border:0;background:#facc15;color:#000;font-weight:800;cursor:pointer}
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.col{background:#1a1a26;border-radius:14px;padding:12px;min-height:400px;border:1px solid #2a2a3a}
+.col h3{color:#facc15;font-size:13px;margin-bottom:10px}
+.lead{background:#252536;padding:10px;border-radius:10px;margin-bottom:8px;border-left:4px solid #facc15}
+.lead b{display:block;font-size:14px}
+.lead small{color:#aaa}
+.lead .btns{margin-top:8px;display:flex;gap:6px}
+.lead .btns button{font-size:10px;padding:5px 8px;border-radius:6px;border:0;cursor:pointer}
+.btn-mover{background:#facc15;color:#000}
+.btn-zap{background:#25D366;color:#000}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>CRM EKKLESIA v3.2 LUXO DARK</h1>
+<div style="font-size:11px;color:#0f0">● ONLINE • IA ON</div>
+</div>
+
+<div class="stats">
+<div class="card-stat"><b>TOTAL LEADS</b><span id="total">0</span></div>
+<div class="card-stat"><b>WHATSAPP</b><span id="whats">0</span></div>
+<div class="card-stat"><b>SCORE IA MÉDIO</b><span id="media">0%</span></div>
+<div class="card-stat"><b>GARGALO</b><span id="gargalo">0 em Prop</span></div>
+</div>
+
+<div class="form">
+<input id="nome" placeholder="Nome lead">
+<input id="zap" placeholder="WhatsApp">
+<button onclick="criar()">+ Novo Lead IA</button>
+</div>
+
+<div class="kanban">
+<div class="col" id="novo"><h3>NOVO</h3></div>
+<div class="col" id="qualificado"><h3>QUALIFICADO</h3></div>
+<div class="col" id="proposta"><h3>PROPOSTA</h3></div>
+<div class="col" id="fechado"><h3>FECHADO</h3></div>
+</div>
+
+<script>
+const API = '/api';
+
+async function load(){
+ const [leads, stats] = await Promise.all([
+   fetch(`${API}/leads`).then(r=>r.json()),
+   fetch(`${API}/stats`).then(r=>r.json())
+ ]);
+ document.getElementById('total').innerText = stats.total;
+ document.getElementById('whats').innerText = stats.whatsapp;
+ document.getElementById('media').innerText = stats.media + '%';
+ document.getElementById('gargalo').innerText = stats.gargalo + ' em Prop';
+
+ ['novo','qualificado','proposta','fechado'].forEach(s=> document.getElementById(s).innerHTML = `<h3>${s.toUpperCase()}</h3>`);
+
+ leads.forEach(l=>{
+   const div = document.createElement('div');
+   div.className='lead';
+   div.innerHTML = `<b>${l.nome}</b><small>WhatsApp • Score ${l.score_ia}%</small>
+   <div class="btns">
+     <button class="btn-zap" onclick="window.open('https://wa.me/55${l.whatsapp}','_blank')">WhatsApp</button>
+     <button class="btn-mover" onclick="mover(${l.id},'${nextStatus(l.status)}')">→ ${nextStatus(l.status)}</button>
+   </div>`;
+   const col = document.getElementById(l.status) || document.getElementById('novo');
+   col.appendChild(div);
+ });
+}
+
+function nextStatus(s){
+ if(s==='novo') return 'qualificado';
+ if(s==='qualificado') return 'proposta';
+ if(s==='proposta') return 'fechado';
+ return 'fechado';
+}
+
+async function criar(){
+ const nome=document.getElementById('nome').value;
+ const whatsapp=document.getElementById('zap').value;
+ if(!nome||!whatsapp) return alert('Preenche nome e zap');
+ const res=await fetch(`${API}/leads`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome,whatsapp})});
+ if(res.ok){document.getElementById('nome').value='';document.getElementById('zap').value='';load();} else alert('Erro ao criar');
+}
+
+async function mover(id,status){
+ await fetch(`${API}/leads/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});
+ load();
+}
+
+load();
+</script>
+</body>
+</html>
