@@ -2,95 +2,146 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRM Ekklesia v3.4 PRO</title>
+<title>CRM EKKLESIA v4 DKW</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
-body{background:#0a0a0a;color:#fff;padding:15px}
-.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:15px}
-.top h1 span{color:#ffcc00}
-.stats{display:flex;gap:10px;flex-wrap:wrap}
-.stat{background:#1a1a1a;border:1px solid #333;padding:10px 15px;border-radius:10px;min-width:100px}
-.stat b{font-size:20px;color:#ffcc00;display:block}
-.bar{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}
-.bar input, .bar button{padding:12px;border-radius:8px;border:none}
-.bar input{background:#1a1a1a;color:#fff;border:1px solid #333;flex:1;min-width:150px}
-.bar button{background:#ffcc00;color:#000;font-weight:800;cursor:pointer}
-.bar .ghost{background:#222;color:#fff;border:1px solid #444}
-.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.col{background:#111;border:1px solid #222;border-radius:12px;padding:10px;min-height:400px}
-.col h3{margin-bottom:10px;font-size:14px}
-.card{background:#1e1e1e;border:1px solid #333;border-radius:10px;padding:10px;margin-bottom:8px}
-.card .score{float:right;background:#ffcc00;color:#000;font-weight:800;padding:2px 6px;border-radius:6px;font-size:12px}
-.card .zap{font-size:12px;color:#888}
-.card .obs{font-size:11px;color:#bbb;margin-top:6px;background:#151515;padding:4px;border-radius:4px;white-space:pre-wrap}
-.card .actions{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
-.card .actions button{font-size:11px;padding:5px 7px;border-radius:6px;border:none;cursor:pointer}
-.btn-mov{background:#333;color:#fff}.btn-del{background:#ff2d2d;color:#fff}.btn-zap{background:#25d366;color:#000;font-weight:700}.btn-edit{background:#ffcc00;color:#000}
-.search{width:100%;margin-bottom:12px;padding:12px;border-radius:8px;border:1px solid #333;background:#1a1a1a;color:#fff}
-@media(max-width:900px){.kanban{grid-template-columns:1fr 1fr} }@media(max-width:600px){.kanban{grid-template-columns:1fr} }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
+body{background:#f5f5f7;display:flex;height:100vh;overflow:hidden}
+.sidebar{width:260px;background:#fff;border-right:1px solid #e5e5e5;padding:18px;display:flex;flex-direction:column}
+.logo{font-weight:800;font-size:22px;margin-bottom:20px}.logo span{color:#ffcc00}
+.search-box{background:#f1f1f3;border:1px solid #e5e5e5;padding:10px 12px;border-radius:10px;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.menu{flex:1}.menu div{padding:10px 8px;border-radius:8px;color:#555;cursor:pointer;display:flex;gap:10px;font-size:14px}
+.menu div.active,.menu div:hover{background:#111;color:#fff}
+.main{flex:1;overflow:auto;padding:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.pill{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:8px 12px;font-size:13px}
+.add-area{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:12px;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.add-area input{border:1px solid #ddd;border-radius:8px;padding:10px;flex:1;min-width:150px}
+.add-area button{border:none;border-radius:8px;padding:10px 14px;font-weight:800;cursor:pointer}
+.btn-black{background:#111;color:#fff}.btn-yellow{background:#ffcc00}
+.kanban{display:flex;gap:14px;overflow-x:auto;padding-bottom:20px}
+.coluna{min-width:320px;background:#efeff1;border-radius:14px;padding:10px}
+.col-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.col-header b{font-size:13px}.col-header span{font-size:12px;color:#666;background:#fff;padding:4px 8px;border-radius:20px;border:1px solid #e5e5e5}
+.card{background:#fff;border-radius:12px;border:1px solid #e8e8e8;padding:12px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card-top{display:flex;justify-content:space-between;align-items:start}
+.avatar{width:32px;height:32px;border-radius:50%;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.valor{color:#00a650;font-weight:800;font-size:13px;display:flex;align-items:center;gap:4px}
+.nome{font-weight:600;font-size:14px;margin-top:6px}
+.fone{font-size:12px;color:#666}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:10px;padding:4px 7px;border-radius:12px;font-weight:600}
+.t-novo{background:#e8e8e8;color:#333}.t-quali{background:#dbeafe;color:#1d4ed8}.t-prop{background:#fef3c7;color:#92400e}.t-fech{background:#dcfce7;color:#166534}.t-ia{background:#ffcc00;color:#000}
+.icons{margin-top:10px;display:flex;gap:8px;border-top:1px solid #f0f0f0;padding-top:8px}
+.icons button{border:none;background:#f5f5f5;width:28px;height:28px;border-radius:8px;cursor:pointer}
+.icons button:hover{background:#111;color:#fff}
 </style>
 </head>
 <body>
-<div class="top">
-<h1>CRM <span>EKKLESIA</span> v3.4 PRO</h1>
-<div class="stats">
-<div class="stat"><b id="t-total">0</b>TOTAL</div>
-<div class="stat"><b id="t-whats">0</b>WHATSAPP</div>
-<div class="stat"><b id="t-fechado">0</b>FECHADOS</div>
-<div class="stat"><b id="t-valor">R$ 0</b>VALOR</div>
+<div class="sidebar">
+<div class="logo">DKW <span style="color:#111">| EKKLESIA</span></div>
+<div class="search-box">🔍 <input id="busca" placeholder="Buscar..." style="border:none;background:transparent;outline:none;width:100%"></div>
+<div class="menu">
+<div class="active">🏠 Início</div>
+<div>📊 Relatórios</div>
+<div>💬 Conversas</div>
+<div>📞 DS Voice</div>
+<div class="active">📁 CRM ▼</div>
+<div>📍 DS Track</div>
+<div>🧩 Recursos</div>
+<div>🤖 Automações ▲</div>
+<div style="padding-left:20px;font-size:12px">⚡ Fluxos de Automação BETA</div>
+<div style="padding-left:20px;font-size:12px">🧠 DS Agente</div>
+<div>⚙️ Filas</div>
+<div>🔌 API</div>
+</div>
+<div style="font-size:12px;color:#888;margin-top:10px">RÔMULO<br><b id="total-geral">R$ 0 • 0 negócios</b></div>
+</div>
+
+<div class="main">
+<div class="topbar">
+<h2 style="font-size:18px">PÓS VENDA - Ekklesia</h2>
+<div style="display:flex;gap:8px">
+<div class="pill">Total: <b id="pill-total">R$ 0</b></div>
+<div class="pill"><span id="pill-qtd">0 negócios</span></div>
+<button class="btn-black" onclick="exportCSV()" style="border-radius:20px">📥 Exportar CSV</button>
 </div>
 </div>
-<input id="busca" class="search" placeholder="🔍 Buscar lead por nome ou whatsapp...">
-<div class="bar">
-<input id="nome" placeholder="Nome / Igreja">
-<input id="whatsapp" placeholder="WhatsApp (só números)">
-<input id="observacao" placeholder="Obs / Valor ex: Cliente quer 3 cultos - R$1500">
-<button onclick="criarLead()">+ Lead IA</button>
-<button class="ghost" onclick="exportCSV()">📥 Exportar CSV</button>
+
+<div class="add-area">
+<input id="nome" placeholder="Nome / Igreja (ex: Igreja Batista)">
+<input id="whatsapp" placeholder="WhatsApp só números">
+<input id="observacao" placeholder="Obs + Valor ex: Quer 3 cultos - R$1500">
+<button class="btn-yellow" onclick="criarLead()">+ Lead IA</button>
+<button class="btn-black" onclick="carregar()">↻ Atualizar</button>
 </div>
+
 <div class="kanban">
-<div class="col" data-status="novo"><h3>📋 NOVO</h3><div id="col-novo"></div></div>
-<div class="col" data-status="qualificado"><h3>⭐ QUALIFICADO</h3><div id="col-qualificado"></div></div>
-<div class="col" data-status="proposta"><h3>💰 PROPOSTA</h3><div id="col-proposta"></div></div>
-<div class="col" data-status="fechado"><h3>✅ FECHADO</h3><div id="col-fechado"></div></div>
+<div class="coluna" id="wrap-novo"><div class="col-header"><b>ONBOARDING - NOVO</b><span id="h-novo">Total: R$ 0 • 0</span></div><div id="col-novo"></div></div>
+<div class="coluna" id="wrap-qual"><div class="col-header"><b>QUALIFICADO</b><span id="h-qualificado">Total: R$ 0 • 0</span></div><div id="col-qualificado"></div></div>
+<div class="coluna" id="wrap-prop"><div class="col-header"><b>PROPOSTA / REUNIÃO AGENDADA</b><span id="h-proposta">Total: R$ 0 • 0</span></div><div id="col-proposta"></div></div>
+<div class="coluna" id="wrap-fech"><div class="col-header"><b>FECHADO - CLIENTE COMPRA</b><span id="h-fechado">Total: R$ 0 • 0</span></div><div id="col-fechado"></div></div>
 </div>
+</div>
+
 <script>
 let leads=[];
 async function carregar(){ const r=await fetch('/api/leads'); leads=await r.json(); render(); }
 function render(){
   const busca=document.getElementById('busca').value.toLowerCase();
-  let filtrados=leads.filter(l=>(l.nome+l.whatsapp).toLowerCase().includes(busca));
+  let f=leads.filter(l=>(l.nome+l.whatsapp+(l.observacao||'')).toLowerCase().includes(busca));
   ['novo','qualificado','proposta','fechado'].forEach(st=>{document.getElementById('col-'+st).innerHTML='';});
-  let totalValor=0;
-  filtrados.forEach(l=>{
-    totalValor+=Number(l.valor||0);
-    const col=document.getElementById('col-'+(l.status||'novo')); if(!col) return;
+  let totais={novo:{q:0,v:0},qualificado:{q:0,v:0},proposta:{q:0,v:0},fechado:{q:0,v:0}};
+  f.forEach(l=>{
+    let st=l.status||'novo'; totais[st].q++; totais[st].v+=Number(l.valor||0);
+    const col=document.getElementById('col-'+st); if(!col) return;
+    const letra=l.nome.charAt(0).toUpperCase();
+    const tagStatus = st==='novo'?'NOVO':st==='qualificado'?'MQL':st==='proposta'?'FD 2 - Proposta':'FECHADO';
+    const tagClass = st==='novo'?'t-novo':st==='qualificado'?'t-quali':st==='proposta'?'t-prop':'t-fech';
     const div=document.createElement('div'); div.className='card';
-    div.innerHTML=`<span class="score">${l.score_ia||65}%</span><b>${l.nome}</b><br><span class="zap">${l.whatsapp} ${l.valor>0?'• R$ '+l.valor:''}</span>${l.observacao?`<div class="obs">${l.observacao}</div>`:''}<div class="actions">${l.status!='novo'?`<button class="btn-mov" onclick="mover(${l.id},'novo')">Novo</button>`:''}${l.status!='qualificado'?`<button class="btn-mov" onclick="mover(${l.id},'qualificado')">Quali</button>`:''}${l.status!='proposta'?`<button class="btn-mov" onclick="mover(${l.id},'proposta')">Proposta</button>`:''}${l.status!='fechado'?`<button class="btn-mov" onclick="mover(${l.id},'fechado')">Fechado</button>`:''}<button class="btn-zap" onclick="abrirZap('${l.whatsapp}')">Zap</button><button class="btn-edit" onclick="editarLead(${l.id})">Editar</button><button class="btn-del" onclick="deletar(${l.id})">X</button></div>`;
+    div.innerHTML=`
+      <div class="card-top"><div style="display:flex;gap:8px;align-items:center"><div class="avatar">${letra}</div><div><div class="nome">${l.nome}</div><div class="fone">+55 ${l.whatsapp}</div></div></div><div class="valor">R$ ${l.valor||0} 💲</div></div>
+      <div class="tags">
+        <span class="tag ${tagClass}">${tagStatus}</span>
+        <span class="tag t-ia">${l.score_ia||65}% IA</span>
+        ${st==='qualificado'?'<span class="tag" style="background:#e0f2fe;color:#0369a1">Call realizada</span>':''}
+        ${st==='proposta'?'<span class="tag" style="background:#fde68a;color:#92400e">Reunião Agendada</span>':''}
+        <span class="tag" style="background:#f3e8ff;color:#6b21a8">${l.observacao?l.observacao.substring(0,20):'Sem obs'}</span>
+      </div>
+      <div class="icons">
+        <button title="Mover" onclick="menuMover(${l.id})">🔀</button>
+        <button title="WhatsApp" onclick="abrirZap('${l.whatsapp}')">💬</button>
+        <button title="Ligar" onclick="abrirZap('${l.whatsapp}')">📞</button>
+        <button title="Editar" onclick="editarLead(${l.id})">✏️</button>
+        <button title="Deletar" onclick="deletar(${l.id})">🗑️</button>
+      </div>
+    `;
     col.appendChild(div);
   });
-  document.getElementById('t-total').innerText=filtrados.length;
-  document.getElementById('t-whats').innerText=filtrados.length;
-  document.getElementById('t-fechado').innerText=filtrados.filter(l=>l.status=='fechado').length;
-  document.getElementById('t-valor').innerText='R$ '+totalValor;
+  document.getElementById('h-novo').innerText=`Total: R$ ${totais.novo.v} • ${totais.novo.q}`;
+  document.getElementById('h-qualificado').innerText=`Total: R$ ${totais.qualificado.v} • ${totais.qualificado.q}`;
+  document.getElementById('h-proposta').innerText=`Total: R$ ${totais.proposta.v} • ${totais.proposta.q}`;
+  document.getElementById('h-fechado').innerText=`Total: R$ ${totais.fechado.v} • ${totais.fechado.q}`;
+  let totalGeral=f.reduce((a,b)=>a+Number(b.valor||0),0);
+  document.getElementById('pill-total').innerText=`R$ ${totalGeral}`;
+  document.getElementById('pill-qtd').innerText=`${f.length} negócios`;
+  document.getElementById('total-geral').innerText=`R$ ${totalGeral} • ${f.length} negócios`;
 }
 async function criarLead(){
-  const nome=document.getElementById('nome').value.trim();
-  let whatsapp=document.getElementById('whatsapp').value.trim().replace(/\D/g,'');
-  const obsInput=document.getElementById('observacao').value.trim();
-  if(!nome||!whatsapp){alert('Preencha nome e whatsapp');return;}
-  let valor=0; const m=obsInput.match(/(\d+[.,]?\d*)/); if(obsInput.toLowerCase().includes('r$')&&m){valor=parseFloat(m[1].replace(',','.'))||0;}
-  const res=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome,whatsapp,observacao:obsInput,valor})});
-  if(!res.ok){const e=await res.json();alert('Erro: '+e.error);return;}
-  document.getElementById('nome').value='';document.getElementById('whatsapp').value='';document.getElementById('observacao').value='';
-  carregar();
+  const nome=document.getElementById('nome').value.trim(); let whatsapp=document.getElementById('whatsapp').value.trim().replace(/\D/g,''); const obs=document.getElementById('observacao').value.trim();
+  if(!nome||!whatsapp){alert('Nome e WhatsApp obrigatório');return;}
+  let valor=0; const m=obs.match(/(\d+[.,]?\d*)/); if(obs.toLowerCase().includes('r$')&&m) valor=parseFloat(m[1].replace(',','.'))||0;
+  const res=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome,whatsapp,observacao:obs,valor})});
+  if(!res.ok){alert('Erro');return;}
+  document.getElementById('nome').value='';document.getElementById('whatsapp').value='';document.getElementById('observacao').value=''; carregar();
 }
-async function mover(id,status){await fetch('/api/leads/'+id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});carregar();}
-async function deletar(id){if(!confirm('Apagar lead?'))return;await fetch('/api/leads/'+id,{method:'DELETE'});carregar();}
-function abrirZap(wpp){window.open('https://wa.me/55'+wpp,'_blank');}
-async function editarLead(id){const l=leads.find(x=>x.id==id);const novaObs=prompt('Observação:',l.observacao||'');if(novaObs===null)return;const novoValor=prompt('Valor da venda:',l.valor||0);if(novoValor===null)return;await fetch('/api/leads/'+id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({observacao:novaObs,valor:parseFloat(novoValor)||0})});carregar();}
-function exportCSV(){let csv='nome,whatsapp,status,score,valor,observacao\n';leads.forEach(l=>{csv+=`"${l.nome}","${l.whatsapp}","${l.status}",${l.score_ia},${l.valor||0},"${(l.observacao||'').replace(/"/g,'""')}"\n`;});const blob=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='leads-ekklesia.csv';a.click();}
-document.getElementById('busca').addEventListener('input',render);carregar();
+async function menuMover(id){ const novo=prompt('Mover para: novo, qualificado, proposta, fechado'); if(!novo) return; await fetch('/api/leads/'+id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:novo})}); carregar(); }
+async function deletar(id){ if(!confirm('Apagar?')) return; await fetch('/api/leads/'+id,{method:'DELETE'}); carregar(); }
+function abrirZap(w){ window.open('https://wa.me/55'+w,'_blank'); }
+async function editarLead(id){ const l=leads.find(x=>x.id==id); const obs=prompt('Observação:',l.observacao||''); if(obs===null) return; const val=prompt('Valor:',l.valor||0); if(val===null) return; await fetch('/api/leads/'+id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({observacao:obs,valor:parseFloat(val)||0})}); carregar(); }
+function exportCSV(){ let csv='nome,whatsapp,status,score,valor,observacao\n'; leads.forEach(l=>{csv+=`"${l.nome}","${l.whatsapp}","${l.status}",${l.score_ia},${l.valor||0},"${(l.observacao||'').replace(/"/g,'""')}"\n`;}); const b=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='ekklesia-dkw.csv'; a.click(); }
+document.getElementById('busca').addEventListener('input',render);
+carregar();
 </script>
 </body>
 </html>
