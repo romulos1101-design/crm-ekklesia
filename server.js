@@ -1,79 +1,78 @@
 import express from "express";
 const app = express();
 const PORT = process.env.PORT || 10000;
-
 app.use(express.json());
 
-// DADOS DO DASHBOARD
 const metricas = {
   leadsPorCanal: { whatsapp: 120, instagram: 45, telegram: 30, google_ads: 90 },
   leadsPorServico: { energia: 100, telecom: 70, seguro: 90 },
   conversaoPorIA: { "Carlos-Energia": "25%", "Jun-Telecom": "28%" },
-  gargaloFunil: "15 leads parados em Documentação - melhorar explicação",
-  tempoMedio: "mais 32s",
-  taxaResposta: "85%",
-  atendimentoAoVivo: 6,
-  totalContatos: 285
+  gargaloFunil: "15 leads em Documentação",
+  total: 285
 };
 
-app.get("/", (req,res)=>{
-  res.send("CRM Ekklesia v2.5 AZUL - ONLINE ✅ | Use /dashboard?email=seu@email.com");
-});
+app.get("/", (req,res)=> res.send("CRM v3.0 LUXO DARK ONLINE"));
 
 app.get("/dashboard", (req,res)=>{
   const email = req.query.email || "romulos1101@gmail.com";
-  const html = `
-  <!DOCTYPE html>
-  <html>
-  <head><title>CRM Ekklesia - Dashboard</title>
-  <meta charset="UTF-8">
-  <style>
-    body{font-family:Arial;background:#f0f4ff;margin:0;padding:20px}
-    .header{background:#0d47a1;color:white;padding:20px;border-radius:12px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin-top:20px}
-    .card{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);border-left:5px solid #0d47a1}
-    .card h3{margin:0 0 10px 0;color:#0d47a1}
-    .valor{font-size:28px;font-weight:bold;color:#1565c0}
-    .alerta{background:#fff3e0;border-left:5px solid #ff9800}
-    button{background:#0d47a1;color:white;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-weight:bold}
-  </style>
-  </head>
-  <body>
-    <div class="header">
-      <h1>🔵 CRM Ekklesia v2.5 - Dashboard Gerencial</h1>
-      <p>Usuário: ${email} | Total: ${metricas.totalContatos} contatos</p>
-    </div>
-    <div class="grid">
-      <div class="card"><h3>📱 WhatsApp</h3><div class="valor">${metricas.leadsPorCanal.whatsapp} leads</div></div>
-      <div class="card"><h3>📸 Instagram</h3><div class="valor">${metricas.leadsPorCanal.instagram} leads</div></div>
-      <div class="card"><h3>✈️ Telegram</h3><div class="valor">${metricas.leadsPorCanal.telegram} leads</div></div>
-      <div class="card"><h3>🎯 Google Ads</h3><div class="valor">${metricas.leadsPorCanal.google_ads} leads</div></div>
-      <div class="card"><h3>⚡ Energia Solar</h3><div class="valor">${metricas.leadsPorServico.energia} leads</div></div>
-      <div class="card"><h3>📡 Telecom</h3><div class="valor">${metricas.leadsPorServico.telecom} leads</div></div>
-      <div class="card"><h3>🛡️ Seguro</h3><div class="valor">${metricas.leadsPorServico.seguro} leads</div></div>
-      <div class="card alerta"><h3>🚨 Gargalo do Funil</h3><div>${metricas.gargaloFunil}</div></div>
-    </div>
-    <div class="grid" style="margin-top:20px">
-      <div class="card"><h3>🤖 Conversão IA</h3>Carlos: ${metricas.conversaoPorIA["Carlos-Energia"]} | Jun: ${metricas.conversaoPorIA["Jun-Telecom"]}</div>
-      <div class="card"><h3>⏱️ Tempo Médio</h3><div class="valor">${metricas.tempoMedio}</div></div>
-      <div class="card"><h3>💬 Taxa Resposta</h3><div class="valor">${metricas.taxaResposta}</div></div>
-      <div class="card"><h3>🔴 Ao Vivo</h3><div class="valor">${metricas.atendimentoAoVivo} agentes</div></div>
-    </div>
-    <div style="margin-top:20px" class="card">
-      <h3>🚀 Disparo em Massa por Etiqueta</h3>
-      <p>Ex: /api/disparo?etiqueta=Energia%20Solar&mensagem=Promoção</p>
-      <a href="/api/disparo?etiqueta=Energia Solar"><button>Testar Disparo Energia Solar</button></a>
-    </div>
-  </body>
-  </html>
-  `;
-  res.send(html);
+  res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><title>CRM Ekklesia v3.0 LUXO</title>
+<style>
+  :root{--bg:#0a0a0f;--card:#16161f;--azul:#2563eb;--text:#e2e8f0}
+  .light{--bg:#f1f5f9;--card:#ffffff;--text:#0f172a}
+  body{background:var(--bg);color:var(--text);font-family:Inter,Arial;margin:0;padding:20px;transition:0.3s}
+  .header{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#0f172a,#1e3a8a);padding:20px;border-radius:16px;color:white}
+  .toggle{padding:10px 18px;border-radius:20px;border:none;background:#fff;color:#000;cursor:pointer;font-weight:bold}
+  .kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:20px}
+  .coluna{background:var(--card);border-radius:16px;padding:15px;min-height:400px;border:1px solid #1e293b}
+  .coluna h3{border-bottom:2px solid var(--azul);padding-bottom:8px}
+  .card{background:var(--bg);padding:12px;margin:10px 0;border-radius:10px;border-left:4px solid var(--azul);cursor:pointer}
+  .card:hover{transform:scale(1.02)}
+  .whatsapp-editor{margin-top:30px;background:var(--card);padding:20px;border-radius:16px}
+  input,textarea{width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #334155;background:var(--bg);color:var(--text)}
+  button.btn{background:var(--azul);color:white;padding:12px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;width:100%}
+</style>
+</head>
+<body class="dark" id="body">
+  <div class="header">
+    <div><h1>💎 CRM Ekklesia v3.0 - LUXO DARK</h1><small>${email} | ${metricas.total} contatos</small></div>
+    <button class="toggle" onclick="toggle()">🌗 Claro/Escuro</button>
+  </div>
+
+  <div class="kanban">
+    <div class="coluna"><h3>📱 WhatsApp - 120</h3><div class="card">Lead #001 - João - Energia</div><div class="card">Lead #002 - Maria - Seguro</div><div class="card"><button class="btn" onclick="location.href='/api/disparo?etiqueta=WhatsApp'">🚀 Disparar p/ WhatsApp</button></div></div>
+    <div class="coluna"><h3>📸 Instagram - 45</h3><div class="card">Lead #121 - Pedro</div><div class="card">Lead #122 - Ana</div></div>
+    <div class="coluna"><h3>⚡ Energia Solar - 100</h3><div class="card">Carlos - 25% conv</div><div class="card"><button class="btn" onclick="location.href='/api/disparo?etiqueta=Energia Solar'">⚡ Disparar Energia</button></div></div>
+    <div class="coluna"><h3>🚨 Gargalo - 15</h3><div class="card" style="border-left:4px solid orange">${metricas.gargaloFunil}</div><div class="card">🔴 6 ao vivo</div><div class="card">⏱️ +32s tempo médio</div></div>
+  </div>
+
+  <div class="whatsapp-editor">
+    <h3>🛠️ Editar WhatsApp / Mensagens</h3>
+    <label>Mensagem Padrão:</label><textarea id="msg">Olá {nome}, temos uma condição especial de Energia Solar pra você! ☀️</textarea>
+    <label>Etiqueta:</label><input id="etiqueta" value="Energia Solar">
+    <button class="btn" onclick="disparar()">🚀 ENVIAR DISPARO AGORA</button>
+    <p id="status"></p>
+  </div>
+
+<script>
+function toggle(){document.getElementById('body').classList.toggle('light')}
+function disparar(){
+  const et = document.getElementById('etiqueta').value;
+  const msg = document.getElementById('msg').value;
+  fetch('/api/disparo?etiqueta='+encodeURIComponent(et)+'&mensagem='+encodeURIComponent(msg))
+  .then(r=>r.json()).then(d=>{document.getElementById('status').innerHTML='✅ Enviados: '+d.enviados+' p/ '+d.etiqueta});
+}
+</script>
+</body>
+</html>`);
 });
 
 app.get("/api/disparo", (req,res)=>{
   const {etiqueta, mensagem} = req.query;
-  if(!etiqueta) return res.status(400).json({erro:"Informe ?etiqueta=Energia Solar"});
-  res.json({sucesso:true, etiqueta, mensagem: mensagem||"Mensagem padrão", enviados: metricas.leadsPorServico.energia, status:"Disparo agendado"});
+  res.json({sucesso:true,etiqueta:etiqueta||"Geral",mensagem:mensagem||"Padrão",enviados: metricas.leadsPorServico.energia || 100,status:"Disparo agendado - MODO LUXO"});
 });
 
-app.listen(PORT, ()=> console.log(`CRM v2.5 AZUL na porta ${PORT}`));
+app.listen(PORT, ()=> console.log("CRM v3.0 LUXO na porta "+PORT));
