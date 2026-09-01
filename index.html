@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CRM EKKLESIA v3.2 LUXO</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRM EKKLESIA v3.3 ULTRA</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
-body{background:#0f0f14;color:#fff;padding:18px}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.header h1{color:#facc15}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.card-stat{background:#1e1e2a;padding:14px;border-radius:12px;border:1px solid #2a2a3a}
-.card-stat b{font-size:11px;color:#999;display:block;margin-bottom:4px}
-.card-stat span{font-size:24px;font-weight:800}
-.form{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.form input{flex:1;min-width:150px;padding:12px;border-radius:10px;border:1px solid #333;background:#1e1e2a;color:#fff;outline:none}
-.form button{padding:12px 18px;border-radius:10px;border:0;background:#facc15;color:#000;font-weight:900;cursor:pointer}
-.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.col{background:#15151f;border-radius:14px;padding:10px;min-height:450px;border:1px solid #2a2a3a}
-.col h3{color:#facc15;font-size:12px;margin-bottom:10px;text-align:center}
-.lead{background:#252536;padding:10px;border-radius:10px;margin-bottom:8px;border-left:4px solid #facc15}
-.lead b{font-size:13px}
-.lead small{display:block;color:#aaa;font-size:11px;margin:3px 0 6px}
-.btns{display:flex;gap:6px}
-.btns button{font-size:10px;padding:6px 8px;border-radius:6px;border:0;cursor:pointer;font-weight:700}
-.btn-zap{background:#25D366;color:#fff}
-.btn-mover{background:#facc15;color:#000}
+body{background:#0b12;color:#fff;padding:16px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.header h1{color:#facc15;font-size:22px}
+.badge{background:#00ff88;color:#000;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:900}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.s{background:#1b1b2b;padding:12px;border-radius:12px;border:1px solid #2e2e44;text-align:center}
+.s b{display:block;font-size:10px;color:#999;margin-bottom:4px}
+.s span{font-size:20px;font-weight:900}
+.form{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.form input{flex:1;min-width:140px;padding:11px;border-radius:10px;border:1px solid #333;background:#1b1b2b;color:#fff}
+.btn-add{padding:11px 16px;border-radius:10px;border:0;background:#facc15;color:#000;font-weight:900;cursor:pointer}
+.search{width:100%;margin-bottom:12px;padding:10px;border-radius:10px;border:1px solid #333;background:#1b1b2b;color:#fff}
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.col{background:#141423;border-radius:12px;padding:8px;min-height:500px;border:1px solid #2e2e44}
+.col h3{color:#facc15;font-size:11px;text-align:center;margin-bottom:8px;letter-spacing:1px}
+.lead{background:#23233a;padding:9px;border-radius:9px;margin-bottom:7px;border-left:4px solid #facc15}
+.lead b{font-size:12px;display:block}
+.lead small{font-size:11px;color:#bbb;display:block;margin:2px 0 6px;word-break:break-all}
+.btns{display:flex;gap:4px;flex-wrap:wrap}
+.btns button{font-size:9px;padding:5px 7px;border-radius:6px;border:0;cursor:pointer;font-weight:800}
+.zap{background:#25D366;color:#fff}.mover{background:#facc15;color:#000}.del{background:#ff3b3b;color:#fff}
+@media(max-width:800px){.kanban{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<div class="header">
-<h1>CRM EKKLESIA v3.2 LUXO</h1>
-<div style="font-size:11px;color:#00ff88">● ONLINE • NEON • IA ON</div>
-</div>
+<div class="header"><h1>CRM EKKLESIA v3.3 ULTRA</h1><div class="badge">● LIVE • NEON • v3.3</div></div>
 <div class="stats">
-<div class="card-stat"><b>TOTAL LEADS</b><span id="total">0</span></div>
-<div class="card-stat"><b>WHATSAPP</b><span id="whats">0</span></div>
-<div class="card-stat"><b>SCORE IA MÉDIO</b><span id="media">0%</span></div>
-<div class="card-stat"><b>GARGALO</b><span id="gargalo">0</span></div>
+<div class="s"><b>TOTAL</b><span id="total">0</span></div>
+<div class="s"><b>WHATSAPP</b><span id="whats">0</span></div>
+<div class="s"><b>SCORE MÉDIO</b><span id="media">0%</span></div>
+<div class="s"><b>EM PROPOSTA</b><span id="gargalo">0</span></div>
 </div>
 <div class="form">
 <input id="nome" placeholder="Nome do lead">
-<input id="zap" placeholder="WhatsApp 27999999999">
-<button onclick="criar()">+ Novo Lead IA</button>
+<input id="zap" placeholder="WhatsApp ex: 27999999999">
+<button class="btn-add" onclick="criar()">+ Lead IA</button>
 </div>
+<input id="busca" class="search" placeholder="🔍 Buscar lead por nome ou whatsapp..." oninput="load()">
 <div class="kanban">
 <div class="col" id="novo"><h3>NOVO</h3></div>
 <div class="col" id="qualificado"><h3>QUALIFICADO</h3></div>
@@ -51,38 +50,43 @@ body{background:#0f0f14;color:#fff;padding:18px}
 <div class="col" id="fechado"><h3>FECHADO</h3></div>
 </div>
 <script>
-const API='/api';
+const API='/api'; let allLeads=[];
 async function load(){
  const leads=await fetch(API+'/leads').then(r=>r.json());
- const stats=await fetch(API+'/stats').then(r=>r.json()).catch(()=>({total:leads.length,whatsapp:leads.length,media:65,gargalo:0}));
- document.getElementById('total').innerText=stats.total||leads.length;
- document.getElementById('whats').innerText=stats.whatsapp||leads.length;
- document.getElementById('media').innerText=(stats.media||65)+'%';
- document.getElementById('gargalo').innerText=(stats.gargalo||0)+' em Prop';
+ allLeads=leads;
+ const f=document.getElementById('busca').value.toLowerCase();
+ const filtrados=f?leads.filter(l=>(l.nome+l.whatsapp).toLowerCase().includes(f)):leads;
+ const stats=await fetch(API+'/stats').then(r=>r.json()).catch(()=>({}));
+ document.getElementById('total').innerText=stats.total??leads.length;
+ document.getElementById('whats').innerText=stats.whatsapp??leads.length;
+ document.getElementById('media').innerText=(stats.media??65)+'%';
+ document.getElementById('gargalo').innerText=stats.gargalo??0;
  ['novo','qualificado','proposta','fechado'].forEach(s=>document.getElementById(s).innerHTML=`<h3>${s.toUpperCase()}</h3>`);
- leads.forEach(l=>{
+ filtrados.forEach(l=>{
+  const zap = l.whatsapp || l.telefone || '';
+  const nome = l.nome || 'Sem nome';
+  const score = l.score_ia || 65;
   const d=document.createElement('div');d.className='lead';
-  d.innerHTML=`<b>${l.nome}</b><small>${l.whatsapp} • Score ${l.score_ia||65}%</small>
+  d.innerHTML=`<b>${nome}</b><small>${zap} • ${score}%</small>
   <div class="btns">
-  <button class="btn-zap" onclick="window.open('https://wa.me/55${l.whatsapp}','_blank')">WhatsApp</button>
-  <button class="btn-mover" onclick="mover(${l.id},'${next(l.status)}')">→ ${next(l.status)}</button>
+  <button class="zap" onclick="window.open('https://wa.me/55${zap.replace(/\\D/g,'')}','_blank')">Zap</button>
+  <button class="mover" onclick="mover(${l.id},'${prox(l.status)}')">→ ${prox(l.status)}</button>
+  <button class="del" onclick="deletar(${l.id})">X</button>
   </div>`;
   (document.getElementById(l.status)||document.getElementById('novo')).appendChild(d);
  });
 }
-function next(s){if(s=='novo')return 'qualificado';if(s=='qualificado')return 'proposta';if(s=='proposta')return 'fechado';return 'fechado';}
+function prox(s){if(s=='novo')return 'qualificado';if(s=='qualificado')return 'proposta';if(s=='proposta')return 'fechado';return 'fechado';}
 async function criar(){
  const nome=document.getElementById('nome').value.trim();
  const whatsapp=document.getElementById('zap').value.trim();
- if(!nome||!whatsapp)return alert('Preencha nome e zap');
+ if(!nome||!whatsapp)return alert('Digite nome e zap');
  const r=await fetch(API+'/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome,whatsapp})});
- if(r.ok){document.getElementById('nome').value='';document.getElementById('zap').value='';load();}else alert('Erro');
+ if(r.ok){document.getElementById('nome').value='';document.getElementById('zap').value='';load();}else alert('Erro ao criar');
 }
-async function mover(id,status){
- await fetch(API+'/leads/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});
- load();
-}
-load();
+async function mover(id,status){await fetch(API+'/leads/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});load();}
+async function deletar(id){if(!confirm('Deletar este lead?'))return;await fetch(API+'/leads/'+id,{method:'DELETE'});load();}
+load();setInterval(load,8000);
 </script>
 </body>
 </html>
