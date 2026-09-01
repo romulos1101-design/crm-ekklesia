@@ -3,22 +3,23 @@ const app = express();
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send(`
-    <body style="background:#0b1120;color:white;font-family:sans-serif;padding:40px">
-      <h1 style="color:#38bdf8">CRM EKKLESIA v2.4 FINAL - ONLINE</h1>
-      <p>Super Admin: <b>romulos1101@gmail.com</b></p>
-      <p>Servicos ilimitados: <b>ATIVOS</b></p>
-      <p>Disparo: <b>PRONTO - 25 msgs/min + Rodizio 2 numeros</b></p>
-      <p><a href="/dashboard?email=romulos1101@gmail.com" style="color:#38bdf8">Ver Dashboard</a></p>
-      <p>Status: v2.4.0 OK - Commit: ${new Date().toLocaleString('pt-BR')}</p>
-    </body>
-  `);
+  res.send(`<h1>CRM Ekklesia v2.4 - ONLINE!</h1><p>Super Admin: romulos1101@gmail.com</p><a href="/dashboard?email=romulos1101@gmail.com">Dashboard</a><br><a href="/health">Health</a>`);
 });
 
+app.get('/health', (req,res)=> res.send('OK'));
+
 app.get('/dashboard', async (req,res)=>{
-  if(req.query.email !== 'romulos1101@gmail.com') return res.send('Acesso negado');
-  const {getDashboard} = await import('./src/crm/dashboard-metricas.js');
-  res.json(await getDashboard(req.query.email));
+  console.log('Dashboard acessado por', req.query.email);
+  if(req.query.email !== 'romulos1101@gmail.com'){
+    return res.status(403).send('Acesso negado - so Super Admin');
+  }
+  try{
+    const {getDashboard} = await import('./src/crm/dashboard-metricas.js');
+    const dados = await getDashboard(req.query.email);
+    res.json(dados);
+  }catch(e){
+    res.status(500).json({erro: e.message, dica: 'Verifique se src/crm/dashboard-metricas.js existe'});
+  }
 });
 
 const PORT = process.env.PORT || 10000;
