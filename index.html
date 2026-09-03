@@ -2,152 +2,166 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ekklesia V8.2 MASTER FINAL - ID 156503</title>
+<title>Ekklesia V8 MASTER RDsc8125@ - Disparos - ID 156503</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial}
 body{background:#08080a;color:#fff;min-height:100vh}
 .login-screen{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%, #0a2a1a, #08080a);display:flex;align-items:center;justify-content:center;z-index:9999}
-.login-box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:32px;width:440px}
-.btn{padding:11px 18px;border-radius:10px;font-weight:800;border:0;cursor:pointer;font-size:13px}
-.btn-g{background:#00ff88;color:#000}.btn-d{background:#1f1f23;color:#fff;border:1px solid #333}.btn-y{background:#facc15;color:#000}
-.sidebar{width:290px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:16px;overflow-y:auto;display:none}
-.main{margin-left:290px;flex:1;padding:18px;background:#0a0a0b;min-height:100vh;display:none}
-.card{background:#151518;border:1px solid #242428;border-radius:16px;padding:16px;margin-bottom:12px}
+.login-box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:28px;width:440px}
+.login-box h1{color:#00ff88;font-size:21px}
+.login-box input{width:100%;background:#0e0e10;border:1px solid #2a2a2e;color:#fff;border-radius:10px;padding:12px;margin:7px 0}
+.btn{padding:10px 16px;border-radius:10px;font-weight:800;border:0;cursor:pointer;font-size:13px;display:inline-block;text-decoration:none}
+.btn-g{background:#00ff88;color:#000}.btn-w{background:#fff;color:#000}.btn-d{background:#1f1f23;color:#fff;border:1px solid #333}.btn-y{background:#facc15;color:#000}
+.sidebar{width:285px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:14px;overflow-y:auto;display:none}
+.main{margin-left:285px;flex:1;padding:16px;background:#0a0a0b;min-height:100vh;display:none}
+.logo{color:#00ff88;font-weight:800}
+.small{color:#666;font-size:11px;line-height:1.3}
+.btn-menu{width:100%;padding:10px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer;font-size:12.5px;display:flex;gap:6px}
+.btn-menu.active,.btn-menu:hover{background:#1d1d20;color:#fff}
+.btn-menu.green{color:#00ff88;border:1px solid rgba(0,255,136,.25)}
+.card{background:#151518;border:1px solid #242428;border-radius:14px;padding:14px;margin-bottom:10px}
 .tela{display:none}.tela.ativa{display:block}
-.kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}
-.col{min-width:260px;background:#111113;border:1px solid #222;border-radius:14px;padding:10px}
-.lead-card{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:12px;padding:10px;margin-bottom:8px;font-size:12px}
-input,select,textarea{width:100%;background:#0e0e10;color:#c7c7c7;border:1px solid #2a2a2e;border-radius:10px;padding:10px;margin:4px 0}
-.btn-menu{width:100%;padding:11px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer}
-.btn-menu.active{background:#1d1d20;color:#fff}.btn-menu.green{color:#00ff88;border:1px solid rgba(0,255,136,.25)}
-.progress{height:10px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}.progress-bar{height:100%;background:#00ff88;width:0%;transition:.3s}
-.hidden{display:none}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.checkbox-list{max-height:300px;overflow:auto;border:1px solid #222;border-radius:10px;padding:8px}
+.badge{padding:3px 7px;border-radius:8px;font-size:10px;font-weight:800;display:inline-block}
+.bg-green{background:#00ff88;color:#000}.bg-w{background:#fff;color:#000}.bg-z{background:#25D366;color:#fff}.bg-y{background:#facc15;color:#000}.bg-r{background:#ff4d4d;color:#fff}.bg-b{background:#3b82f6;color:#fff}
+textarea,input,select{width:100%;background:#0e0e10;color:#c7c7c7;border:1px solid #2a2a2e;border-radius:10px;padding:9px;font-size:12px;margin:4px 0}
+.kanban{display:flex;gap:10px;overflow-x:auto}
+.col{min-width:250px;background:#111113;border:1px solid #222;border-radius:12px;padding:8px}
+.col h4{font-size:10px;color:#aaa;margin-bottom:6px;text-transform:uppercase}
+.lead-card{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:10px;padding:8px;margin-bottom:6px;font-size:11px;line-height:1.3}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.filters input,.filters select{width:150px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.hidden{display:none}.progress{height:8px;background:#222;border-radius:10px;overflow:hidden;margin:6px 0}.progress-bar{height:100%;background:#00ff88;width:0%;transition:.3s}
+.checkbox-list{max-height:200px;overflow:auto;border:1px solid #222;border-radius:10px;padding:6px}
 </style>
 </head>
 <body>
-<div id="loginScreen" class="login-screen"><div class="login-box">
-<h1 style="color:#00ff88">🙏 EKKLESIA V8.2 FINAL</h1><p style="color:#888;font-size:11px">ID 156503 - Só MedSeg - Master RDsc8125@</p>
-<input id="loginUser" value="Rômulo Sousa"><input id="loginPass" type="password" value="RDsc8125@">
-<button class="btn btn-g" style="width:100%;margin-top:10px" onclick="fazerLogin()">Entrar Master</button>
-</div></div>
+<div id="loginScreen" class="login-screen">
+<div class="login-box">
+<h1>🙏 EKKLESIA V8 MASTER</h1>
+<p style="color:#888;font-size:11px">ID 156503 - Só MedSeg - Master RDsc8125@</p>
+<p style="color:#00ff88;font-size:11px;margin-bottom:10px">Rômulo Sousa | RDsc8125@ | Disparos em Massa</p>
+<div id="loginForm">
+<input id="loginUser" placeholder="ID: Rômulo Sousa" value="Rômulo Sousa">
+<input id="loginPass" type="password" placeholder="Senha: RDsc8125@" value="RDsc8125@">
+<button class="btn btn-g" style="width:100%;margin-top:8px" onclick="fazerLogin()">Entrar Master RDsc8125@</button>
+<button class="btn btn-d" style="width:100%;margin-top:6px" onclick="mostrarCadastro()">Novo usuário - Solicitar acesso</button>
+<p style="color:#555;font-size:9px;margin-top:8px">Master aprova e define abas | 27981244268 | 27998242975</p>
+</div>
+<div id="cadastroForm" class="hidden">
+<h3 style="color:#facc15;font-size:14px">Solicitar Acesso ao Master</h3>
+<input id="cadNome" placeholder="Nome completo">
+<input id="cadId" placeholder="ID / Usuário desejado">
+<input id="cadSenha" type="password" placeholder="Senha desejada">
+<input id="cadWhats" placeholder="WhatsApp">
+<button class="btn btn-g" style="width:100%;margin-top:8px" onclick="solicitarAcesso()">Solicitar acesso</button>
+<button class="btn btn-d" style="width:100%;margin-top:6px" onclick="mostrarLogin()">Voltar</button>
+</div>
+</div>
+</div>
 
 <div id="sidebar" class="sidebar">
-<div style="color:#00ff88;font-weight:800">EKKLESIA V8.2 MASTER</div>
-<div style="font-size:10px;color:#666" id="userInfo"></div>
+<div class="logo">EKKLESIA V8 MASTER RDsc8125@</div>
+<div class="small" id="userInfo">MASTER: Rômulo Sousa<br>Senha: RDsc8125@<br>ID 156503<br>27981244268 | 27998242975</div>
+<div style="margin-top:10px">
 <button class="btn-menu active" onclick="abrir('dashboard')">📊 Dashboard</button>
 <button class="btn-menu green" onclick="abrir('kanban')">💬 Kanban IA</button>
-<button class="btn-menu" onclick="abrir('leads')">👥 Leads</button>
-<button class="btn-menu" onclick="abrir('clientes')">📋 Fechados</button>
-<button class="btn-menu" onclick="abrir('disparos')">🚀 Disparos</button>
-<button class="btn-menu" onclick="abrir('agenda')">📅 Agenda</button>
-<button class="btn-menu" onclick="abrir('treinamento')">🧠 Treinamento IA</button>
-<button class="btn-menu" onclick="abrir('usuarios')">👤 Usuários</button>
+<button class="btn-menu" onclick="abrir('leads')">👥 Leads CNPJ/Cidade</button>
+<button class="btn-menu" onclick="abrir('clientes')">📋 Fechados / Não Fechados</button>
+<button class="btn-menu" onclick="abrir('disparos')">🚀 Disparos em Massa</button>
+<button class="btn-menu" onclick="abrir('agenda')">📅 Agenda 27981244268</button>
+<button class="btn-menu" onclick="abrir('treinamento')">🧠 Treinamento IA + LINK</button>
+<button class="btn-menu" onclick="abrir('usuarios')">👤 Usuários - Liberação Master + Abas</button>
 <button class="btn-menu" onclick="abrir('config')">⚙️ Config</button>
 <button class="btn-menu" onclick="sair()">🚪 Sair</button>
 </div>
+</div>
 
 <div id="main" class="main">
-<div id="dashboard" class="tela ativa"><div class="card"><h2>Dashboard ID 156503</h2><div class="grid3"><div><small>Total</small><div id="kpiLeads" style="font-size:24px;font-weight:800">0</div></div><div><small>Fechados</small><div id="kpiFechados" style="font-size:24px;color:#00ff88">0</div></div><div><small>Disparos</small><div id="kpiDisparos" style="font-size:24px;color:#facc15">0</div></div></div></div></div>
+<div id="dashboard" class="tela ativa">
+<div class="card"><h2>V8 MASTER Rômulo Sousa / RDsc8125@ - Disparos</h2><p style="color:#999;font-size:11px">ID 156503 travado | Só MedSeg | Assessoria 27981244268 | Atendimento 27998242975</p><p style="margin-top:6px"><span class="badge bg-green">MASTER RDsc8125@</span> <span class="badge bg-green">ID 156503</span> <span class="badge bg-w">27981244268</span> <span class="badge bg-z">27998242975</span> <span class="badge bg-y">DISPAROS</span></p></div>
+<div class="grid3">
+<div class="card"><small>Total Leads</small><div style="font-size:22px;font-weight:800" id="kpiLeads">0</div></div>
+<div class="card"><small>Fechados</small><div style="font-size:22px;font-weight:800;color:#00ff88" id="kpiFechados">0</div></div>
+<div class="card"><small>Não Fechados</small><div style="font-size:22px;font-weight:800;color:#ff9f43" id="kpiNaoFechados">0</div></div>
+</div>
+<div class="grid3">
+<div class="card"><small>Disparos</small><div style="font-size:22px;font-weight:800;color:#facc15" id="kpiDisparos">0</div></div>
+<div class="card"><small>Pendentes</small><div style="font-size:22px;font-weight:800;color:#facc15" id="kpiPendentes">0</div></div>
+<div class="card"><small>Usuários</small><div style="font-size:22px;font-weight:800" id="kpiUsuarios">0</div></div>
+</div>
+</div>
 
-<div id="kanban" class="tela"><div class="card"><h2>Kanban - Histórico</h2><div id="kanbanCols" class="kanban"></div></div></div>
+<div id="kanban" class="tela">
+<div class="card"><h2>💬 Kanban IA - Histórico</h2><div class="filters"><input id="fBusca" placeholder="Buscar" oninput="renderLeads()"><select id="fEstado" onchange="renderLeads()"><option value="">UF</option><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select><input id="fCidade" placeholder="Cidade" oninput="renderLeads()"></div></div>
+<div class="kanban"><div class="col" data-col="novo"><h4>🆕 Novo</h4><div id="col-novo"></div></div><div class="col" data-col="atendimento"><h4>Atendimento</h4><div id="col-atendimento"></div></div><div class="col" data-col="documentos"><h4>Docs</h4><div id="col-documentos"></div></div><div class="col" data-col="orcamento"><h4>Orçamento</h4><div id="col-orcamento"></div></div><div class="col" data-col="assessoria"><h4>Assessoria 27981244268</h4><div id="col-assessoria"></div></div><div class="col" data-col="fechado"><h4>✅ Fechado</h4><div id="col-fechado"></div></div><div class="col" data-col="recusou"><h4>❌ Não Fechou</h4><div id="col-recusou"></div></div></div>
+</div>
 
-<div id="leads" class="tela"><div class="card"><h2>Leads</h2><div class="grid2"><input id="leadCNPJ" placeholder="CNPJ"><input id="leadNome" placeholder="Nome"><input id="leadUF" placeholder="UF" value="ES"><input id="leadCidade" placeholder="Cidade"><input id="leadTel" placeholder="Tel 279..."><select id="leadServ"><option>MedSeg</option><option>Green</option><option>Telecom</option></select></div><button class="btn btn-g" style="margin-top:8px" onclick="addLead()">+ Add Lead</button><div id="tabelaLeads" style="margin-top:10px"></div></div></div>
+<div id="leads" class="tela">
+<div class="card"><h2>👥 Leads CNPJ/Cidade/Estado</h2>
+<div class="grid2"><div><input id="leadCNPJ" placeholder="CNPJ/CPF"></div><div><input id="leadNome" placeholder="Nome/Razão"></div><div><select id="leadUF"><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select></div><div><input id="leadCidade" placeholder="Cidade/Município"></div><div><input id="leadTel" placeholder="Tel WhatsApp 2799..."></div><div><select id="leadServ"><option>Green até 10k - 27998242975</option><option>Livre acima 10k - 27998242975</option><option>Placas - 27998242975</option><option>Telecom - 27998242975</option><option>Seguros - 27998242975</option><option>Expansão 156503 - 27998242975</option><option>MedSeg Só MedSeg - 27998242975</option><option>Agenda 27981244268</option></select></div></div>
+<button class="btn btn-g" style="margin-top:8px" onclick="addLead()">+ Add Lead</button>
+<div id="tabelaLeads" style="margin-top:10px"></div>
+</div>
+</div>
 
-<div id="clientes" class="tela"><div class="card"><h2>Clientes Fechados / Não Fechados</h2><div id="listaClientes"></div></div></div>
+<div id="clientes" class="tela">
+<div class="card"><h2>📋 Fechados / Não Fechados + Histórico</h2>
+<div class="grid3"><div><input id="cliCNPJ" placeholder="CNPJ"></div><div><input id="cliNome" placeholder="Nome"></div><div><input id="cliTel" placeholder="Tel"></div><div><select id="cliUF"><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select></div><div><input id="cliCidade" placeholder="Cidade"></div><div><select id="cliServ"><option>Green</option><option>Livre</option><option>Placas</option><option>Telecom</option><option>Seguros</option><option>Expansão 156503</option><option>MedSeg</option><option>Agenda</option></select></div><div><select id="cliStatus"><option value="fechado">Fechado</option><option value="nao_fechado">Não Fechado</option></select></div><div><input id="cliMotivo" placeholder="Motivo/Valor"></div><div><input id="cliFeito" placeholder="O que foi feito"></div></div>
+<button class="btn btn-g" style="margin-top:8px" onclick="addCliente()">+ Salvar com Histórico</button>
+<div id="listaClientes" style="margin-top:10px"></div>
+</div>
+</div>
 
 <div id="disparos" class="tela">
-<div class="card"><h2>🚀 Disparos em Massa</h2>
-<select id="dispServico" onchange="atualizarModelo()"><option value="medseg">MedSeg Só MedSeg</option><option value="green">Green até 10k</option><option value="telecom">Telecom</option><option value="agenda">Agenda 27981244268</option></select>
-<input id="dispLink" placeholder="Link do serviço" value="https://expansao.igreenenergy.com.br/?id=156503">
-<textarea id="dispMensagem" rows="5">Olá {nome} de {cidade}, Rômulo ID 156503 - {link}</textarea>
-<div class="grid2"><input id="dispIntervalo" type="number" value="30"><select id="dispNumero"><option>27998242975</option><option>27981244268</option></select></div>
-<button class="btn btn-y" style="width:100%;margin-top:8px" onclick="iniciarDisparo()">🚀 Iniciar</button><button class="btn btn-d" style="width:100%;margin-top:6px" onclick="pararDisparo()">Parar</button>
-<div class="progress"><div id="progressBar" class="progress-bar"></div></div><p id="progressText" style="font-size:11px;color:#888">0 / 0</p>
+<div class="card"><h2>🚀 Disparos em Massa - Prospecção</h2><p style="color:#999;font-size:10px">Assessoria 27981244268 | Atendimento 27998242975 | Só MedSeg | ID 156503 | Anti-bloqueio com intervalo</p></div>
+<div class="grid2">
+<div class="card">
+<h3 style="font-size:13px">📝 Mensagem</h3>
+<select id="dispServico" onchange="atualizarModelo()"><option value="green">Green até 10k - 27998242975</option><option value="livre">Livre acima 10k</option><option value="placas">Placas</option><option value="telecom">Telecom</option><option value="seguros">Seguros</option><option value="expansao">Expansão 156503</option><option value="medseg">MedSeg Só MedSeg - PGR/PCMSO</option><option value="agenda">Agenda 27981244268</option></select>
+<input id="dispLink" placeholder="Link do serviço">
+<textarea id="dispMensagem" rows="7" placeholder="Use {nome} {cidade} {cnpj}"></textarea>
+<div class="grid2"><div><input id="dispIntervalo" type="number" value="30" placeholder="Intervalo seg"></div><div><select id="dispNumero"><option value="27998242975">27998242975 - Atend</option><option value="27981244268">27981244268 - Assessoria</option></select></div></div>
+<button class="btn btn-y" style="width:100%;margin-top:6px" onclick="iniciarDisparo()">🚀 Iniciar Disparo</button>
+<button class="btn btn-d" style="width:100%;margin-top:4px" onclick="pararDisparo()">⏹️ Parar</button>
+<div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+<p style="font-size:10px;color:#888" id="progressText">0 / 0 - Aguardando</p>
 </div>
-<div class="card"><h3>Lista para disparo</h3><input id="dispFiltro" placeholder="Filtrar" oninput="renderDisparosLista()"><div class="checkbox-list" id="listaDisparos"></div></div>
+<div class="card">
+<h3 style="font-size:13px">👥 Lista para Disparo</h3>
+<div class="filters"><input id="dispFiltro" placeholder="Filtrar" oninput="renderDisparosLista()"><select id="dispFiltroStatus" onchange="renderDisparosLista()"><option value="">Todos</option><option value="novo">Novos</option><option value="recusou">Não Fechados</option><option value="nao_fechado">Clientes Não Fechados</option></select></div>
+<div style="margin:6px 0"><button class="btn btn-d" style="font-size:10px" onclick="selecionarTodos(true)">✅ Todos filtrados</button> <button class="btn btn-d" style="font-size:10px;margin-left:4px" onclick="selecionarTodos(false)">❌ Desmarcar</button> <span id="selCount" style="font-size:10px;color:#facc15;margin-left:6px">0 sel</span></div>
+<div class="checkbox-list" id="listaDisparos"></div>
+<div id="relatorioDisparos" style="font-size:10px;color:#aaa;margin-top:8px">Nenhum disparo</div>
+</div>
+</div>
 </div>
 
-<div id="agenda" class="tela"><div class="card"><h2>📅 Agenda 27981244268</h2><div id="listaAgenda">Nenhum agendamento ainda - histórico de leads em assessoria aparece aqui</div></div></div>
-<div id="treinamento" class="tela"><div class="card"><h2>🧠 Treinamento IA + LINK</h2></div><div id="listaTreinamento"></div></div>
-<div id="usuarios" class="tela"><div class="card"><h2>👤 Usuários - Liberação Master</h2><div class="grid2"><input id="uNome" placeholder="Nome"><input id="uLogin" placeholder="Login"><input id="uSenha" placeholder="Senha"><input id="uWhats" placeholder="WhatsApp"></div><button class="btn btn-g" style="margin-top:8px;width:100%" onclick="addUsuario()">+ Criar Usuário</button><div id="listaUsuarios" style="margin-top:10px"></div></div></div>
-<div id="config" class="tela"><div class="card"><h2>⚙️ Config</h2><p>API: https://crm-ekklesia.onrender.com</p><p id="apiStatus">Verificando...</p><p style="font-size:11px;color:#666;margin-top:8px">Master: Rômulo Sousa | RDsc8125@ | ID 156503 travado | Só MedSeg</p></div></div>
+<div id="agenda" class="tela"><div class="card"><h2>📅 Agenda 27981244268 - Histórico</h2><div id="listaAgenda"></div></div></div>
+
+<div id="treinamento" class="tela">
+<div class="card"><h2>🧠 Treinamento IA + LINK por Serviço - RDsc8125@ - ID 156503</h2><p style="font-size:10px;color:#999">Cada agente tem link editável - AMANDA abertura 6 opções - 27981244268 / 27998242975</p></div>
+<div id="listaTreinamento"></div>
 </div>
 
-<script>
-const API_URL = 'https://crm-ekklesia.onrender.com';
-let leads = JSON.parse(localStorage.getItem('ekk_leads')||'[]');
-let usuarios = JSON.parse(localStorage.getItem('ekk_users')||'[]');
-const MODELOS = {
-  green: "Olá {nome} de {cidade}, CNPJ {cnpj} - Green até 10k 27998242975 Link: {link}",
-  medseg: "🙏 {nome}, Rômulo ID 156503 - Só MedSeg PGR/PCMSO {cidade} {link} Atend 27998242975",
-  telecom: "Oi {nome}, economia 40% telecom {cidade} {link}",
-  agenda: "Olá {nome}, agenda 27981244268 - {cidade} - {link}"
-};
-let disparoAtivo=false;
+<div id="usuarios" class="tela">
+<div class="card"><h2>👤 Usuários - Liberação Master Rômulo Sousa / RDsc8125@ + Abas</h2><p style="font-size:10px;color:#999">Você é o Master. Define abas que cada usuário acessa.</p>
+<div id="pendentes"></div>
+<hr style="margin:10px 0;border:0;border-top:1px solid #222">
+<h3 style="font-size:13px;color:#00ff88">➕ Criar usuário já liberado</h3>
+<div class="grid2"><div><input id="uNome" placeholder="Nome"></div><div><input id="uLogin" placeholder="ID/Login"></div><div><input id="uSenha" type="password" placeholder="Senha"></div><div><input id="uWhats" placeholder="WhatsApp"></div></div>
+<div style="margin:8px 0"><label style="font-size:11px;color:#00ff88">🔐 Abas liberadas:</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px">
+<label style="font-size:11px"><input type="checkbox" id="perm_dashboard" checked> Dashboard</label>
+<label style="font-size:11px"><input type="checkbox" id="perm_kanban" checked> Kanban</label>
+<label style="font-size:11px"><input type="checkbox" id="perm_leads" checked> Leads</label>
+<label style="font-size:11px"><input type="checkbox" id="perm_clientes" checked> Clientes</label>
+<label style="font-size:11px"><input type="checkbox" id="perm_disparos"> Disparos</label>
+<label style="font-size:11px"><input type="checkbox" id="perm_agenda"> Agenda</label>
+<label style="font-size:11px"><input type="checkbox" id="perm_treinamento"> Treinamento</label>
+<label style="font-size:11px"><input type="checkbox" id="perm_config"> Config</label>
+</div></div>
+<button class="btn btn-g" style="width:100%;margin-top:6px" onclick="addUsuario()">+ Criar Usuário Liberado</button>
+<div id="listaUsuarios" style="margin-top:10px"></div>
+</div>
+</div>
 
-function fazerLogin(){
-  if(document.getElementById('loginUser').value==='Rômulo Sousa' && document.getElementById('loginPass').value==='RDsc8125@'){
-    localStorage.setItem('ekk_master','1');
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('sidebar').style.display='block';
-    document.getElementById('main').style.display='block';
-    carregar();
-  } else alert('Senha errada');
-}
-function sair(){localStorage.removeItem('ekk_master');location.reload();}
-function abrir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');}
-
-async function carregar(){
-  try{
-    let r=await fetch(API_URL+'/api/leads'); let d=await r.json();
-    if(d.length>0) leads=d;
-    document.getElementById('apiStatus').innerText='✅ API ONLINE '+d.length+' leads';
-  }catch{ document.getElementById('apiStatus').innerText='⚠️ API OFF - localStorage'; }
-  renderTudo();
-}
-
-function renderTudo(){
-  document.getElementById('kpiLeads').innerText=leads.length;
-  document.getElementById('kpiFechados').innerText=leads.filter(l=>l.status==='fechado').length;
-  document.getElementById('tabelaLeads').innerHTML=leads.map(l=>`<div class="lead-card">${l.nome} - ${l.telefone} - ${l.status||'novo'}</div>`).join('');
-  document.getElementById('listaClientes').innerHTML=leads.filter(l=>l.status==='fechado'||l.status==='recusou').map(l=>`<div class="lead-card">${l.nome} ${l.status}</div>`).join('')||'Nenhum';
-  renderKanban(); renderDisparosLista(); renderTreinamento(); renderUsuarios();
-}
-
-function renderKanban(){
-  const cols=['novo','atendimento','documentos','orcamento','assessoria','fechado','recusou'];
-  document.getElementById('kanbanCols').innerHTML=cols.map(c=>`<div class="col"><h4>${c.toUpperCase()}</h4><div id="list-${c}"></div></div>`).join('');
-  leads.forEach((l,i)=>{
-    let col=(l.status||'novo'); if(!cols.includes(col)) col='novo';
-    let el=document.getElementById('list-'+col);
-    if(el) el.innerHTML+=`<div class="lead-card"><b>${l.nome}</b><br><small>${l.telefone}</small><br><button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'fechado')">Fechou</button> <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'recusou')">Não</button> <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'assessoria')">→ Assessoria</button></div>`;
-  });
-}
-function moverLead(i,s){leads[i].status=s; localStorage.setItem('ekk_leads',JSON.stringify(leads)); renderTudo();}
-function atualizarModelo(){let v=document.getElementById('dispServico').value; document.getElementById('dispMensagem').value=MODELOS[v];}
-function renderDisparosLista(){
-  let f=(document.getElementById('dispFiltro')?.value||'').toLowerCase();
-  document.getElementById('listaDisparos').innerHTML=leads.filter(l=>l.nome.toLowerCase().includes(f)).map((l,i)=>`<label style="display:flex;gap:6px;padding:4px;border-bottom:1px solid #222;font-size:11px"><input type="checkbox" checked> ${l.nome} - ${l.telefone}</label>`).join('');
-}
-function renderTreinamento(){
-  document.getElementById('listaTreinamento').innerHTML=Object.keys(MODELOS).map(k=>`<div class="card"><h3 style="font-size:12px;color:#00ff88">${k.toUpperCase()}</h3><input id="link-${k}" value="${localStorage.getItem('link_'+k)||'https://expansao.igreenenergy.com.br/?id=156503'}"><textarea id="prompt-${k}">${localStorage.getItem('prompt_'+k)||MODELOS[k]}</textarea><button class="btn btn-g" style="font-size:10px" onclick="localStorage.setItem('link_'+k, document.getElementById('link-${k}').value); localStorage.setItem('prompt_'+k, document.getElementById('prompt-${k}').value); alert('Salvo')">Salvar</button></div>`).join('');
-}
-function renderUsuarios(){document.getElementById('listaUsuarios').innerHTML=usuarios.map(u=>`<div class="lead-card">${u.nome} - ${u.login} - ${u.whats}</div>`).join('')||'Nenhum usuário';}
-function addUsuario(){let n={nome:uNome.value, login:uLogin.value, senha:uSenha.value, whats:uWhats.value}; usuarios.push(n); localStorage.setItem('ekk_users',JSON.stringify(usuarios)); renderUsuarios();}
-async function addLead(){
-  let nome=document.getElementById('leadNome').value||'Lead Teste'; let tel=document.getElementById('leadTel').value||'27999999999';
-  let cnpj=document.getElementById('leadCNPJ').value; let cidade=document.getElementById('leadCidade').value;
-  let novo={nome, telefone:tel, cnpj, cidade, status:'novo', score:Math.floor(Math.random()*30)+70};
-  try{let r=await fetch(API_URL+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(novo)}); novo=await r.json();}catch{}
-  leads.unshift(novo); localStorage.setItem('ekk_leads',JSON.stringify(leads)); renderTudo();
-}
-async function iniciarDisparo(){
-  if(disparoAtivo) return; disparoAtivo=true;
-  let intervalo=parseInt(dispIntervalo.value||30); let msg=dispMensagem.value;
-  let total=document.querySelectorAll('#listaDisparos input:checked').length||leads.length;
-  for(let k=0;k<total;k++){
-    if(!disparoAtivo) break;
-    document.getElementById('progressBar').style.width=Math.round((k+1)/total*100)+'%';
-    document.getElementById('progressText').innerText=`${k+1} / ${total} - ${leads[k]?.nome||''} - aguardando ${intervalo}s`;
-    console.log('DISPARO ->', leads
+<div id="config" class="tela"><div class="card"><h2>⚙️ Config V8 MASTER RDsc8125@</h2><div class="grid2"><div><input value="Master: Rômulo Sousa" disabled></div><div><input value="Senha: RDsc8125@" disabled></div><div><input value="ID 156503" disabled></div><div><input value="Assessoria 27981244268" disabled></div><div><input value="Atendimento 27998242975" disabled></
