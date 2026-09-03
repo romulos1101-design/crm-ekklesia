@@ -2,308 +2,120 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ekklesia CRM V8 MASTER - Rômulo Sousa RDsc8125@ - Disparos em Massa - ID 156503</title>
+<title>EKKLESIA V8 MASTER - Equipe Rômulo Sousa - ID 156503</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial}
-body{background:#08080a;color:#fff;min-height:100vh}
-.login-screen{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%, #0a2a1a, #08080a);display:flex;align-items:center;justify-content:center;z-index:9999}
-.login-box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:32px;width:440px}
-.login-box h1{color:#00ff88;font-size:22px}
-.login-box input{width:100%;background:#0e0e10;border:1px solid #2a2a2e;color:#fff;border-radius:10px;padding:12px;margin:8px 0}
-.btn{padding:11px 18px;border-radius:10px;font-weight:800;border:0;cursor:pointer;font-size:13px;display:inline-block;text-decoration:none}
-.btn-g{background:#00ff88;color:#000}.btn-w{background:#fff;color:#000}.btn-d{background:#1f1f23;color:#fff;border:1px solid #333}.btn-y{background:#facc15;color:#000}
-.sidebar{width:290px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:16px;overflow-y:auto;display:none}
-.main{margin-left:290px;flex:1;padding:18px;background:#0a0a0b;min-height:100vh;display:none}
-.logo{color:#00ff88;font-weight:800;font-size:18px}
-.small{color:#666;font-size:11px;line-height:1.3}
-.menu{margin-top:16px}
-.btn-menu{width:100%;padding:11px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer;font-size:13px;display:flex;gap:8px}
-.btn-menu.active,.btn-menu:hover{background:#1d1d20;color:#fff}
-.btn-menu.green{color:#00ff88;border:1px solid rgba(0,255,136,.25)}
-.card{background:#151518;border:1px solid #242428;border-radius:16px;padding:16px;margin-bottom:12px}
+:root{--bg:#0a0a0b;--card:#1a1a1d;--card2:#151517;--border:#2a2a2e;--text:#fff;--text2:#aaa;--green:#00ff88;--wpp:#25D366}
+[data-theme="light"]{--bg:#f5f5f7;--card:#ffffff;--card2:#ffffff;--border:#e5e5e5;--text:#111;--text2:#666}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+body{background:var(--bg);color:var(--text);display:flex;min-height:100vh;transition:.3s}
+.sidebar{width:295px;background:var(--card2);border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;padding:14px;overflow-y:auto;z-index:20}
+.main{margin-left:295px;flex:1;padding:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;transition:.3s}
 .tela{display:none}.tela.ativa{display:block}
-.badge{padding:4px 8px;border-radius:10px;font-size:10px;font-weight:800;display:inline-block}
-.bg-green{background:#00ff88;color:#000}.bg-w{background:#fff;color:#000}.bg-z{background:#25D366;color:#fff}.bg-o{background:#ff9f43;color:#000}.bg-r{background:#ff4d4d;color:#fff}.bg-b{background:#3b82f6;color:#fff}.bg-y{background:#facc15;color:#000}
-textarea,input,select{width:100%;background:#0e0e10;color:#c7c7c7;border:1px solid #2a2a2e;border-radius:10px;padding:10px;font-size:12.5px;margin:4px 0}
-.kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}
-.col{min-width:260px;background:#111113;border:1px solid #222;border-radius:14px;padding:10px}
-.col h4{font-size:11px;color:#aaa;margin-bottom:8px;text-transform:uppercase}
-.lead-card{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:12px;padding:10px;margin-bottom:8px;cursor:grab;font-size:12px;line-height:1.4}
-.lead-card:hover{border-color:#00ff88}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.filters input,.filters select{width:160px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.timeline{border-left:2px solid #222;margin-left:6px;padding-left:12px;margin-top:8px}
-.timeline-item{margin-bottom:8px;font-size:11px;color:#aaa}
-.timeline-item b{color:#fff}
-.hidden{display:none}
-.progress{height:10px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}
-.progress-bar{height:100%;background:#00ff88;width:0%;transition:.3s}
-.checkbox-list{max-height:200px;overflow:auto;border:1px solid #222;border-radius:10px;padding:8px}
+.btn{background:var(--green);color:#000;padding:11px 14px;border-radius:10px;font-weight:800;text-decoration:none;display:inline-block;border:0;cursor:pointer;font-size:13px}
+.btn-menu{width:100%;padding:10px;margin:3px 0;border:0;background:transparent;color:var(--text2);border-radius:8px;text-align:left;cursor:pointer;font-size:13px}
+.btn-menu.active,.btn-menu:hover{background:var(--card);color:var(--text);border:1px solid var(--border)}
+textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:12px;line-height:1.5}
+.theme-btn{position:fixed;top:12px;right:12px;z-index:99;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:30px;cursor:pointer;font-weight:700}
+.badge{background:var(--green);color:#000;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700}
 </style>
 </head>
 <body>
-<div id="loginScreen" class="login-screen">
-<div class="login-box">
-<h1>🙏 EKKLESIA V8 MASTER</h1>
-<p style="color:#888;font-size:12px">Equipe Rômulo Sousa - ID 156503 - Só MedSeg</p>
-<p style="color:#00ff88;font-size:11px;margin-bottom:14px">Master: Rômulo Sousa | RDsc8125@ | Disparos em Massa</p>
-<div id="loginForm">
-<input id="loginUser" placeholder="ID: Rômulo Sousa" value="Rômulo Sousa">
-<input id="loginPass" type="password" placeholder="Senha: RDsc8125@" value="RDsc8125@">
-<button class="btn btn-g" style="width:100%;margin-top:10px" onclick="fazerLogin()">Entrar como Master Rômulo Sousa</button>
-<button class="btn btn-d" style="width:100%;margin-top:8px" onclick="mostrarCadastro()">Novo usuário - Solicitar acesso ao Master</button>
-</div>
-<div id="cadastroForm" class="hidden">
-<h3 style="color:#facc15">Solicitar Acesso ao Master</h3>
-<input id="cadNome" placeholder="Nome completo">
-<input id="cadId" placeholder="ID / Usuário desejado">
-<input id="cadSenha" type="password" placeholder="Senha desejada">
-<input id="cadWhats" placeholder="WhatsApp para contato">
-<button class="btn btn-g" style="width:100%;margin-top:10px" onclick="solicitarAcesso()">Solicitar acesso ao Master Rômulo Sousa</button>
-<button class="btn btn-d" style="width:100%;margin-top:8px" onclick="mostrarLogin()">Voltar ao login</button>
-</div>
-</div>
-</div>
-<div id="sidebar" class="sidebar">
-<div class="logo">EKKLESIA V8 MASTER</div>
-<div class="small" id="userInfo">MASTER: Rômulo Sousa<br>Senha: RDsc8125@<br>ID 156503 - Só MedSeg</div>
-<div class="menu">
+<button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Modo Escuro</button>
+<div class="sidebar">
+<h2 style="color:var(--green)">EKKLESIA V8 MASTER</h2>
+<small style="color:var(--text2)">Equipe Rômulo Sousa - ID 156503</small>
+<div style="margin-top:12px">
 <button class="btn-menu active" onclick="abrir('dashboard')">📊 Dashboard</button>
-<button class="btn-menu green" onclick="abrir('kanban')">💬 Kanban WhatsApp IA</button>
-<button class="btn-menu" onclick="abrir('leads')">👥 Leads CNPJ/Cidade/Estado</button>
-<button class="btn-menu" onclick="abrir('clientes')">📋 Fechados / Não Fechados + Histórico</button>
-<button class="btn-menu" onclick="abrir('disparos')">🚀 Disparos em Massa - Prospecção</button>
-<button class="btn-menu" onclick="abrir('agenda')">📅 Agenda 27981244268</button>
-<button class="btn-menu" onclick="abrir('treinamento')">🧠 Treinamento IA + LINK</button>
-<button class="btn-menu" onclick="abrir('usuarios')">👤 Usuários - Liberação Master + Abas</button>
-<button class="btn-menu" onclick="abrir('config')">⚙️ Config</button>
-<button class="btn-menu" onclick="sair()">🚪 Sair</button>
+<button class="btn-menu" style="color:var(--green);border:1px solid #00ff8833" onclick="abrir('amanda')">⭐ 0 - AMANDA Central</button>
+<button class="btn-menu" onclick="abrir('agente1')">1️⃣ Agenda Rômulo - 98124-4268</button>
+<button class="btn-menu" onclick="abrir('agente2')">2️⃣ Isa Green até 10k</button>
+<button class="btn-menu" onclick="abrir('agente3')">3️⃣ Cris Livre +10k</button>
+<button class="btn-menu" onclick="abrir('agente4')">4️⃣ Mateus Placas</button>
+<button class="btn-menu" onclick="abrir('agente5')">5️⃣ Bia Telecom</button>
+<button class="btn-menu" onclick="abrir('agente6')">6️⃣ Léo Seguros</button>
+<button class="btn-menu" onclick="abrir('agente7')">7️⃣ Fernanda Expansão</button>
+<button class="btn-menu" style="color:#ff9f43" onclick="abrir('agente8')">8️⃣ Carol MedSeg</button>
 </div>
-<div style="margin-top:10px;padding:10px;background:#1a1a1d;border-radius:12px;border:1px solid #222">
-<a href="https://wa.me/5527981244268" target="_blank" class="btn btn-w" style="width:100%;text-align:center;font-size:11px">Assessoria 27981244268</a>
-<a href="https://wa.me/5527998242975" target="_blank" class="btn" style="width:100%;text-align:center;margin-top:6px;background:#25D366;color:#fff;font-size:11px">Atendimento 27998242975</a>
-<a href="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT" target="_blank" class="btn btn-g" style="width:100%;text-align:center;margin-top:6px;font-size:11px">LINK 156503</a>
+<div style="margin-top:12px;padding:10px;background:var(--card);border-radius:10px;border:1px solid var(--border)">
+<p style="font-size:11px;color:var(--text2)">ASSESSORIA AGENDA/EVENTOS</p><p style="color:var(--green);font-weight:800">27981244268</p>
+<a href="https://wa.me/5527981244268" target="_blank" class="btn" style="width:100%;margin-top:4px;text-align:center;background:#fff;color:#000">Chamar Assessoria</a>
+<p style="font-size:11px;color:var(--text2);margin-top:10px">ATENDIMENTO IGREEN + MEDSEG</p><p style="color:var(--wpp);font-weight:800">27998242975</p>
+<a href="https://wa.me/5527998242975" target="_blank" class="btn" style="width:100%;margin-top:4px;text-align:center;background:var(--wpp);color:#fff">Chamar Atendimento</a>
+<a href="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT" target="_blank" class="btn" style="width:100%;margin-top:8px;text-align:center">LINK TRAVADO 156503</a>
 </div>
 </div>
-<div id="main" class="main">
+<div class="main">
 <div id="dashboard" class="tela ativa">
-<div class="card"><h2>Dashboard V8 MASTER - Rômulo Sousa / RDsc8125@ - Disparos em Massa</h2><p style="color:#999;font-size:12px">Master: Rômulo Sousa | Senha: RDsc8125@ | ID 156503 travado | Só MedSeg</p><div style="margin-top:8px"><span class="badge bg-green">MASTER RÔMULO SOUSA RDsc8125@</span> <span class="badge bg-green">ID 156503</span> <span class="badge bg-y">DISPAROS EM MASSA</span></div></div>
-<div class="grid3">
-<div class="card"><small style="color:#888">Total Leads</small><div style="font-size:26px;font-weight:800" id="kpiLeads">0</div></div>
-<div class="card"><small style="color:#888">Fechados</small><div style="font-size:26px;font-weight:800;color:#00ff88" id="kpiFechados">0</div></div>
-<div class="card"><small style="color:#888">Não Fechados</small><div style="font-size:26px;font-weight:800;color:#ff9f43" id="kpiNaoFechados">0</div></div>
+<div class="card"><h1>EKKLESIA V8 MASTER ✅ ID 156503</h1><p>Equipe Rômulo Sousa - Assessoria 27981244268 | Atendimento 27998242975</p><p style="margin-top:8px"><span class="badge">ID 156503 TRAVADO</span> <span class="badge" style="background:#fff;color:#000">Assessoria</span> <span class="badge" style="background:var(--wpp);color:#fff">Atendimento</span></p></div>
+<div class="card"><h3>🔒 Versão Segura</h3><p style="color:var(--text2);font-size:13px">Removido: 56 MedSeg, RDs, senhas expostas. Agora só aparece ID 156503 limpo para prints.</p></div>
 </div>
-<div class="grid3">
-<div class="card"><small style="color:#888">Disparos Hoje</small><div style="font-size:26px;font-weight:800;color:#facc15" id="kpiDisparos">0</div></div>
-<div class="card"><small style="color:#888">Pendentes Aprovação</small><div style="font-size:26px;font-weight:800;color:#facc15" id="kpiPendentes">0</div></div>
-<div class="card"><small style="color:#888">Usuários Ativos</small><div style="font-size:26px;font-weight:800" id="kpiUsuarios">0</div></div>
+
+<!-- AMANDA -->
+<div id="amanda" class="tela"><div class="card"><h2>⭐ 0 - AMANDA - Central Geral</h2>
+<textarea rows="18">Você é a AMANDA, Atendente Virtual Central da Equipe Rômulo Sousa ID 156503.
+MENSAGEM INICIAL: Olá! Bem-vindo à Equipe Rômulo Sousa! 👋 Sou a Amanda. Me diz: você precisa de ajuda com:
+1️⃣ Agendas e Eventos
+2️⃣ IGreen ENERGY - Descontos / Soluções de Energia Sustentável
+3️⃣ Medseg - Medicina e Segurança do Trabalho
+
+REGRAS:
+- Se clicar em 1 ou falar agenda/evento/show → direciona para assessoria humana WhatsApp 27981244268 https://wa.me/5527981244268
+- Se clicar em 2 ou 3 ou falar energia/seguro/telecom/placas/licenciado/medseg → direciona para atendimento 27998242975 https://wa.me/5527998242975
+- Sempre finalize com: Se eu não conseguir te ajudar, digita #HUMANO que te passo pra equipe agora mesmo.
+Link iGreen sempre travado ID 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT</textarea></div></div>
+
+<div id="agente1" class="tela"><div class="card"><h2>1️⃣ Sofia - Agenda Rômulo</h2><textarea rows="10">Você é a Sofia, assessoria do cantor Rômulo Sousa.
+Prompt: Oi! Sou a Sofia, da assessoria do cantor Rômulo Sousa. Vi que você quer falar sobre agendas. É show, evento na sua igreja/empresa?
+Ação: Botão fixo "Falar com Assessoria" → https://wa.me/5527981244268
+WhatsApp assessoria: 27981244268
+Final: Se não conseguir ajudar, digita #HUMANO.</textarea></div></div>
+
+<div id="agente2" class="tela"><div class="card"><h2>2️⃣ Isa - Green até 10k</h2><textarea rows="10">Você é a Isa, especialista IGreen ENERGY baixo consumo da equipe Rômulo Sousa ID 156503.
+Prompt: Olá! Sou a Isa, especialista em desconto para baixo consumo. Você consegue me mandar o valor médio da sua conta de luz? Atendemos de R$130 a 10k.
+WhatsApp: 27998242975 https://wa.me/5527998242975
+Link: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT
+Final: #HUMANO para humano.</textarea></div></div>
+
+<div id="agente3" class="tela"><div class="card"><h2>3️⃣ Cris - Livre acima 10k</h2><textarea rows="10">Você é a Cris, especialista Mercado Livre alto consumo ID 156503.
+Prompt: Olá! Sou a Cris, especialista em Mercado Livre de Energia para clientes alto consumo. Sua conta é acima de R$3.000 ou CNPJ?
+WhatsApp: 27998242975 https://wa.me/5527998242975
+Link: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT</textarea></div></div>
+
+<div id="agente4" class="tela"><div class="card"><h2>4️⃣ Mateus - Placas Solares</h2><textarea rows="10">Você é o Mateus, especialista projetos solares ID 156503.
+Prompt: Olá! Sou o Mateus, especialista em projetos solares da equipe Rômulo Sousa. Quer instalar placas na sua casa ou empresa?
+WhatsApp: 27998242975 https://wa.me/5527998242975
+Link: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT</textarea></div></div>
+
+<div id="agente5" class="tela"><div class="card"><h2>5️⃣ Bia - Telecom</h2><textarea rows="10">Você é a Bia, especialista Telecom ID 156503.
+Prompt: Olá! Sou a Bia, especialista em Telecom. Quer economizar no seu plano de internet/telefonia?
+WhatsApp: 27998242975 https://wa.me/5527998242975</textarea></div></div>
+
+<div id="agente6" class="tela"><div class="card"><h2>6️⃣ Léo - Seguros</h2><textarea rows="10">Você é o Léo, especialista Seguros ID 156503.
+Prompt: Olá! Sou o Léo, especialista em Seguros da equipe Rômulo Sousa. Seguros para Carro/Moto/Caminhão.
+WhatsApp: 27998242975 https://wa.me/5527998242975</textarea></div></div>
+
+<div id="agente7" class="tela"><div class="card"><h2>7️⃣ Fernanda - Expansão Licenciado</h2><textarea rows="12">Você é a Fernanda, especialista Expansão Conexão ID 156503.
+Prompt: Olá! Sou a Fernanda, especialista em expansão da Conexão. Que legal que você quer ser licenciado! Você já trabalha com vendas?
+Link TRAVADO 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT
+WhatsApp: 27998242975 https://wa.me/5527998242975
+Este link já tem ID 156503 travado, não precisa alterar.</textarea></div></div>
+
+<div id="agente8" class="tela"><div class="card"><h2>8️⃣ Carol - MedSeg VTN</h2><textarea rows="12">Você é a Carol, especialista MedSeg - Medicina e Segurança do Trabalho (INDEPENDENTE DA IGREEN).
+Prompt: Olá! Sou a Carol, especialista da MedSeg. Fazemos PGR, PCMSO, LTCAT, ASO, eSocial, orçamentos e visitas técnicas. Como posso te atender?
+Serviços: Orçamentos, Visitas Técnicas, Documentação, Exames
+WhatsApp MedSeg: 27998242975 https://wa.me/5527998242975
+NÃO USA LINK IGREEN, É SERVIÇO INDEPENDENTE.
+Final: #HUMANO para atendimento humano.</textarea></div></div>
+
 </div>
-</div>
-<div id="kanban" class="tela">
-<div class="card"><h2>💬 Kanban WhatsApp IA - ID 156503 - Histórico</h2><div class="filters"><input id="fBusca" placeholder="Buscar nome/CNPJ/tel" oninput="renderLeads()"><select id="fEstado" onchange="renderLeads()"><option value="">UF</option><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select><input id="fCidade" placeholder="Cidade/Município" oninput="renderLeads()"><select id="fServico" onchange="renderLeads()"><option value="">Serviço</option><option>Green até 10k</option><option>Livre acima 10k</option><option>Placas</option><option>Telecom</option><option>Seguros</option><option>Expansão 156503</option><option>MedSeg</option><option>Agenda 27981244268</option></select></div></div>
-<div class="kanban"><div class="col" data-col="novo"><h4>🆕 Novo Lead</h4><div id="col-novo"></div></div><div class="col" data-col="atendimento"><h4>👨‍💼 Em Atendimento</h4><div id="col-atendimento"></div></div><div class="col" data-col="documentos"><h4>📄 Já enviou docs</h4><div id="col-documentos"></div></div><div class="col" data-col="orcamento"><h4>💰 Solicitou Orçamento</h4><div id="col-orcamento"></div></div><div class="col" data-col="assessoria"><h4>📅 Enviado p/ Assessoria 27981244268</h4><div id="col-assessoria"></div></div><div class="col" data-col="fechado"><h4>✅ Cliente Fechado / Finalizado</h4><div id="col-fechado"></div></div><div class="col" data-col="recusou"><h4>❌ Não Fechou - Reativar</h4><div id="col-recusou"></div></div></div>
-</div>
-<div id="leads" class="tela">
-<div class="card"><h2>👥 Leads - CNPJ / Estado / Cidade / Município - ID 156503</h2>
-<div class="grid2">
-<div><label style="font-size:11px;color:#888">CNPJ / CPF</label><input id="leadCNPJ" placeholder="00.000.000/0001-00"></div>
-<div><label style="font-size:11px;color:#888">Razão Social / Nome</label><input id="leadNome" placeholder="Nome"></div>
-<div><label style="font-size:11px;color:#888">Estado UF</label><select id="leadUF"><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option><option>Outros</option></select></div>
-<div><label style="font-size:11px;color:#888">Cidade / Município</label><input id="leadCidade" placeholder="Serra"></div>
-<div><label style="font-size:11px;color:#888">Telefone WhatsApp</label><input id="leadTel" placeholder="2799..."></div>
-<div><label style="font-size:11px;color:#888">Serviço</label><select id="leadServ"><option>Green até 10k - 100kWh - 27998242975</option><option>Livre acima 10k - 27998242975</option><option>Placas - 27998242975</option><option>Telecom - 27998242975</option><option>Seguros Carro/Moto/Caminhão - 27998242975</option><option>Expansão ID 156503 - 27998242975</option><option>MedSeg - PGR/PCMSO/LTCAT/ASO - 27998242975 - SÓ MEDSEG</option><option>Agenda e Eventos - 27981244268</option></select></div>
-</div>
-<button class="btn btn-g" style="margin-top:10px" onclick="addLead()">+ Adicionar Lead</button>
-<button class="btn btn-d" style="margin-top:10px;margin-left:6px" onclick="document.getElementById('importFile').click()">📥 Importar CSV</button>
-<input type="file" id="importFile" style="display:none" accept=".csv" onchange="importarCSV(event)">
-<div id="tabelaLeads" style="margin-top:12px"></div>
-</div>
-</div>
-<div id="clientes" class="tela">
-<div class="card"><h2>📋 Clientes Fechados / Não Fechados - Histórico Completo</h2>
-<div class="grid3">
-<div><label style="font-size:11px;color:#888">CNPJ/CPF</label><input id="cliCNPJ"></div>
-<div><label style="font-size:11px;color:#888">Nome/Razão</label><input id="cliNome"></div>
-<div><label style="font-size:11px;color:#888">Telefone</label><input id="cliTel"></div>
-<div><label style="font-size:11px;color:#888">Estado</label><select id="cliUF"><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select></div>
-<div><label style="font-size:11px;color:#888">Cidade/Município</label><input id="cliCidade"></div>
-<div><label style="font-size:11px;color:#888">Serviço</label><select id="cliServ"><option>Green até 10k</option><option>Livre acima 10k</option><option>Placas</option><option>Telecom</option><option>Seguros</option><option>Expansão ID 156503</option><option>MedSeg - Só MedSeg</option><option>Agenda 27981244268</option></select></div>
-<div><label style="font-size:11px;color:#888">Status</label><select id="cliStatus"><option value="fechado">Fechado / Finalizado</option><option value="nao_fechado">Não Fechado - Reativar</option></select></div>
-<div><label style="font-size:11px;color:#888">Motivo / Valor</label><input id="cliMotivo" placeholder="Fechou R$5k / Não tinha verba"></div>
-<div><label style="font-size:11px;color:#888">O que foi feito</label><input id="cliFeito" placeholder="Enviou docs, orçamento, enviado assessoria"></div>
-</div>
-<button class="btn btn-g" style="margin-top:10px" onclick="addCliente()">+ Salvar Cliente com Histórico</button>
-<div id="listaClientes" style="margin-top:12px"></div>
-</div>
-</div>
-<div id="disparos" class="tela">
-<div class="card"><h2>🚀 Disparos em Massa - Prospecção - ID 156503</h2><p style="color:#999;font-size:11px">Prospecção ativa. Assessoria 27981244268 | Atendimento 27998242975 | Só MedSeg | ID 156503 travado.</p></div>
-<div class="grid2">
-<div class="card">
-<h3>📝 Mensagem de Prospecção</h3>
-<label style="font-size:11px;color:#888">Serviço</label><select id="dispServico" onchange="atualizarModelo()"><option value="green">Green até 10k - 27998242975</option><option value="livre">Livre acima 10k - 27998242975</option><option value="placas">Placas - 27998242975</option><option value="telecom">Telecom - 27998242975</option><option value="seguros">Seguros Carro/Moto/Caminhão - 27998242975</option><option value="expansao">Expansão ID 156503 - 27998242975</option><option value="medseg">MedSeg - PGR/PCMSO/LTCAT/ASO - 27998242975 - SÓ MEDSEG</option><option value="agenda">Agenda e Eventos - 27981244268</option></select>
-<label style="font-size:11px;color:#888">Link do serviço</label><input id="dispLink" placeholder="Link será preenchido">
-<label style="font-size:11px;color:#888">Mensagem (use {nome} {cidade} {cnpj})</label><textarea id="dispMensagem" rows="8"></textarea>
-<div class="grid2">
-<div><label style="font-size:11px;color:#888">Intervalo (seg)</label><input id="dispIntervalo" type="number" value="30"></div>
-<div><label style="font-size:11px;color:#888">Número que vai disparar</label><select id="dispNumero"><option value="27998242975">Atendimento 27998242975 - iGreen + MedSeg</option><option value="27981244268">Assessoria 27981244268 - Agenda</option></select></div>
-</div>
-<button class="btn btn-y" style="width:100%;margin-top:10px" onclick="iniciarDisparo()">🚀 Iniciar Disparo em Massa</button>
-<button class="btn btn-d" style="width:100%;margin-top:6px" onclick="pararDisparo()">⏹️ Parar Disparo</button>
-<div class="progress"><div id="progressBar" class="progress-bar"></div></div>
-<p style="font-size:11px;color:#888" id="progressText">0 / 0 disparos - 0% - Aguardando</p>
-</div>
-<div class="card">
-<h3>👥 Lista para Disparo - Selecione</h3>
-<div class="filters"><input id="dispFiltro" placeholder="Filtrar CNPJ/Cidade/UF" oninput="renderDisparosLista()"><select id="dispFiltroStatus" onchange="renderDisparosLista()"><option value="">Todos status</option><option value="novo">Só Novos</option><option value="recusou">Só Não Fechados - Reativar</option><option value="nao_fechado">Clientes Não Fechados</option></select></div>
-<div style="margin:8px 0"><button class="btn btn-d" style="font-size:11px" onclick="selecionarTodos(true)">✅ Selecionar todos filtrados</button> <button class="btn btn-d" style="font-size:11px;margin-left:4px" onclick="selecionarTodos(false)">❌ Desmarcar todos</button> <span id="selCount" style="font-size:11px;color:#facc15;margin-left:8px">0 selecionados</span></div>
-<div class="checkbox-list" id="listaDisparos"></div>
-<div style="margin-top:10px">
-<h4 style="font-size:12px;color:#888">📊 Relatório de Disparos</h4>
-<div id="relatorioDisparos" style="font-size:11px;color:#aaa;margin-top:6px">Nenhum disparo ainda</div>
-</div>
-</div>
-</div>
-</div>// --- PARTE 2: LOGICA COMPLETA V8 MASTER ---
-
-const MODELOS = {
-  green: "Olá {nome} de {cidade}, aqui é da assessoria 27998242975. Vi seu CNPJ {cnpj}. Você já tem PGR/PCMSO Green até 10k? Link: {link}",
-  medseg: "🙏 {nome}, Rômulo aqui - ID 156503. Só MedSeg! PGR + PCMSO + eSocial. {cidade} precisa regularizar? {link} - Atend 27998242975",
-  telecom: "Oi {nome}, economia de até 40% na conta telecom de {cidade}. Posso te mandar simulação? {link}",
-  agenda: "Olá {nome}, agenda 27981244268 - vamos marcar assessoria? {cidade} - {link}"
-};
-
-let disparoAtivo = false;
-
-function atualizarModelo(){
-  let serv = document.getElementById('dispServico')?.value || 'medseg';
-  if(document.getElementById('dispMensagem'))
-    document.getElementById('dispMensagem').value = MODELOS[serv] || MODELOS.medseg;
-}
-
-function renderKanban(){
-  const cols = ['novo','atendimento','documentos','orcamento','assessoria','fechado','recusou'];
-  let container = document.getElementById('kanbanCols');
-  if(!container) return;
-  container.innerHTML = cols.map(c=>`
-    <div class="col" id="col-${c}"><h4>${c.toUpperCase()}</h4>
-    <div id="list-${c}"></div></div>
-  `).join('');
-
-  leads.forEach((l,i)=>{
-    let col = (l.status||'novo').toLowerCase();
-    if(!cols.includes(col)) col='novo';
-    let el = document.getElementById('list-'+col);
-    if(el) el.innerHTML += `
-      <div class="lead-card" draggable="true" onclick="abrirLead(${i})">
-        <b>${l.nome}</b><br><small>${l.cidade||''} ${l.telefone||''}</small><br>
-        <span style="color:#00ff88">${l.score||80}%</span> • ${l.canal||'WhatsApp'}
-        <div style="margin-top:4px">
-          <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'fechado')">✅ Fechou</button>
-          <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'recusou')">❌ Não</button>
-        </div>
-      </div>`;
-  });
-}
-
-function moverLead(i, novoStatus){
-  leads[i].status = novoStatus;
-  localStorage.setItem('ekk_leads', JSON.stringify(leads));
-  renderKanban();
-  // Salva no backend também
-  fetch(API_URL+'/api/leads/'+leads[i].id, {method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify({status:novoStatus})}).catch(()=>{});
-}
-
-function abrirLead(i){
-  let l = leads[i];
-  let hist = prompt(`LEAD: ${l.nome}\nTel: ${l.telefone}\nStatus: ${l.status}\n\nDigite histórico / o que foi feito:`, l.transcricao||'');
-  if(hist!==null){
-    leads[i].transcricao = hist;
-    localStorage.setItem('ekk_leads', JSON.stringify(leads));
-  }
-}
-
-// DISPAROS ANTI-BLOQUEIO
-async function iniciarDisparoReal(){
-  if(disparoAtivo) return;
-  disparoAtivo = true;
-  let intervalo = parseInt(document.getElementById('dispIntervalo')?.value || 30);
-  let mensagem = document.getElementById('dispMensagem').value;
-  let numero = document.getElementById('dispNumero')?.value || '27998242975';
-  let lista = document.querySelectorAll('#listaDisparos input:checked');
-  if(lista.length===0) lista = leads.slice(0,10); // fallback
-
-  let progress = document.getElementById('progressBar');
-  let text = document.getElementById('progressText');
-
-  for(let k=0;k<lista.length;k++){
-    if(!disparoAtivo) break;
-    let lead = leads[k] || {nome:'Cliente', cidade:'ES', telefone:'27999999999'};
-    let msgPersonalizada = mensagem.replace('{nome}', lead.nome).replace('{cidade}', lead.cidade||'sua cidade').replace('{cnpj}', lead.cnpj||'').replace('{link}', document.getElementById('dispLink')?.value || '');
-
-    // AQUI INTEGRA COM Z-API / UAZAPI / EVOLUTION
-    console.log(`[DISPARO ${numero}] -> ${lead.telefone}: ${msgPersonalizada}`);
-
-    // Atualiza barra
-    let pct = Math.round((k+1)/lista.length*100);
-    if(progress) progress.style.width = pct+'%';
-    if(text) text.innerText = `${k+1} / ${lista.length} - Enviando para ${lead.nome} - Aguardando ${intervalo}s`;
-
-    await new Promise(r=>setTimeout(r, intervalo*1000));
-  }
-  disparoAtivo = false;
-  alert('Disparo finalizado!');
-}
-
-function pararDisparo(){ disparoAtivo=false; }
-
-function selecionarTodos(v){
-  document.querySelectorAll('#listaDisparos input[type=checkbox]').forEach(c=>c.checked=v);
-}
-
-function renderDisparosLista(){
-  let el = document.getElementById('listaDisparos');
-  if(!el) return;
-  let filtro = document.getElementById('dispFiltro')?.value.toLowerCase() || '';
-  el.innerHTML = leads.filter(l=> l.nome.toLowerCase().includes(filtro)).map((l,i)=>`
-    <label style="display:flex;gap:6px;padding:4px;border-bottom:1px solid #222;font-size:11px">
-      <input type="checkbox" checked value="${i}"> ${l.nome} - ${l.telefone}
-    </label>
-  `).join('');
-}
-
-// TREINAMENTO IA POR SERVIÇO
-function renderTreinamento(){
-  let el = document.getElementById('listaTreinamento');
-  if(!el) return;
-  el.innerHTML = Object.keys(MODELOS).map(k=>`
-    <div class="card">
-      <h3 style="font-size:12px;color:#00ff88">${k.toUpperCase()} - 27998242975</h3>
-      <input id="link-${k}" placeholder="Link do serviço ${k}" value="https://ekklesia.com/${k}">
-      <textarea rows="2" id="prompt-${k}">${MODELOS[k]}</textarea>
-      <button class="btn btn-g" style="font-size:10px;margin-top:4px" onclick="salvarTreino('${k}')">Salvar IA + Link</button>
-    </div>
-  `).join('');
-}
-
-function salvarTreino(k){
-  let link = document.getElementById('link-'+k).value;
-  let prompt = document.getElementById('prompt-'+k).value;
-  localStorage.setItem('treino_'+k, JSON.stringify({link, prompt}));
-  alert('Treinamento '+k+' salvo! IA vai usar esse link');
-}
-
-// OVERRIDE RENDER ORIGINAL
-const oldRender = render;
-render = function(){
-  oldRender();
-  renderKanban();
-  renderDisparosLista();
-  renderTreinamento();
-  if(document.getElementById('kpiLeads')) document.getElementById('kpiLeads').innerText = leads.length;
-}
-
-// Troca função iniciarDisparo
-window.iniciarDisparo = iniciarDisparoReal;
+<script>
+function abrir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');document.querySelectorAll('.btn-menu').forEach(b=>b.classList.remove('active'))}
+function toggleTheme(){const b=document.body;const cur=b.getAttribute('data-theme');const next=cur==='light'?'dark':'light';b.setAttribute('data-theme',next);localStorage.setItem('ekklesia_theme',next);document.getElementById('themeBtn').innerText=next==='light'?'🌙 Modo Escuro':'☀️ Modo Claro'}
+(function(){const saved=localStorage.getItem('ekklesia_theme')||'dark';document.body.setAttribute('data-theme',saved);document.getElementById('themeBtn').innerText=saved==='light'?'🌙 Modo Escuro':'☀️ Modo Claro'})();
+const AGENTES=[{id:"amanda"},{id:"agente1"},{id:"agente2"},{id:"agente3"},{id:"agente4"},{id:"agente5"},{id:"agente6"},{id:"agente7"},{id:"agente8"}];
+localStorage.setItem('ekklesia_V8_ID156503_final',JSON.stringify({id:156503,wpp_atendimento:'27998242975',wpp_assessoria:'27981244268',link:'https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT'}));
+console.log('✅ EKKLESIA V8 MASTER ID 156503 - TEMA CLARO/ESCURO OK');
+</script>
+</body>
+</html>
