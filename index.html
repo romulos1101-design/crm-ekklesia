@@ -3,56 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekklésia - CRM</title>
+<title>Ekklesia CRM - Equipe Rômulo Sousa ID 156503</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#0a0a0a;color:#fff;display:flex}
-.sidebar{position:fixed;left:0;top:0;width:280px;height:100vh;background:#111;border-right:1px solid #222;z-index:9999;transform:translateX(-100%);transition:0.3s;padding:20px;display:flex;flex-direction:column}
-.sidebar.open{transform:translateX(0)}
-.sidebar h1{font-size:28px;margin-bottom:20px}
-.sidebar input{width:100%;padding:12px;border-radius:12px;border:1px solid #222;background:#1a1a1a;color:#fff;margin-bottom:10px}
-.sidebar a{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;color:#aaa;text-decoration:none;margin-bottom:4px}
-.sidebar a.active,.sidebar a:hover{background:#fff;color:#000}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998}
-.overlay.show{display:block}
-.main-content{flex:1;min-height:100vh;padding:20px;width:100%;transition:0.3s}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.menu-toggle{font-size:28px;background:none;border:none;color:#fff;cursor:pointer}
-@media(min-width:768px){.sidebar{transform:translateX(0)}.main-content{margin-left:280px}.menu-toggle{display:none}.overlay{display:none!important}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+body{background:#0f0f10;color:#fff;display:flex;min-height:100vh;overflow-x:hidden}
+.sidebar{width:260px;background:#151517;border-right:1px solid #2a2a2e;position:fixed;left:0;top:0;bottom:0;z-index:20;transition:.3s;padding:20px 12px}
+.sidebar h2{font-size:18px;margin-bottom:20px;padding-left:8px;color:#00ff88}
+.sidebar a, .sidebar button{display:flex;width:100%;padding:12px 14px;margin:4px 0;border:0;background:transparent;color:#aaa;border-radius:10px;text-align:left;cursor:pointer;font-size:14px;text-decoration:none}
+.sidebar a:hover,.sidebar button:hover,.sidebar a.active{background:#1f1f23;color:#fff}
+.main{margin-left:260px;flex:1;padding:24px;min-height:100vh;width:calc(100% - 260px)}
+.card{background:#1a1a1d;border:1px solid #2a2a2e;border-radius:16px;padding:20px;margin-bottom:16px}
+.tela{display:none}
+.tela.ativa{display:block}
+.btn{background:#00ff88;color:#000;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-block;border:0;cursor:pointer}
+.badge{background:#00ff88;color:#000;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10}
+@media(max-width:900px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;width:100%}.overlay.open{display:block}}
 </style>
 </head>
 <body>
-
-<div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <div class="sidebar" id="sidebar">
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <h1>Ekklésia</h1>
-    <span>☀️</span>
-  </div>
-  <input placeholder="🔍 Buscar...">
-  <a href="#" class="active">📁 CRM Kanban</a>
-  <a href="#">🎯 Prospecção</a>
-  <a href="#">👥 Clientes</a>
-  <a href="#">🧠 Treinamento IA</a>
-  <a href="#">⚡ Automações</a>
-  <a href="#">📊 Monitoramento</a>
-  <div style="margin-top:auto;color:#666;font-size:12px">ILIMITADO <span style="color:#0f0">• 999 Zaps • 999 Usuários</span></div>
-  <div style="margin-top:20px;border:1px solid #333;border-radius:30px;padding:10px;text-align:center">1 • R$0</div>
+<h2>🙏 Ekklesia CRM<br><span style="font-size:11px;color:#666">Equipe Rômulo 156503</span></h2>
+<button onclick="abrir('dashboard')" id="btn-dashboard" class="active">📊 Dashboard</button>
+<button onclick="abrir('buscar')">🔍 Buscar</button>
+<button onclick="abrir('prospeccao')">🚀 Prospecção</button>
+<button onclick="abrir('clientes')">👥 Clientes</button>
+<button onclick="abrir('treinamento')" style="color:#00ff88;border:1px solid #00ff8833">🤖 Treinamento IA</button>
+<button onclick="abrir('automacao')" style="color:#00ff88;border:1px solid #00ff8833">⚙️ Automação</button>
+<button onclick="abrir('monitoramento')" style="color:#00ff88;border:1px solid #00ff8833">📡 Monitoramento</button>
+<div style="margin-top:20px;padding:12px;background:#1f1f23;border-radius:12px">
+<p style="font-size:12px;color:#aaa">LINK TRAVADO ID</p>
+<p style="font-weight:700;color:#00ff88">156503 - CONNECT</p>
+<a href="https://expansao.igreenenergy.com.br/?id=156503" target="_blank" style="font-size:12px;color:#aaa;word-break:break-all">Link principal</a><br>
+<a href="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT" target="_blank" class="btn" style="margin-top:10px;font-size:12px;width:100%;text-align:center">Ir p/ Checkout</a>
+</div>
 </div>
 
-<div class="main-content">
-  <div class="topbar">
-    <button class="menu-toggle" onclick="abrirMenu()">☰</button>
-    <div id="conteudo-kanban">Seu Kanban aqui...</div>
-  </div>
-  <!-- COLE SEU KANBAN AQUI DENTRO -->
+<div class="main">
+<button onclick="toggleMenu()" style="display:none" id="menuBtn" class="btn">☰ Menu</button>
+
+<div id="dashboard" class="tela ativa">
+<div class="card"><h1>Ekklesia v6 LIVE ✅</h1><p style="color:#aaa;margin-top:8px">Sistema no ar em https://crm-ekklesia.onrender.com | Deploy corrigido agora 02/09/2026</p><p><span class="badge">ID 156503 ATIVO</span></p></div>
+<div class="card"><h3>Equipe Rômulo Sousa</h3><p style="color:#aaa">Seu link não fica mais travado na inicial. Use o principal para apresentar e o checkout para fechar.</p></div>
+</div>
+
+<div id="treinamento" class="tela">
+<div class="card"><h2>🤖 Treinamento IA - Fernanda</h2><p style="color:#aaa">Agente da Equipe Rômulo Sousa travado no ID 156503</p>
+<textarea style="width:100%;height:260px;background:#0f0f10;color:#ddd;border:1px solid #333;border-radius:12px;padding:12px;margin-top:12px">
+Você é a Fernanda, atendente da Equipe Rômulo Sousa - iGreen Energy ID 156503.
+
+OBJETIVO: Vender franquia CONNECT.
+
+REGRAS:
+1. Sempre trave no ID 156503
+2. Link principal: https://expansao.igreenenergy.com.br/?id=156503
+3. Se cliente quiser comprar, envie checkout: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT
+4. Se link travar na inicial, oriente abrir em aba anônima
+5. Seja curta, objetiva, vendedora.
+
+PITCH: "Você vira dono de franquia de energia solar sem estoque..."
+</textarea>
+<button class="btn" style="margin-top:12px">💾 Salvar Agente</button>
+</div>
+</div>
+
+<div id="automacao" class="tela">
+<div class="card"><h2>⚙️ Automação</h2><p style="color:#aaa">Fluxos da Equipe 156503</p>
+<div style="margin-top:12px;padding:12px;background:#0f0f10;border-radius:10px;border:1px dashed #333">
+<p>1. Lead entra > 2. Fernanda atende > 3. Envia link ID 156503 > 4. Se não comprar em 1h, follow-up automático</p>
+</div>
+</div>
+</div>
+
+<div id="monitoramento" class="tela">
+<div class="card"><h2>📡 Monitoramento</h2><p>Status Render: <b style="color:#00ff88">Live</b> | Free Instance - pode atrasar 50s se ficar inativo</p>
+<p style="margin-top:10px;color:#aaa">Dica: Use o UptimeRobot pra pingar https://crm-ekklesia.onrender.com a cada 5 min e não hibernar.</p>
+</div>
+</div>
+
+<div id="buscar" class="tela"><div class="card"><h2>Buscar</h2><p style="color:#aaa">Em breve</p></div></div>
+<div id="prospeccao" class="tela"><div class="card"><h2>Prospecção</h2><p style="color:#aaa">Em breve</p></div></div>
+<div id="clientes" class="tela"><div class="card"><h2>Clientes</h2><p style="color:#aaa">Em breve</p></div></div>
+
 </div>
 
 <script>
-function abrirMenu(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').classList.add('show')}
-function fecharMenu(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
-document.querySelectorAll('.sidebar a').forEach(a=>a.addEventListener('click',()=>{if(window.innerWidth<768)fecharMenu()}));
+function abrir(id){
+ document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));
+ document.getElementById(id).classList.add('ativa');
+ document.querySelectorAll('.sidebar button').forEach(b=>b.classList.remove('active'));
+ const btn=document.getElementById('btn-'+id);
+ if(btn) btn.classList.add('active');
+ if(window.innerWidth<900) toggleMenu();
+}
+function toggleMenu(){
+ document.getElementById('sidebar').classList.toggle('open');
+ document.getElementById('overlay').classList.toggle('open');
+}
+if(window.innerWidth<900) document.getElementById('menuBtn').style.display='inline-block';
+
+// FIX do bug do seu commit "Refactor sidebar and overlay styles"
+console.log('Ekklesia v6 FIX by Equipe Rômulo 156503 - LIVE');
 </script>
 </body>
 </html>
