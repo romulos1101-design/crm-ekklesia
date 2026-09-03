@@ -1,111 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekklesia CRM - Equipe Rômulo Sousa ID 156503</title>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EKKLESIA FINAL V2 - ID156503 - AMANDA + 8 AGENTES</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
-body{background:#0f0f10;color:#fff;display:flex;min-height:100vh;overflow-x:hidden}
-.sidebar{width:260px;background:#151517;border-right:1px solid #2a2a2e;position:fixed;left:0;top:0;bottom:0;z-index:20;transition:.3s;padding:20px 12px}
-.sidebar h2{font-size:18px;margin-bottom:20px;padding-left:8px;color:#00ff88}
-.sidebar a, .sidebar button{display:flex;width:100%;padding:12px 14px;margin:4px 0;border:0;background:transparent;color:#aaa;border-radius:10px;text-align:left;cursor:pointer;font-size:14px;text-decoration:none}
-.sidebar a:hover,.sidebar button:hover,.sidebar a.active{background:#1f1f23;color:#fff}
-.main{margin-left:260px;flex:1;padding:24px;min-height:100vh;width:calc(100% - 260px)}
-.card{background:#1a1a1d;border:1px solid #2a2a2e;border-radius:16px;padding:20px;margin-bottom:16px}
-.tela{display:none}
-.tela.ativa{display:block}
-.btn{background:#00ff88;color:#000;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-block;border:0;cursor:pointer}
-.badge{background:#00ff88;color:#000;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10}
-@media(max-width:900px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;width:100%}.overlay.open{display:block}}
-</style>
-</head>
-<body>
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-
-<div class="sidebar" id="sidebar">
-<h2>🙏 Ekklesia CRM<br><span style="font-size:11px;color:#666">Equipe Rômulo 156503</span></h2>
-<button onclick="abrir('dashboard')" id="btn-dashboard" class="active">📊 Dashboard</button>
-<button onclick="abrir('buscar')">🔍 Buscar</button>
-<button onclick="abrir('prospeccao')">🚀 Prospecção</button>
-<button onclick="abrir('clientes')">👥 Clientes</button>
-<button onclick="abrir('treinamento')" style="color:#00ff88;border:1px solid #00ff8833">🤖 Treinamento IA</button>
-<button onclick="abrir('automacao')" style="color:#00ff88;border:1px solid #00ff8833">⚙️ Automação</button>
-<button onclick="abrir('monitoramento')" style="color:#00ff88;border:1px solid #00ff8833">📡 Monitoramento</button>
-<div style="margin-top:20px;padding:12px;background:#1f1f23;border-radius:12px">
-<p style="font-size:12px;color:#aaa">LINK TRAVADO ID</p>
-<p style="font-weight:700;color:#00ff88">156503 - CONNECT</p>
-<a href="https://expansao.igreenenergy.com.br/?id=156503" target="_blank" style="font-size:12px;color:#aaa;word-break:break-all">Link principal</a><br>
-<a href="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT" target="_blank" class="btn" style="margin-top:10px;font-size:12px;width:100%;text-align:center">Ir p/ Checkout</a>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+body{background:#0a0a0b;color:#fff;display:flex;min-height:100vh}
+.sidebar{width:285px;background:#151517;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:14px;overflow-y:auto;z-index:20}
+.main{margin-left:285px;flex:1;padding:20px}
+.card{background:#1a1a1d;border:1px solid #2a2a2e;border-radius:14px;padding:16px;margin-bottom:12px}
+.tela{display:none}.tela.ativa{display:block}
+.btn{background:#00ff88;color:#000;padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-block;border:0;cursor:pointer;font-size:13px}
+.badge{background:#00ff88;color:#000;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700}
+.btn-menu{width:100%;padding:10px;margin:3px 0;border:0;background:transparent;color:#aaa;border-radius:8px;text-align:left;cursor:pointer;font-size:13px}
+.btn-menu.active,.btn-menu:hover{background:#1f1f23;color:#fff}
+textarea{width:100%;background:#0f0f10;color:#ccc;border:1px solid #333;border-radius:10px;padding:10px;font-size:12px}
+</style></head><body>
+<div class="sidebar">
+<h2 style="color:#00ff88">EKKLESIA CRM</h2><small style="color:#666">EQUIPE ROMULO SOUSA<br>ID 156503 TRAVADO</small>
+<div style="margin-top:10px">
+<button class="btn-menu active" onclick="abrir('dashboard')">📊 Dashboard</button>
+<button class="btn-menu" style="color:#00ff88;border:1px solid #00ff8833" onclick="abrir('amanda')">⭐ 0 - AMANDA Central</button>
+<button class="btn-menu" onclick="abrir('agente1')">1️⃣ Agenda Rômulo - 98124-4268</button>
+<button class="btn-menu" onclick="abrir('agente2')">2️⃣ Isa Green até 10k</button>
+<button class="btn-menu" onclick="abrir('agente3')">3️⃣ Cris Livre +10k</button>
+<button class="btn-menu" onclick="abrir('agente4')">4️⃣ Mateus Placas</button>
+<button class="btn-menu" onclick="abrir('agente5')">5️⃣ Bia Telecom</button>
+<button class="btn-menu" onclick="abrir('agente6')">6️⃣ Léo Seguros</button>
+<button class="btn-menu" onclick="abrir('agente7')">7️⃣ Fernanda Expansão 156503</button>
+<button class="btn-menu" style="color:#ff9f43" onclick="abrir('agente8')">8️⃣ Carol MedSeg</button>
+</div>
+<div style="margin-top:12px;padding:10px;background:#1f1f23;border-radius:10px">
+<p style="font-size:11px;color:#aaa">ASSESSORIA AGENDA/EVENTOS</p><p style="color:#00ff88;font-weight:700">27981244268</p>
+<a href="https://wa.me/5527981244268" target="_blank" class="btn" style="width:100%;margin-top:4px;text-align:center;background:#fff;color:#000">Chamar Assessoria</a>
+<p style="font-size:11px;color:#aaa;margin-top:8px">ATENDIMENTO IGREEN + MEDSEG</p><p style="color:#25D366;font-weight:700">27998242975</p>
+<a href="https://wa.me/5527998242975" target="_blank" class="btn" style="width:100%;margin-top:4px;text-align:center;background:#25D366;color:#fff">Chamar Atendimento</a>
+<a href="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT" target="_blank" class="btn" style="width:100%;margin-top:8px;text-align:center">LINK TRAVADO 156503</a>
 </div>
 </div>
-
 <div class="main">
-<button onclick="toggleMenu()" style="display:none" id="menuBtn" class="btn">☰ Menu</button>
-
 <div id="dashboard" class="tela ativa">
-<div class="card"><h1>Ekklesia v6 LIVE ✅</h1><p style="color:#aaa;margin-top:8px">Sistema no ar em https://crm-ekklesia.onrender.com | Deploy corrigido agora 02/09/2026</p><p><span class="badge">ID 156503 ATIVO</span></p></div>
-<div class="card"><h3>Equipe Rômulo Sousa</h3><p style="color:#aaa">Seu link não fica mais travado na inicial. Use o principal para apresentar e o checkout para fechar.</p></div>
+<div class="card"><h1>EKKLESIA FINAL V2 ✅ AMANDA + 8 AGENTES</h1><p>Equipe Rômulo Sousa - ID 156503 - Assessoria 27981244268 | Atendimento 27998242975</p><p style="margin-top:8px"><span class="badge">ID 156503</span> <span class="badge" style="background:#fff;color:#000">Assessoria 27981244268</span> <span class="badge" style="background:#25D366;color:#fff">Atendimento 27998242975</span></p></div>
+<div id="grid"></div>
 </div>
-
-<div id="treinamento" class="tela">
-<div class="card"><h2>🤖 Treinamento IA - Fernanda</h2><p style="color:#aaa">Agente da Equipe Rômulo Sousa travado no ID 156503</p>
-<textarea style="width:100%;height:260px;background:#0f0f10;color:#ddd;border:1px solid #333;border-radius:12px;padding:12px;margin-top:12px">
-Você é a Fernanda, atendente da Equipe Rômulo Sousa - iGreen Energy ID 156503.
-
-OBJETIVO: Vender franquia CONNECT.
-
-REGRAS:
-1. Sempre trave no ID 156503
-2. Link principal: https://expansao.igreenenergy.com.br/?id=156503
-3. Se cliente quiser comprar, envie checkout: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT
-4. Se link travar na inicial, oriente abrir em aba anônima
-5. Seja curta, objetiva, vendedora.
-
-PITCH: "Você vira dono de franquia de energia solar sem estoque..."
-</textarea>
-<button class="btn" style="margin-top:12px">💾 Salvar Agente</button>
+<div id="amanda" class="tela"><div class="card"><h2>⭐ AMANDA - Central Geral</h2><textarea rows="12">Você é a AMANDA, Atendente Virtual Central da Equipe Rômulo Sousa ID 156503.
+MENSAGEM INICIAL: Olá! Bem-vindo à Equipe Rômulo Sousa! 👋 Sou a Amanda. Me diz: você precisa de ajuda com: 1️⃣ Economia conta de luz / Energia Solar 2️⃣ Seguro Carro/Moto/Caminhão 3️⃣ Internet/Telecom 4️⃣ Quero ser parceiro/franquia iGreen 5️⃣ Medicina e Segurança do Trabalho PGR/PCMSO 6️⃣ Agenda e Eventos
+DIRECIONAMENTO: Se 6 ou Agenda/Eventos -> direciona para assessoria humana WhatsApp 27981244268 https://wa.me/5527981244268. Se 1 a 5 -> direciona para especialista WhatsApp 27998242975 https://wa.me/5527998242975. Mensagem final: Ou fala com atendente humano ou aguarda que vou verificar sua situação e já volto te chamar 😉
+Link iGreen sempre travado ID 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT</textarea></div></div>
+<div id="agentesContainer"></div>
 </div>
-</div>
-
-<div id="automacao" class="tela">
-<div class="card"><h2>⚙️ Automação</h2><p style="color:#aaa">Fluxos da Equipe 156503</p>
-<div style="margin-top:12px;padding:12px;background:#0f0f10;border-radius:10px;border:1px dashed #333">
-<p>1. Lead entra > 2. Fernanda atende > 3. Envia link ID 156503 > 4. Se não comprar em 1h, follow-up automático</p>
-</div>
-</div>
-</div>
-
-<div id="monitoramento" class="tela">
-<div class="card"><h2>📡 Monitoramento</h2><p>Status Render: <b style="color:#00ff88">Live</b> | Free Instance - pode atrasar 50s se ficar inativo</p>
-<p style="margin-top:10px;color:#aaa">Dica: Use o UptimeRobot pra pingar https://crm-ekklesia.onrender.com a cada 5 min e não hibernar.</p>
-</div>
-</div>
-
-<div id="buscar" class="tela"><div class="card"><h2>Buscar</h2><p style="color:#aaa">Em breve</p></div></div>
-<div id="prospeccao" class="tela"><div class="card"><h2>Prospecção</h2><p style="color:#aaa">Em breve</p></div></div>
-<div id="clientes" class="tela"><div class="card"><h2>Clientes</h2><p style="color:#aaa">Em breve</p></div></div>
-
-</div>
-
 <script>
-function abrir(id){
- document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));
- document.getElementById(id).classList.add('ativa');
- document.querySelectorAll('.sidebar button').forEach(b=>b.classList.remove('active'));
- const btn=document.getElementById('btn-'+id);
- if(btn) btn.classList.add('active');
- if(window.innerWidth<900) toggleMenu();
-}
-function toggleMenu(){
- document.getElementById('sidebar').classList.toggle('open');
- document.getElementById('overlay').classList.toggle('open');
-}
-if(window.innerWidth<900) document.getElementById('menuBtn').style.display='inline-block';
-
-// FIX do bug do seu commit "Refactor sidebar and overlay styles"
-console.log('Ekklesia v6 FIX by Equipe Rômulo 156503 - LIVE');
+function abrir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');}
+const AGENTES=[
+{id:"agente1",nome:"1 Agenda Romulo - 27981244268",servico:"SERVICO 1 - ASSESSORIA"},
+{id:"agente2",nome:"2 Isa Green ate 10k",servico:"SERVICO 2 - GREEN ID 156503 - 27998242975"},
+{id:"agente3",nome:"3 Cris Livre +10k",servico:"SERVICO 2 - LIVRE ID 156503"},
+{id:"agente4",nome:"4 Mateus Placas",servico:"SERVICO 2 - PLACAS ID 156503"},
+{id:"agente5",nome:"5 Bia Telecom",servico:"SERVICO 2 - TELECOM ID 156503"},
+{id:"agente6",nome:"6 Leo Seguros",servico:"SERVICO 2 - SEGUROS ID 156503"},
+{id:"agente7",nome:"7 Fernanda Expansao ID 156503",servico:"SERVICO 2 - EXPANSAO TRAVADO"},
+{id:"agente8",nome:"8 Carol MedSeg",servico:"SERVICO 3 - VTN MEDSEG INDEPENDENTE"}
+];
+// AUTO-SALVA
+localStorage.setItem('ekklesia_final_v2_ID156503_9agentes',JSON.stringify(AGENTES));
+console.log('✅ FINAL V2 9 AGENTES ID 156503 - Assessoria 27981244268 | Atendimento 27998242975');
 </script>
-</body>
-</html>
+</body></html>
