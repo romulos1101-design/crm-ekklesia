@@ -1,85 +1,153 @@
-import express from "express";
-import pkg from "pg";
-const { Pool } = pkg;
-const app = express();
-const PORT = process.env.PORT || 10000;
-app.use(express.json({ limit: '10mb' }));
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
-
-async function initDB(){
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS leads (id SERIAL PRIMARY KEY, nome TEXT, cnpj TEXT, telefone TEXT, cidade TEXT, uf TEXT DEFAULT 'ES', canal TEXT, status TEXT DEFAULT 'novo', score INT DEFAULT 75, transcricao TEXT, created_at TIMESTAMPTZ DEFAULT NOW());
-    CREATE TABLE IF NOT EXISTS config (id INT PRIMARY KEY, dados JSONB);
-    INSERT INTO config(id, dados) VALUES(1, '{"empresa":"EKKLESIA V8 MASTER","id":"156503","cor":"#00ff88","tel1":"27981244268","tel2":"27998242975","link":"https://expansao.igreenenergy.com.br/?id=156503"}') ON CONFLICT (id) DO NOTHING;
-  `);
-}
-initDB();
-
-app.get("/api/leads", async (req,res)=>{ const r=await pool.query("SELECT * FROM leads ORDER BY id DESC LIMIT 200"); res.json(r.rows); });
-app.post("/api/leads", async (req,res)=>{ const r=await pool.query("INSERT INTO leads(nome, telefone, cnpj, cidade, status) VALUES($1,$2,$3,$4,'novo') RETURNING *", [req.body.nome, req.body.telefone, req.body.cnpj, req.body.cidade]); res.json(r.rows[0]); });
-app.patch("/api/leads/:id", async (req,res)=>{ await pool.query("UPDATE leads SET status=$1 WHERE id=$2", [req.body.status, req.params.id]); res.json({ok:true}); });
-app.get("/api/config", async (req,res)=>{ const r=await pool.query("SELECT dados FROM config WHERE id=1"); res.json(r.rows[0].dados); });
-app.post("/api/config", async (req,res)=>{ await pool.query("UPDATE config SET dados=$1 WHERE id=1", [req.body]); res.json({ok:true}); });
-app.get("/webhook", (req,res)=>{ if(req.query["hub.verify_token"]===process.env.VERIFY_TOKEN) res.send(req.query["hub.challenge"]); else res.sendStatus(403); });
-app.post("/webhook", async (req,res)=>{ try{const m=req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]; if(m){const nome=req.body.entry[0].changes[0].value.contacts?.[0]?.profile?.name||'Lead'; await pool.query("INSERT INTO leads(nome, telefone, transcricao) VALUES($1,$2,$3)", [nome, m.from, m.text?.body||'']);}}catch{} res.sendStatus(200); });
-
-app.get(["/","/painel"], (req,res)=>res.send(`
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CRM Ekklesia V8.3 EDITAVEL</title>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ekklesia V8.2 MASTER FINAL - ID 156503</title>
 <style>
-:root{--cor:#00ff88} *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial} body{background:#08080a;color:#fff;min-height:100vh}
-.login{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%, #0a2a1a, #08080a);display:flex;align-items:center;justify-content:center;z-index:9999}
-.box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:28px;width:420px}.btn{padding:11px 18px;border-radius:10px;font-weight:800;border:0;cursor:pointer}.btn-g{background:var(--cor);color:#000}
-.sidebar{width:290px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:16px;overflow:auto;display:none}
-.main{margin-left:290px;padding:18px;min-height:100vh;display:none}.card{background:#151518;border:1px solid #242428;border-radius:16px;padding:16px;margin-bottom:12px}
-.tela{display:none}.tela.ativa{display:block}.kanban{display:flex;gap:12px;overflow-x:auto}.col{min-width:250px;background:#111113;border:1px solid #222;border-radius:12px;padding:10px}
-.lead{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:10px;padding:10px;margin-bottom:8px;font-size:12px} input,textarea,select{width:100%;background:#0e0e10;color:#fff;border:1px solid #2a2a2e;border-radius:10px;padding:10px;margin:4px 0}
-.menu{width:100%;padding:10px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer}.menu.active{background:#1d1d20;color:#fff}
-</style></head><body>
-<div id="login" class="login"><div class="box"><h1 style="color:var(--cor)">🙏 EKKLESIA V8.3 EDITÁVEL</h1><p style="color:#888;font-size:11px">ID 156503 - Edite tudo no ⚙️ Config</p><input id="u" value="Rômulo Sousa"><input id="p" type="password" value="RDsc8125@"><button class="btn btn-g" style="width:100%;margin-top:10px" onclick="login()">Entrar</button></div></div>
-<div id="side" class="sidebar">
-<div style="color:var(--cor);font-weight:900" id="logoTxt">EKKLESIA V8.3</div><div style="font-size:10px;color:#666" id="infoTxt"></div>
-<button class="menu active" onclick="openT('dash')">📊 Dashboard</button>
-<button class="menu" onclick="openT('kanban')">💬 Kanban</button>
-<button class="menu" onclick="openT('leads')">👥 Leads</button>
-<button class="menu" onclick="openT('disparos')">🚀 Disparos Meta Oficial</button>
-<button class="menu" onclick="openT('config')">⚙️ Config EDITÁVEL</button>
-<button class="menu" onclick="logout()">🚪 Sair</button>
-<div style="margin-top:12px"><a id="btn1" href="https://wa.me/5527981244268" target="_blank" class="btn btn-g" style="display:block;text-align:center;font-size:11px">Assessoria</a><a id="btn2" href="https://wa.me/5527998242975" target="_blank" class="btn" style="display:block;text-align:center;margin-top:6px;background:#25D366;color:#fff;font-size:11px">Atendimento</a></div>
-</div>
-<div id="main" class="main">
-<div id="dash" class="tela ativa"><div class="card"><h2>Dashboard <span id="dashId"></span></h2><div style="display:flex;gap:10px;margin-top:10px"><div class="card" style="flex:1"><small>Total</small><div id="kLeads" style="font-size:26px;font-weight:800">0</div></div><div class="card" style="flex:1"><small>Fechados</small><div id="kFech" style="font-size:26px;color:var(--cor)">0</div></div><div class="card" style="flex:1"><small>Pendentes</small><div id="kPend" style="font-size:26px;color:#facc15">0</div></div></div></div></div>
-<div id="kanban" class="tela"><div class="card"><h2>Kanban</h2><div id="kanCols" class="kanban"></div></div></div>
-<div id="leads" class="tela"><div class="card"><h2>Leads</h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input id="cnpj" placeholder="CNPJ"><input id="nome" placeholder="Nome"><input id="cid" placeholder="Cidade"><input id="tel" placeholder="Tel 279..."></div><button class="btn btn-g" style="margin-top:8px" onclick="addLead()">+ Add</button><div id="listLeads" style="margin-top:10px"></div></div></div>
-<div id="disparos" class="tela"><div class="card"><h2>🚀 Disparos API Oficial Meta</h2><p style="font-size:11px;color:#888">Edite a mensagem abaixo. Use {nome} {cidade}</p><textarea id="msg" rows="4">Olá {nome} de {cidade}, Rômulo ID 156503 - Só MedSeg PGR/PCMSO. Posso enviar proposta? Link: {link}</textarea><input id="link" placeholder="Link"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input id="inter" value="30"><select id="num"><option>27998242975</option><option>27981244268</option></select></div><button class="btn btn-g" style="width:100%;margin-top:8px" onclick="disparar()">🚀 Disparar via Meta Oficial</button><div id="logDisp" style="font-size:11px;color:#888;margin-top:8px"></div></div><div class="card"><div id="checkList"></div></div></div>
-<div id="config" class="tela"><div class="card"><h2>⚙️ CONFIG EDITÁVEL - Mude tudo aqui</h2><p style="font-size:11px;color:#888">Isso altera seu https://crm-ekklesia.onrender.com/ na hora. Sem código.</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
-<div><label style="font-size:10px">Nome Empresa</label><input id="cfgEmpresa"></div>
-<div><label style="font-size:10px">ID Expansão</label><input id="cfgId"></div>
-<div><label style="font-size:10px">Cor Principal</label><input id="cfgCor" type="color"></div>
-<div><label style="font-size:10px">Tel Assessoria</label><input id="cfgTel1"></div>
-<div><label style="font-size:10px">Tel Atendimento</label><input id="cfgTel2"></div>
-<div><label style="font-size:10px">Link 156503</label><input id="cfgLink"></div>
-</div>
-<button class="btn btn-g" style="width:100%;margin-top:12px" onclick="salvarCfg()">💾 SALVAR ALTERAÇÕES</button>
-<p style="font-size:10px;color:#666;margin-top:8px">API: ${'${location.origin}'} | Token Meta: ${'${!!process.env.META_TOKEN?"ON":"OFF"}'}</p>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial}
+body{background:#08080a;color:#fff;min-height:100vh}
+.login-screen{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%, #0a2a1a, #08080a);display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:32px;width:440px}
+.btn{padding:11px 18px;border-radius:10px;font-weight:800;border:0;cursor:pointer;font-size:13px}
+.btn-g{background:#00ff88;color:#000}.btn-d{background:#1f1f23;color:#fff;border:1px solid #333}.btn-y{background:#facc15;color:#000}
+.sidebar{width:290px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:16px;overflow-y:auto;display:none}
+.main{margin-left:290px;flex:1;padding:18px;background:#0a0a0b;min-height:100vh;display:none}
+.card{background:#151518;border:1px solid #242428;border-radius:16px;padding:16px;margin-bottom:12px}
+.tela{display:none}.tela.ativa{display:block}
+.kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}
+.col{min-width:260px;background:#111113;border:1px solid #222;border-radius:14px;padding:10px}
+.lead-card{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:12px;padding:10px;margin-bottom:8px;font-size:12px}
+input,select,textarea{width:100%;background:#0e0e10;color:#c7c7c7;border:1px solid #2a2a2e;border-radius:10px;padding:10px;margin:4px 0}
+.btn-menu{width:100%;padding:11px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer}
+.btn-menu.active{background:#1d1d20;color:#fff}.btn-menu.green{color:#00ff88;border:1px solid rgba(0,255,136,.25)}
+.progress{height:10px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}.progress-bar{height:100%;background:#00ff88;width:0%;transition:.3s}
+.hidden{display:none}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.checkbox-list{max-height:300px;overflow:auto;border:1px solid #222;border-radius:10px;padding:8px}
+</style>
+</head>
+<body>
+<div id="loginScreen" class="login-screen"><div class="login-box">
+<h1 style="color:#00ff88">🙏 EKKLESIA V8.2 FINAL</h1><p style="color:#888;font-size:11px">ID 156503 - Só MedSeg - Master RDsc8125@</p>
+<input id="loginUser" value="Rômulo Sousa"><input id="loginPass" type="password" value="RDsc8125@">
+<button class="btn btn-g" style="width:100%;margin-top:10px" onclick="fazerLogin()">Entrar Master</button>
 </div></div>
-</div>
-<script>
-const API=location.origin; let leads=[]; let cfg={};
-function login(){if(u.value==='Rômulo Sousa'&&p.value==='RDsc8125@'){localStorage.setItem('m','1');loginEl();}else alert('errado');}
-function loginEl(){document.getElementById('login').style.display='none';side.style.display='block';main.style.display='block';load();}
-function logout(){localStorage.removeItem('m');location.reload();}
-function openT(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');}
-async function load(){try{let c=await fetch(API+'/api/config').then(r=>r.json()); cfg=c; applyCfg();}catch{} try{let r=await fetch(API+'/api/leads').then(r=>r.json()); leads=r;}catch{} render();}
-function applyCfg(){document.documentElement.style.setProperty('--cor', cfg.cor||'#00ff88'); logoTxt.innerText=cfg.empresa||'EKKLESIA'; dashId.innerText='ID '+(cfg.id||'156503'); infoTxt.innerHTML=\`MASTER<br>\${cfg.tel1} | \${cfg.tel2}\`; btn1.href='https://wa.me/55'+(cfg.tel1||'27981244268'); btn1.innerText='Assessoria '+(cfg.tel1||''); btn2.href='https://wa.me/55'+(cfg.tel2||'27998242975'); btn2.innerText='Atend '+(cfg.tel2||''); cfgEmpresa.value=cfg.empresa; cfgId.value=cfg.id; cfgCor.value=cfg.cor; cfgTel1.value=cfg.tel1; cfgTel2.value=cfg.tel2; cfgLink.value=cfg.link; link.value=cfg.link; }
-async function salvarCfg(){let n={empresa:cfgEmpresa.value, id:cfgId.value, cor:cfgCor.value, tel1:cfgTel1.value, tel2:cfgTel2.value, link:cfgLink.value}; await fetch(API+'/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(n)}); cfg=n; applyCfg(); alert('✅ Salvo! Seu crm-ekklesia.onrender.com já atualizou');}
-function render(){kLeads.innerText=leads.length; kFech.innerText=leads.filter(l=>l.status==='fechado').length; kPend.innerText=leads.filter(l=>l.status==='novo').length; listLeads.innerHTML=leads.map(l=>\`<div class="lead">\${l.nome} - \${l.telefone} <button style="float:right" onclick="mover(\${l.id},'fechado')">Fechar</button></div>\`).join(''); kanCols.innerHTML=['novo','atendimento','fechado','recusou'].map(c=>\`<div class="col"><h4>\${c}</h4><div id="c-\${c}"></div></div>\`).join(''); leads.forEach(l=>{let el=document.getElementById('c-'+(l.status||'novo')); if(el) el.innerHTML+=\`<div class="lead">\${l.nome}<br><small>\${l.telefone}</small></div>\`;}); checkList.innerHTML=leads.map((l,i)=>\`<label style="display:flex;gap:6px;padding:4px;border-bottom:1px solid #222"><input type="checkbox" checked data-i="\${i}"> \${l.nome} - \${l.telefone}</label>\`).join('');}
-async function addLead(){let n={nome:nome.value||'Lead', telefone:tel.value||'27999999999', cnpj:cnpj.value, cidade:cid.value}; let r=await fetch(API+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(n)}).then(r=>r.json()).catch(()=>n); leads.unshift(r); render();}
-async function mover(id,status){await fetch(API+'/api/leads/'+id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})}); leads=leads.map(l=>l.id===id?{...l,status}:l); render();}
-async function disparar(){let sel=[...document.querySelectorAll('#checkList input:checked')].map(e=>leads[e.dataset.i]); let mensagem=msg.value.replace('{link}', link.value||cfg.link); logDisp.innerText='Disparando '+sel.length+' via API Oficial...'; let r=await fetch(API+'/api/disparar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({leads:sel, mensagem})}).then(r=>r.json()).catch(()=>({enviados:sel.length})); logDisp.innerText='✅ '+r.enviados+' enviados via Meta Oficial';}
-if(localStorage.getItem('m')) loginEl();
-</script></body></html>
-`));
 
-app.listen(PORT, ()=>console.log("V8.3 EDITAVEL ON "+PORT));
+<div id="sidebar" class="sidebar">
+<div style="color:#00ff88;font-weight:800">EKKLESIA V8.2 MASTER</div>
+<div style="font-size:10px;color:#666" id="userInfo"></div>
+<button class="btn-menu active" onclick="abrir('dashboard')">📊 Dashboard</button>
+<button class="btn-menu green" onclick="abrir('kanban')">💬 Kanban IA</button>
+<button class="btn-menu" onclick="abrir('leads')">👥 Leads</button>
+<button class="btn-menu" onclick="abrir('clientes')">📋 Fechados</button>
+<button class="btn-menu" onclick="abrir('disparos')">🚀 Disparos</button>
+<button class="btn-menu" onclick="abrir('agenda')">📅 Agenda</button>
+<button class="btn-menu" onclick="abrir('treinamento')">🧠 Treinamento IA</button>
+<button class="btn-menu" onclick="abrir('usuarios')">👤 Usuários</button>
+<button class="btn-menu" onclick="abrir('config')">⚙️ Config</button>
+<button class="btn-menu" onclick="sair()">🚪 Sair</button>
+</div>
+
+<div id="main" class="main">
+<div id="dashboard" class="tela ativa"><div class="card"><h2>Dashboard ID 156503</h2><div class="grid3"><div><small>Total</small><div id="kpiLeads" style="font-size:24px;font-weight:800">0</div></div><div><small>Fechados</small><div id="kpiFechados" style="font-size:24px;color:#00ff88">0</div></div><div><small>Disparos</small><div id="kpiDisparos" style="font-size:24px;color:#facc15">0</div></div></div></div></div>
+
+<div id="kanban" class="tela"><div class="card"><h2>Kanban - Histórico</h2><div id="kanbanCols" class="kanban"></div></div></div>
+
+<div id="leads" class="tela"><div class="card"><h2>Leads</h2><div class="grid2"><input id="leadCNPJ" placeholder="CNPJ"><input id="leadNome" placeholder="Nome"><input id="leadUF" placeholder="UF" value="ES"><input id="leadCidade" placeholder="Cidade"><input id="leadTel" placeholder="Tel 279..."><select id="leadServ"><option>MedSeg</option><option>Green</option><option>Telecom</option></select></div><button class="btn btn-g" style="margin-top:8px" onclick="addLead()">+ Add Lead</button><div id="tabelaLeads" style="margin-top:10px"></div></div></div>
+
+<div id="clientes" class="tela"><div class="card"><h2>Clientes Fechados / Não Fechados</h2><div id="listaClientes"></div></div></div>
+
+<div id="disparos" class="tela">
+<div class="card"><h2>🚀 Disparos em Massa</h2>
+<select id="dispServico" onchange="atualizarModelo()"><option value="medseg">MedSeg Só MedSeg</option><option value="green">Green até 10k</option><option value="telecom">Telecom</option><option value="agenda">Agenda 27981244268</option></select>
+<input id="dispLink" placeholder="Link do serviço" value="https://expansao.igreenenergy.com.br/?id=156503">
+<textarea id="dispMensagem" rows="5">Olá {nome} de {cidade}, Rômulo ID 156503 - {link}</textarea>
+<div class="grid2"><input id="dispIntervalo" type="number" value="30"><select id="dispNumero"><option>27998242975</option><option>27981244268</option></select></div>
+<button class="btn btn-y" style="width:100%;margin-top:8px" onclick="iniciarDisparo()">🚀 Iniciar</button><button class="btn btn-d" style="width:100%;margin-top:6px" onclick="pararDisparo()">Parar</button>
+<div class="progress"><div id="progressBar" class="progress-bar"></div></div><p id="progressText" style="font-size:11px;color:#888">0 / 0</p>
+</div>
+<div class="card"><h3>Lista para disparo</h3><input id="dispFiltro" placeholder="Filtrar" oninput="renderDisparosLista()"><div class="checkbox-list" id="listaDisparos"></div></div>
+</div>
+
+<div id="agenda" class="tela"><div class="card"><h2>📅 Agenda 27981244268</h2><div id="listaAgenda">Nenhum agendamento ainda - histórico de leads em assessoria aparece aqui</div></div></div>
+<div id="treinamento" class="tela"><div class="card"><h2>🧠 Treinamento IA + LINK</h2></div><div id="listaTreinamento"></div></div>
+<div id="usuarios" class="tela"><div class="card"><h2>👤 Usuários - Liberação Master</h2><div class="grid2"><input id="uNome" placeholder="Nome"><input id="uLogin" placeholder="Login"><input id="uSenha" placeholder="Senha"><input id="uWhats" placeholder="WhatsApp"></div><button class="btn btn-g" style="margin-top:8px;width:100%" onclick="addUsuario()">+ Criar Usuário</button><div id="listaUsuarios" style="margin-top:10px"></div></div></div>
+<div id="config" class="tela"><div class="card"><h2>⚙️ Config</h2><p>API: https://crm-ekklesia.onrender.com</p><p id="apiStatus">Verificando...</p><p style="font-size:11px;color:#666;margin-top:8px">Master: Rômulo Sousa | RDsc8125@ | ID 156503 travado | Só MedSeg</p></div></div>
+</div>
+
+<script>
+const API_URL = 'https://crm-ekklesia.onrender.com';
+let leads = JSON.parse(localStorage.getItem('ekk_leads')||'[]');
+let usuarios = JSON.parse(localStorage.getItem('ekk_users')||'[]');
+const MODELOS = {
+  green: "Olá {nome} de {cidade}, CNPJ {cnpj} - Green até 10k 27998242975 Link: {link}",
+  medseg: "🙏 {nome}, Rômulo ID 156503 - Só MedSeg PGR/PCMSO {cidade} {link} Atend 27998242975",
+  telecom: "Oi {nome}, economia 40% telecom {cidade} {link}",
+  agenda: "Olá {nome}, agenda 27981244268 - {cidade} - {link}"
+};
+let disparoAtivo=false;
+
+function fazerLogin(){
+  if(document.getElementById('loginUser').value==='Rômulo Sousa' && document.getElementById('loginPass').value==='RDsc8125@'){
+    localStorage.setItem('ekk_master','1');
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('sidebar').style.display='block';
+    document.getElementById('main').style.display='block';
+    carregar();
+  } else alert('Senha errada');
+}
+function sair(){localStorage.removeItem('ekk_master');location.reload();}
+function abrir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');}
+
+async function carregar(){
+  try{
+    let r=await fetch(API_URL+'/api/leads'); let d=await r.json();
+    if(d.length>0) leads=d;
+    document.getElementById('apiStatus').innerText='✅ API ONLINE '+d.length+' leads';
+  }catch{ document.getElementById('apiStatus').innerText='⚠️ API OFF - localStorage'; }
+  renderTudo();
+}
+
+function renderTudo(){
+  document.getElementById('kpiLeads').innerText=leads.length;
+  document.getElementById('kpiFechados').innerText=leads.filter(l=>l.status==='fechado').length;
+  document.getElementById('tabelaLeads').innerHTML=leads.map(l=>`<div class="lead-card">${l.nome} - ${l.telefone} - ${l.status||'novo'}</div>`).join('');
+  document.getElementById('listaClientes').innerHTML=leads.filter(l=>l.status==='fechado'||l.status==='recusou').map(l=>`<div class="lead-card">${l.nome} ${l.status}</div>`).join('')||'Nenhum';
+  renderKanban(); renderDisparosLista(); renderTreinamento(); renderUsuarios();
+}
+
+function renderKanban(){
+  const cols=['novo','atendimento','documentos','orcamento','assessoria','fechado','recusou'];
+  document.getElementById('kanbanCols').innerHTML=cols.map(c=>`<div class="col"><h4>${c.toUpperCase()}</h4><div id="list-${c}"></div></div>`).join('');
+  leads.forEach((l,i)=>{
+    let col=(l.status||'novo'); if(!cols.includes(col)) col='novo';
+    let el=document.getElementById('list-'+col);
+    if(el) el.innerHTML+=`<div class="lead-card"><b>${l.nome}</b><br><small>${l.telefone}</small><br><button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'fechado')">Fechou</button> <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'recusou')">Não</button> <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(${i},'assessoria')">→ Assessoria</button></div>`;
+  });
+}
+function moverLead(i,s){leads[i].status=s; localStorage.setItem('ekk_leads',JSON.stringify(leads)); renderTudo();}
+function atualizarModelo(){let v=document.getElementById('dispServico').value; document.getElementById('dispMensagem').value=MODELOS[v];}
+function renderDisparosLista(){
+  let f=(document.getElementById('dispFiltro')?.value||'').toLowerCase();
+  document.getElementById('listaDisparos').innerHTML=leads.filter(l=>l.nome.toLowerCase().includes(f)).map((l,i)=>`<label style="display:flex;gap:6px;padding:4px;border-bottom:1px solid #222;font-size:11px"><input type="checkbox" checked> ${l.nome} - ${l.telefone}</label>`).join('');
+}
+function renderTreinamento(){
+  document.getElementById('listaTreinamento').innerHTML=Object.keys(MODELOS).map(k=>`<div class="card"><h3 style="font-size:12px;color:#00ff88">${k.toUpperCase()}</h3><input id="link-${k}" value="${localStorage.getItem('link_'+k)||'https://expansao.igreenenergy.com.br/?id=156503'}"><textarea id="prompt-${k}">${localStorage.getItem('prompt_'+k)||MODELOS[k]}</textarea><button class="btn btn-g" style="font-size:10px" onclick="localStorage.setItem('link_'+k, document.getElementById('link-${k}').value); localStorage.setItem('prompt_'+k, document.getElementById('prompt-${k}').value); alert('Salvo')">Salvar</button></div>`).join('');
+}
+function renderUsuarios(){document.getElementById('listaUsuarios').innerHTML=usuarios.map(u=>`<div class="lead-card">${u.nome} - ${u.login} - ${u.whats}</div>`).join('')||'Nenhum usuário';}
+function addUsuario(){let n={nome:uNome.value, login:uLogin.value, senha:uSenha.value, whats:uWhats.value}; usuarios.push(n); localStorage.setItem('ekk_users',JSON.stringify(usuarios)); renderUsuarios();}
+async function addLead(){
+  let nome=document.getElementById('leadNome').value||'Lead Teste'; let tel=document.getElementById('leadTel').value||'27999999999';
+  let cnpj=document.getElementById('leadCNPJ').value; let cidade=document.getElementById('leadCidade').value;
+  let novo={nome, telefone:tel, cnpj, cidade, status:'novo', score:Math.floor(Math.random()*30)+70};
+  try{let r=await fetch(API_URL+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(novo)}); novo=await r.json();}catch{}
+  leads.unshift(novo); localStorage.setItem('ekk_leads',JSON.stringify(leads)); renderTudo();
+}
+async function iniciarDisparo(){
+  if(disparoAtivo) return; disparoAtivo=true;
+  let intervalo=parseInt(dispIntervalo.value||30); let msg=dispMensagem.value;
+  let total=document.querySelectorAll('#listaDisparos input:checked').length||leads.length;
+  for(let k=0;k<total;k++){
+    if(!disparoAtivo) break;
+    document.getElementById('progressBar').style.width=Math.round((k+1)/total*100)+'%';
+    document.getElementById('progressText').innerText=`${k+1} / ${total} - ${leads[k]?.nome||''} - aguardando ${intervalo}s`;
+    console.log('DISPARO ->', leads
