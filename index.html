@@ -1,121 +1,126 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EKKLESIA V8 MASTER - Equipe Rômulo Sousa - ID 156503</title>
-<style>
-:root{--bg:#0a0a0b;--card:#1a1a1d;--card2:#151517;--border:#2a2a2e;--text:#fff;--text2:#aaa;--green:#00ff88;--wpp:#25D366}
-[data-theme="light"]{--bg:#f5f5f7;--card:#ffffff;--card2:#ffffff;--border:#e5e5e5;--text:#111;--text2:#666}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
-body{background:var(--bg);color:var(--text);display:flex;min-height:100vh;transition:.3s}
-.sidebar{width:295px;background:var(--card2);border-right:1px solid var(--border);position:fixed;left:0;top:0;bottom:0;padding:14px;overflow-y:auto;z-index:20}
-.main{margin-left:295px;flex:1;padding:20px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;transition:.3s}
-.tela{display:none}.tela.ativa{display:block}
-.btn{background:var(--green);color:#000;padding:11px 14px;border-radius:10px;font-weight:800;text-decoration:none;display:inline-block;border:0;cursor:pointer;font-size:13px}
-.btn-menu{width:100%;padding:10px;margin:3px 0;border:0;background:transparent;color:var(--text2);border-radius:8px;text-align:left;cursor:pointer;font-size:13px}
-.btn-menu.active,.btn-menu:hover{background:var(--card);color:var(--text);border:1px solid var(--border)}
-textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:12px;line-height:1.5}
-.theme-btn{position:fixed;top:12px;right:12px;z-index:99;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:30px;cursor:pointer;font-weight:700}
-.badge{background:var(--green);color:#000;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:700}
-</style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EKKLESIA CRM</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class'}</script>
+<style>body{font-family:Inter,sans-serif}</style>
 </head>
-<body>
-<button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 Modo Escuro</button>
-<div class="sidebar">
-<h2 style="color:var(--green)">EKKLESIA V8 MASTER</h2>
-<small style="color:var(--text2)">Equipe Rômulo Sousa - ID 156503</small>
-<div style="margin-top:12px">
-<button class="btn-menu active" onclick="abrir('dashboard')">📊 Dashboard</button>
-<button class="btn-menu" style="color:var(--green);border:1px solid #00ff8833" onclick="abrir('amanda')">⭐ 0 - AMANDA Central</button>
-<button class="btn-menu" onclick="abrir('agente1')">1️⃣ Agenda Rômulo - 98124-4268</button>
-<button class="btn-menu" onclick="abrir('agente2')">2️⃣ Isa Green até 10k</button>
-<button class="btn-menu" onclick="abrir('agente3')">3️⃣ Cris Livre +10k</button>
-<button class="btn-menu" onclick="abrir('agente4')">4️⃣ Mateus Placas</button>
-<button class="btn-menu" onclick="abrir('agente5')">5️⃣ Bia Telecom</button>
-<button class="btn-menu" onclick="abrir('agente6')">6️⃣ Léo Seguros</button>
-<button class="btn-menu" onclick="abrir('agente7')">7️⃣ Fernanda Expansão</button>
-<button class="btn-menu" style="color:#ff9f43" onclick="abrir('agente8')">8️⃣ Carol MedSeg</button>
+<body class="bg-gray-100 dark:bg-[#0a0a0a] text-black dark:text-white transition-all">
+<div class="flex min-h-screen">
+  <!-- MENU LATERAL -->
+  <div class="w-[280px] bg-[#121212] p-6 flex flex-col">
+    <!-- CABEÇALHO CORRIGIDO + BOTÃO TEMA -->
+    <div class="flex justify-between items-start">
+      <div>
+        <h1 class="text-[#7CFF7C] font-black text-2xl leading-none">EKKLESIA CRM</h1>
+        <p class="text-gray-300 text-[15px] mt-1">Equipe Rômulo Sousa</p>
+      </div>
+      <button id="themeBtn" class="bg-white/10 p-2 rounded-lg text-lg">🌙</button>
+    </div>
+
+    <nav class="mt-10 flex flex-col gap-3 text-sm">
+      <a class="opacity-60">📊 Dashboard</a>
+      <a class="text-[#7CFF7C] border border-[#7CFF7C] rounded-xl p-3">💬 Conversas WhatsApp - Kanban IA</a>
+      <a class="opacity-60">👥 Leads - Filtro CNPJ/Cidade/Estado</a>
+      <a class="opacity-60">📅 Agenda e Eventos</a>
+      <a class="opacity-60">🤖 Treinamento de IA - 9 Agentes</a>
+      <a class="opacity-60">👤 Usuários Ilimitados - Permissões</a>
+      <a class="opacity-60">⚙️ Configurações - Só MedSeg</a>
+    </nav>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="flex-1 p-8">
+    <!-- DISPAROS -->
+    <div class="flex gap-3 mb-6">
+      <button onclick="alert('Disparo para TODOS iniciado')" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold">Disparar para TODOS os contatos</button>
+      <button onclick="document.getElementById('modalTag').classList.remove('hidden')" class="bg-purple-600 text-white px-5 py-2 rounded-lg font-bold">Disparar por Tag da Coluna</button>
+    </div>
+
+    <!-- CONFIG MULTI NUMERO -->
+    <div class="bg-white dark:bg-[#1e1e1e] p-6 rounded-xl shadow">
+      <h2 class="font-bold text-lg">Configurações - Só MedSeg</h2>
+      <p class="text-xs text-gray-500 mb-4">Sistema sem termo VTN. Apenas MedSeg. Cada linha é uma equipe.</p>
+      <div id="equipes"></div>
+      <button onclick="addEquipe()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded font-bold">+ Cadastrar Novo Número / Equipe</button>
+    </div>
+
+    <!-- USUARIOS - ADM MASTER -->
+    <div class="bg-white dark:bg-[#1e1e1e] p-6 rounded-xl shadow mt-6">
+      <h2 class="font-bold text-lg">Usuários - Aprovação ADM Master (Você)</h2>
+      <p class="text-xs text-red-500">Regra: Todo novo cadastro fica PENDENTE até você aprovar.</p>
+      <div id="listaUsuarios" class="mt-4 space-y-3"></div>
+    </div>
+
+    <!-- TREINAMENTO LINKS -->
+    <div class="bg-white dark:bg-[#1e1e1e] p-6 rounded-xl shadow mt-6">
+      <h2 class="font-bold text-lg">Treinamento de IA - 9 Agentes</h2>
+      <div class="grid grid-cols-3 gap-3 mt-4">
+        <div class="border p-3 rounded">Agente Comercial <a href="#treinamento-comercial" class="block text-blue-500 text-xs mt-2">Ver Treinamento Interno →</a></div>
+        <div class="border p-3 rounded">Agente Suporte <a href="#treinamento-suporte" class="block text-blue-500 text-xs mt-2">Ver Espaço do Agente →</a></div>
+        <div class="border p-3 rounded">Agente MedSeg <a href="#treinamento-medseg" class="block text-blue-500 text-xs mt-2">Ver Treinamento Interno →</a></div>
+      </div>
+    </div>
+  </div>
 </div>
-<div style="margin-top:12px;padding:10px;background:var(--card);border-radius:10px;border:1px solid var(--border)">
-<p style="font-size:11px;color:var(--text2)">ASSESSORIA AGENDA/EVENTOS</p><p style="color:var(--green);font-weight:800">27981244268</p>
-<a href="https://wa.me/5527981244268" target="_blank" class="btn" style="width:100%;margin-top:4px;text-align:center;background:#fff;color:#000">Chamar Assessoria</a>
-<p style="font-size:11px;color:var(--text2);margin-top:10px">ATENDIMENTO IGREEN + MEDSEG</p><p style="color:var(--wpp);font-weight:800">27998242975</p>
-<a href="https://wa.me/5527998242975" target="_blank" class="btn" style="width:100%;margin-top:4px;text-align:center;background:var(--wpp);color:#fff">Chamar Atendimento</a>
-<a href="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT" target="_blank" class="btn" style="width:100%;margin-top:8px;text-align:center">LINK TRAVADO 156503</a>
-</div>
-</div>
-<div class="main">
-<div id="dashboard" class="tela ativa">
-<div class="card"><h1>EKKLESIA V8 MASTER ✅ ID 156503</h1><p>Equipe Rômulo Sousa - Assessoria 27981244268 | Atendimento 27998242975</p><p style="margin-top:8px"><span class="badge">ID 156503 TRAVADO</span> <span class="badge" style="background:#fff;color:#000">Assessoria</span> <span class="badge" style="background:var(--wpp);color:#fff">Atendimento</span></p></div>
-<div class="card"><h3>🔒 Versão Segura</h3><p style="color:var(--text2);font-size:13px">Removido: 56 MedSeg, RDs, senhas expostas. Agora só aparece ID 156503 limpo para prints.</p></div>
+
+<!-- MODAL TAG -->
+<div id="modalTag" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center">
+  <div class="bg-white dark:bg-zinc-900 p-6 rounded-xl">
+    <h3 class="font-bold">Selecione a Tag da Coluna</h3>
+    <select class="w-full mt-3 p-2 border rounded dark:bg-black"><option>Leads Novos</option><option>Em Negociação</option><option>Fechado</option></select>
+    <button onclick="document.getElementById('modalTag').classList.add('hidden')" class="mt-4 bg-green-500 text-white w-full py-2 rounded">Disparar</button>
+  </div>
 </div>
 
-<!-- AMANDA -->
-<div id="amanda" class="tela"><div class="card"><h2>⭐ 0 - AMANDA - Central Geral</h2>
-<textarea rows="18">Você é a AMANDA, Atendente Virtual Central da Equipe Rômulo Sousa ID 156503.
-MENSAGEM INICIAL: Olá! Bem-vindo à Equipe Rômulo Sousa! 👋 Sou a Amanda. Me diz: você precisa de ajuda com:
-1️⃣ Agendas e Eventos
-2️⃣ IGreen ENERGY - Descontos / Soluções de Energia Sustentável
-3️⃣ Medseg - Medicina e Segurança do Trabalho
-
-REGRAS:
-- Se clicar em 1 ou falar agenda/evento/show → direciona para assessoria humana WhatsApp 27981244268 https://wa.me/5527981244268
-- Se clicar em 2 ou 3 ou falar energia/seguro/telecom/placas/licenciado/medseg → direciona para atendimento 27998242975 https://wa.me/5527998242975
-- Sempre finalize com: Se eu não conseguir te ajudar, digita #HUMANO que te passo pra equipe agora mesmo.
-Link iGreen sempre travado ID 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT</textarea></div></div>
-
-<div id="agente1" class="tela"><div class="card"><h2>1️⃣ Sofia - Agenda Rômulo</h2><textarea rows="10">Você é a Sofia, assessoria do cantor Rômulo Sousa.
-Prompt: Oi! Sou a Sofia, da assessoria do cantor Rômulo Sousa. Vi que você quer falar sobre agendas. É show, evento na sua igreja/empresa?
-Ação: Botão fixo "Falar com Assessoria" → https://wa.me/5527981244268
-WhatsApp assessoria: 27981244268
-Final: Se não conseguir ajudar, digita #HUMANO.</textarea></div></div>
-
-<div id="agente2" class="tela"><div class="card"><h2>2️⃣ Isa - Green até 10k</h2><textarea rows="10">Você é a Isa, especialista IGreen ENERGY baixo consumo da equipe Rômulo Sousa ID 156503.
-Prompt: Olá! Sou a Isa, especialista em desconto para baixo consumo. Você consegue me mandar o valor médio da sua conta de luz? Atendemos de R$130 a 10k.
-WhatsApp: 27998242975 https://wa.me/5527998242975
-Link: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT
-Final: #HUMANO para humano.</textarea></div></div>
-
-<div id="agente3" class="tela"><div class="card"><h2>3️⃣ Cris - Livre acima 10k</h2><textarea rows="10">Você é a Cris, especialista Mercado Livre alto consumo ID 156503.
-Prompt: Olá! Sou a Cris, especialista em Mercado Livre de Energia para clientes alto consumo. Sua conta é acima de R$3.000 ou CNPJ?
-WhatsApp: 27998242975 https://wa.me/5527998242975
-Link: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT</textarea></div></div>
-
-<div id="agente4" class="tela"><div class="card"><h2>4️⃣ Mateus - Placas Solares</h2><textarea rows="10">Você é o Mateus, especialista projetos solares ID 156503.
-Prompt: Olá! Sou o Mateus, especialista em projetos solares da equipe Rômulo Sousa. Quer instalar placas na sua casa ou empresa?
-WhatsApp: 27998242975 https://wa.me/5527998242975
-Link: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT</textarea></div></div>
-
-<div id="agente5" class="tela"><div class="card"><h2>5️⃣ Bia - Telecom</h2><textarea rows="10">Você é a Bia, especialista Telecom ID 156503.
-Prompt: Olá! Sou a Bia, especialista em Telecom. Quer economizar no seu plano de internet/telefonia?
-WhatsApp: 27998242975 https://wa.me/5527998242975</textarea></div></div>
-
-<div id="agente6" class="tela"><div class="card"><h2>6️⃣ Léo - Seguros</h2><textarea rows="10">Você é o Léo, especialista Seguros ID 156503.
-Prompt: Olá! Sou o Léo, especialista em Seguros da equipe Rômulo Sousa. Seguros para Carro/Moto/Caminhão.
-WhatsApp: 27998242975 https://wa.me/5527998242975</textarea></div></div>
-
-<div id="agente7" class="tela"><div class="card"><h2>7️⃣ Fernanda - Expansão Licenciado</h2><textarea rows="12">Você é a Fernanda, especialista Expansão Conexão ID 156503.
-Prompt: Olá! Sou a Fernanda, especialista em expansão da Conexão. Que legal que você quer ser licenciado! Você já trabalha com vendas?
-Link TRAVADO 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT
-WhatsApp: 27998242975 https://wa.me/5527998242975
-Este link já tem ID 156503 travado, não precisa alterar.</textarea></div></div>
-
-<div id="agente8" class="tela"><div class="card"><h2>8️⃣ Carol - MedSeg VTN</h2><textarea rows="12">Você é a Carol, especialista MedSeg - Medicina e Segurança do Trabalho (INDEPENDENTE DA IGREEN).
-Prompt: Olá! Sou a Carol, especialista da MedSeg. Fazemos PGR, PCMSO, LTCAT, ASO, eSocial, orçamentos e visitas técnicas. Como posso te atender?
-Serviços: Orçamentos, Visitas Técnicas, Documentação, Exames
-WhatsApp MedSeg: 27998242975 https://wa.me/5527998242975
-NÃO USA LINK IGREEN, É SERVIÇO INDEPENDENTE.
-Final: #HUMANO para atendimento humano.</textarea></div></div>
-
-</div>
 <script>
-function abrir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');document.querySelectorAll('.btn-menu').forEach(b=>b.classList.remove('active'))}
-function toggleTheme(){const b=document.body;const cur=b.getAttribute('data-theme');const next=cur==='light'?'dark':'light';b.setAttribute('data-theme',next);localStorage.setItem('ekklesia_theme',next);document.getElementById('themeBtn').innerText=next==='light'?'🌙 Modo Escuro':'☀️ Modo Claro'}
-(function(){const saved=localStorage.getItem('ekklesia_theme')||'dark';document.body.setAttribute('data-theme',saved);document.getElementById('themeBtn').innerText=saved==='light'?'🌙 Modo Escuro':'☀️ Modo Claro'})();
-const AGENTES=[{id:"amanda"},{id:"agente1"},{id:"agente2"},{id:"agente3"},{id:"agente4"},{id:"agente5"},{id:"agente6"},{id:"agente7"},{id:"agente8"}];
-localStorage.setItem('ekklesia_V8_ID156503_final',JSON.stringify({id:156503,wpp_atendimento:'27998242975',wpp_assessoria:'27981244268',link:'https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT'}));
-console.log('✅ EKKLESIA V8 MASTER ID 156503 - TEMA CLARO/ESCURO OK');
+// TEMA
+const btn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('theme')||'dark';
+if(theme==='light') document.documentElement.classList.remove('dark');
+btn.onclick=()=>{
+  document.documentElement.classList.toggle('dark');
+  const isDark=document.documentElement.classList.contains('dark');
+  localStorage.setItem('theme',isDark?'dark':'light');
+  btn.textContent=isDark?'🌙':'☀️';
+};
+
+// MULTI NUMERO
+let equipes=[{nome:'Só MedSeg - Matriz',numero:'27998242975',id:'156503',link:'',senha:''}];
+function renderEquipes(){
+  document.getElementById('equipes').innerHTML=equipes.map((e,i)=>`
+    <div class="grid grid-cols-2 gap-2 mt-3 p-3 border rounded dark:border-zinc-700">
+      <input value="${e.nome}" placeholder="Nome da Equipe" class="p-2 border rounded dark:bg-black">
+      <input value="${e.numero}" placeholder="Número WhatsApp" class="p-2 border rounded dark:bg-black">
+      <input value="${e.id}" placeholder="ID Travado" class="p-2 border rounded dark:bg-black">
+      <input value="${e.link}" placeholder="Link" class="p-2 border rounded dark:bg-black">
+      <input type="password" placeholder="••••••••" class="p-2 border rounded dark:bg-black col-span-2">
+    </div>
+  `).join('');
+}
+function addEquipe(){equipes.push({nome:'',numero:'',id:'',link:'',senha:''});renderEquipes();}
+renderEquipes();
+
+// USUARIOS COM PERMISSÃO
+let usuarios=[
+  {nome:'João Vendas',email:'joao@teste.com',status:'PENDENTE',permissoes:{dashboard:true,kanban:false}},
+  {nome:'Maria ADM',email:'maria@teste.com',status:'APROVADO',permissoes:{dashboard:true,kanban:true}}
+];
+function renderUsuarios(){
+  document.getElementById('listaUsuarios').innerHTML=usuarios.map((u,i)=>`
+    <div class="border p-3 rounded flex justify-between items-center dark:border-zinc-700">
+      <div><b>${u.nome}</b> - ${u.email} <span class="text-xs px-2 py-1 rounded ${u.status==='PENDENTE'?'bg-yellow-200 text-yellow-800':'bg-green-200 text-green-800'}">${u.status}</span></div>
+      <div class="flex gap-2 items-center">
+        <label class="text-xs"><input type="checkbox" ${u.permissoes.dashboard?'checked':''}> Dashboard</label>
+        <label class="text-xs"><input type="checkbox" ${u.permissoes.kanban?'checked':''}> Kanban</label>
+        <button onclick="usuarios[${i}].status='APROVADO';renderUsuarios()" class="bg-green-600 text-white px-3 py-1 rounded text-xs">Aprovar (ADM Master)</button>
+      </div>
+    </div>
+  `).join('');
+}
+renderUsuarios();
 </script>
 </body>
 </html>
