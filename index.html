@@ -1,126 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="dark">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EKKLESIA CRM</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={darkMode:'class'}</script>
-<style>body{font-family:Inter,sans-serif}</style>
 </head>
-<body class="bg-gray-100 dark:bg-[#0a0a0a] text-black dark:text-white transition-all">
+<body class="bg-[#0a0a0a] text-white">
 <div class="flex min-h-screen">
-  <!-- MENU LATERAL -->
-  <div class="w-[280px] bg-[#121212] p-6 flex flex-col">
-    <!-- CABEÇALHO CORRIGIDO + BOTÃO TEMA -->
-    <div class="flex justify-between items-start">
-      <div>
-        <h1 class="text-[#7CFF7C] font-black text-2xl leading-none">EKKLESIA CRM</h1>
-        <p class="text-gray-300 text-[15px] mt-1">Equipe Rômulo Sousa</p>
+  <aside class="w-[280px] bg-[#111111] border-r border-zinc-800 p-5 flex flex-col">
+    <div>
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-[#7CFF7C] font-black text-[20px] leading-none">EKKLESIA CRM</h1>
+          <p class="text-zinc-300 text-[13px] mt-1">Equipe Rômulo Sousa</p>
+        </div>
+        <button id="btnTema" class="bg-zinc-800 w-9 h-9 rounded-lg">🌙</button>
       </div>
-      <button id="themeBtn" class="bg-white/10 p-2 rounded-lg text-lg">🌙</button>
-    </div>
-
-    <nav class="mt-10 flex flex-col gap-3 text-sm">
-      <a class="opacity-60">📊 Dashboard</a>
-      <a class="text-[#7CFF7C] border border-[#7CFF7C] rounded-xl p-3">💬 Conversas WhatsApp - Kanban IA</a>
-      <a class="opacity-60">👥 Leads - Filtro CNPJ/Cidade/Estado</a>
-      <a class="opacity-60">📅 Agenda e Eventos</a>
-      <a class="opacity-60">🤖 Treinamento de IA - 9 Agentes</a>
-      <a class="opacity-60">👤 Usuários Ilimitados - Permissões</a>
-      <a class="opacity-60">⚙️ Configurações - Só MedSeg</a>
-    </nav>
-  </div>
-
-  <!-- CONTEÚDO -->
-  <div class="flex-1 p-8">
-    <!-- DISPAROS -->
-    <div class="flex gap-3 mb-6">
-      <button onclick="alert('Disparo para TODOS iniciado')" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-bold">Disparar para TODOS os contatos</button>
-      <button onclick="document.getElementById('modalTag').classList.remove('hidden')" class="bg-purple-600 text-white px-5 py-2 rounded-lg font-bold">Disparar por Tag da Coluna</button>
-    </div>
-
-    <!-- CONFIG MULTI NUMERO -->
-    <div class="bg-white dark:bg-[#1e1e1e] p-6 rounded-xl shadow">
-      <h2 class="font-bold text-lg">Configurações - Só MedSeg</h2>
-      <p class="text-xs text-gray-500 mb-4">Sistema sem termo VTN. Apenas MedSeg. Cada linha é uma equipe.</p>
-      <div id="equipes"></div>
-      <button onclick="addEquipe()" class="mt-4 bg-green-500 text-white px-4 py-2 rounded font-bold">+ Cadastrar Novo Número / Equipe</button>
-    </div>
-
-    <!-- USUARIOS - ADM MASTER -->
-    <div class="bg-white dark:bg-[#1e1e1e] p-6 rounded-xl shadow mt-6">
-      <h2 class="font-bold text-lg">Usuários - Aprovação ADM Master (Você)</h2>
-      <p class="text-xs text-red-500">Regra: Todo novo cadastro fica PENDENTE até você aprovar.</p>
-      <div id="listaUsuarios" class="mt-4 space-y-3"></div>
-    </div>
-
-    <!-- TREINAMENTO LINKS -->
-    <div class="bg-white dark:bg-[#1e1e1e] p-6 rounded-xl shadow mt-6">
-      <h2 class="font-bold text-lg">Treinamento de IA - 9 Agentes</h2>
-      <div class="grid grid-cols-3 gap-3 mt-4">
-        <div class="border p-3 rounded">Agente Comercial <a href="#treinamento-comercial" class="block text-blue-500 text-xs mt-2">Ver Treinamento Interno →</a></div>
-        <div class="border p-3 rounded">Agente Suporte <a href="#treinamento-suporte" class="block text-blue-500 text-xs mt-2">Ver Espaço do Agente →</a></div>
-        <div class="border p-3 rounded">Agente MedSeg <a href="#treinamento-medseg" class="block text-blue-500 text-xs mt-2">Ver Treinamento Interno →</a></div>
+      <div class="mt-8 space-y-2 text-[13px]">
+        <div class="bg-zinc-900 border border-green-500/30 text-green-300 p-3 rounded-xl">Conversas WhatsApp - Kanban IA - MeuTag</div>
+        <div class="p-3 opacity-50">Leads - Filtro CNPJ/Cidade/Estado</div>
+        <div class="p-3 opacity-50">Agenda e Eventos</div>
+        <div class="p-3 opacity-50">Treinamento de IA - 9 Agentes</div>
+        <div class="p-3 opacity-50">Usuários Ilimitados - Permissões</div>
+        <div class="p-3 opacity-50">Configurações - Só MedSeg</div>
       </div>
     </div>
-  </div>
-</div>
+    <div class="mt-auto bg-zinc-900 p-3 rounded-xl text-[11px] text-zinc-500">Barra fixa no final - sempre visível</div>
+  </aside>
 
-<!-- MODAL TAG -->
-<div id="modalTag" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center">
-  <div class="bg-white dark:bg-zinc-900 p-6 rounded-xl">
-    <h3 class="font-bold">Selecione a Tag da Coluna</h3>
-    <select class="w-full mt-3 p-2 border rounded dark:bg-black"><option>Leads Novos</option><option>Em Negociação</option><option>Fechado</option></select>
-    <button onclick="document.getElementById('modalTag').classList.add('hidden')" class="mt-4 bg-green-500 text-white w-full py-2 rounded">Disparar</button>
-  </div>
+  <main class="flex-1 bg-[#0f0f0f] flex flex-col">
+    <div class="p-4 flex gap-2 border-b border-zinc-800 bg-[#1a1a1a]">
+      <button class="bg-blue-600 px-4 py-2 rounded-lg font-bold text-xs">Disparar para TODOS os contatos</button>
+      <button class="bg-purple-600 px-4 py-2 rounded-lg font-bold text-xs">Disparar por Tag da Coluna</button>
+      <div class="ml-auto flex items-center gap-2 text-[11px] text-green-400"><span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>IA Monitorando Conversas - Move coluna sozinha</div>
+    </div>
+
+    <div class="flex-1 p-4 grid grid-cols-4 gap-4 overflow-auto">
+      <div class="bg-[#1e1e1e] rounded-xl p-3"><h3 class="text-xs font-bold mb-3">NOVO LEAD</h3><div id="colNovo" class="space-y-2"></div></div>
+      <div class="bg-[#1e1e1e] rounded-xl p-3"><h3 class="text-xs font-bold mb-3">EM NEGOCIAÇÃO</h3><div id="colNeg" class="space-y-2"></div></div>
+      <div class="bg-[#1e1e1e] rounded-xl p-3"><h3 class="text-xs font-bold mb-3">FECHADO</h3><div id="colFechado" class="space-y-2"></div></div>
+
+      <div class="bg-[#1e1e1e] rounded-xl p-3 flex flex-col gap-2">
+        <h3 class="text-xs font-bold">Configuração - Só MedSeg</h3>
+        <div id="boxEquipes" class="space-y-2"></div>
+        <button onclick="addEquipe()" class="bg-zinc-800 text-xs py-2 rounded">+ Cadastrar Novo Número / Equipe</button>
+        <hr class="border-zinc-700 my-2">
+        <h3 class="text-xs font-bold">Cadastro Contato</h3>
+        <input id="fNome" placeholder="Nome" class="bg-black border border-zinc-700 p-2 rounded text-xs">
+        <input id="fTel" placeholder="Telefone" class="bg-black border border-zinc-700 p-2 rounded text-xs">
+        <input id="fEmpresa" placeholder="Nome Empresa" class="bg-black border border-zinc-700 p-2 rounded text-xs">
+        <input id="fCnpj" placeholder="CNPJ" class="bg-black border border-zinc-700 p-2 rounded text-xs">
+        <input id="fSenha" type="password" placeholder="••••••••" class="bg-black border border-zinc-700 p-2 rounded text-xs">
+        <button onclick="salvar()" class="bg-green-500 text-black font-bold py-2 rounded text-xs">Salvar Contato / Equipe</button>
+        <hr class="border-zinc-700 my-2">
+        <h3 class="text-xs font-bold">Usuários - Aprovação ADM Master</h3>
+        <div id="boxUsuarios" class="space-y-2 text-[11px]"></div>
+      </div>
+    </div>
+  </main>
 </div>
 
 <script>
-// TEMA
-const btn=document.getElementById('themeBtn');
-let theme=localStorage.getItem('theme')||'dark';
-if(theme==='light') document.documentElement.classList.remove('dark');
-btn.onclick=()=>{
+document.getElementById('btnTema').onclick=()=>{
   document.documentElement.classList.toggle('dark');
-  const isDark=document.documentElement.classList.contains('dark');
-  localStorage.setItem('theme',isDark?'dark':'light');
-  btn.textContent=isDark?'🌙':'☀️';
+  const d=document.documentElement.classList.contains('dark');
+  localStorage.setItem('theme',d?'dark':'light');
+  document.getElementById('btnTema').innerText=d?'🌙':'☀️';
+  document.body.className=d?'bg-[#0a0a0a] text-white':'bg-gray-100 text-black';
 };
 
-// MULTI NUMERO
-let equipes=[{nome:'Só MedSeg - Matriz',numero:'27998242975',id:'156503',link:'',senha:''}];
+let equipes=[{nome:'Só MedSeg',numero:'27998242975',id:'156503'}];
 function renderEquipes(){
-  document.getElementById('equipes').innerHTML=equipes.map((e,i)=>`
-    <div class="grid grid-cols-2 gap-2 mt-3 p-3 border rounded dark:border-zinc-700">
-      <input value="${e.nome}" placeholder="Nome da Equipe" class="p-2 border rounded dark:bg-black">
-      <input value="${e.numero}" placeholder="Número WhatsApp" class="p-2 border rounded dark:bg-black">
-      <input value="${e.id}" placeholder="ID Travado" class="p-2 border rounded dark:bg-black">
-      <input value="${e.link}" placeholder="Link" class="p-2 border rounded dark:bg-black">
-      <input type="password" placeholder="••••••••" class="p-2 border rounded dark:bg-black col-span-2">
+  document.getElementById('boxEquipes').innerHTML=equipes.map(e=>`
+    <div class="bg-black p-2 rounded border border-zinc-800 text-[11px]">
+      <div>${e.nome}</div>
+      <div class="text-zinc-500">${e.numero} - ID ${e.id}</div>
+      <input type="password" placeholder="••••••••" class="w-full mt-1 bg-zinc-900 border border-zinc-700 p-1 rounded">
     </div>
   `).join('');
 }
-function addEquipe(){equipes.push({nome:'',numero:'',id:'',link:'',senha:''});renderEquipes();}
-renderEquipes();
+function addEquipe(){
+  const n=prompt('Nome da equipe:');
+  const t=prompt('Número WhatsApp:');
+  if(n&&t){equipes.push({nome:n,numero:t,id:'novo'});renderEquipes();}
+}
 
-// USUARIOS COM PERMISSÃO
-let usuarios=[
-  {nome:'João Vendas',email:'joao@teste.com',status:'PENDENTE',permissoes:{dashboard:true,kanban:false}},
-  {nome:'Maria ADM',email:'maria@teste.com',status:'APROVADO',permissoes:{dashboard:true,kanban:true}}
-];
-function renderUsuarios(){
-  document.getElementById('listaUsuarios').innerHTML=usuarios.map((u,i)=>`
-    <div class="border p-3 rounded flex justify-between items-center dark:border-zinc-700">
-      <div><b>${u.nome}</b> - ${u.email} <span class="text-xs px-2 py-1 rounded ${u.status==='PENDENTE'?'bg-yellow-200 text-yellow-800':'bg-green-200 text-green-800'}">${u.status}</span></div>
-      <div class="flex gap-2 items-center">
-        <label class="text-xs"><input type="checkbox" ${u.permissoes.dashboard?'checked':''}> Dashboard</label>
-        <label class="text-xs"><input type="checkbox" ${u.permissoes.kanban?'checked':''}> Kanban</label>
-        <button onclick="usuarios[${i}].status='APROVADO';renderUsuarios()" class="bg-green-600 text-white px-3 py-1 rounded text-xs">Aprovar (ADM Master)</button>
-      </div>
+let contatos=JSON.parse(localStorage.getItem('ekklesia_contatos')||'[]');
+let usuarios=[{nome:'João Vendas',email:'joao@teste.com',status:'PENDENTE',permi:{dashboard:false,kanban:false}}];
+function renderAll(){
+  document.getElementById('colNovo').innerHTML=contatos.filter(c=>c.col==='novo').map(c=>`<div class="bg-zinc-800 p-2 rounded text-[11px]"><b>${c.nome}</b><br>${c.empresa}<br>${c.tel}</div>`).join('');
+  document.getElementById('colNeg').innerHTML=contatos.filter(c=>c.col==='neg').map(c=>`<div class="bg-zinc-800 border border-yellow-500/30 p-2 rounded text-[11px]"><b>${c.nome}</b></div>`).join('');
+  document.getElementById('colFechado').innerHTML=contatos.filter(c=>c.col==='fechado').map(c=>`<div class="bg-zinc-800 border border-green-500/30 p-2 rounded text-[11px]"><b>${c.nome}</b></div>`).join('');
+  document.getElementById('boxUsuarios').innerHTML=usuarios.map((u,i)=>`
+    <div class="bg-black p-2 rounded border border-zinc-800">
+      <div>${u.nome} - ${u.status}</div>
+      <div class="flex gap-2 mt-1"><label><input type="checkbox"> Dashboard</label><label><input type="checkbox"> Kanban</label></div>
+      <button onclick="usuarios[${i}].status='APROVADO';renderAll()" class="mt-1 w-full bg-green-600 text-white py-1 rounded">Aprovar (ADM Master)</button>
     </div>
   `).join('');
 }
-renderUsuarios();
+function salvar(){
+  if(!fNome.value) return alert('Digite nome');
+  contatos.push({nome:fNome.value,tel:fTel.value,empresa:fEmpresa.value,cnpj:fCnpj.value,col:'novo'});
+  localStorage.setItem('ekklesia_contatos',JSON.stringify(contatos));
+  fNome.value=fTel.value=fEmpresa.value=fCnpj.value='';
+  renderAll();
+}
+renderEquipes();renderAll();
+setInterval(()=>{if(contatos[0]&&contatos[0].col==='novo'){contatos[0].col='neg';renderAll();}},8000);
 </script>
 </body>
 </html>
