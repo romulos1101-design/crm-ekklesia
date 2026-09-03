@@ -2,166 +2,186 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ekklesia V8 MASTER RDsc8125@ - Disparos - ID 156503</title>
+<title>Ekklesia CRM Completo - ID 156503 - MedSeg</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
 body{background:#08080a;color:#fff;min-height:100vh}
-.login-screen{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%, #0a2a1a, #08080a);display:flex;align-items:center;justify-content:center;z-index:9999}
-.login-box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:28px;width:440px}
-.login-box h1{color:#00ff88;font-size:21px}
-.login-box input{width:100%;background:#0e0e10;border:1px solid #2a2a2e;color:#fff;border-radius:10px;padding:12px;margin:7px 0}
-.btn{padding:10px 16px;border-radius:10px;font-weight:800;border:0;cursor:pointer;font-size:13px;display:inline-block;text-decoration:none}
-.btn-g{background:#00ff88;color:#000}.btn-w{background:#fff;color:#000}.btn-d{background:#1f1f23;color:#fff;border:1px solid #333}.btn-y{background:#facc15;color:#000}
-.sidebar{width:285px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:14px;overflow-y:auto;display:none}
-.main{margin-left:285px;flex:1;padding:16px;background:#0a0a0b;min-height:100vh;display:none}
-.logo{color:#00ff88;font-weight:800}
+.login-screen{position:fixed;inset:0;background:#08080a;display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:32px;width:380px}
+.login-box h1{color:#00ff88;font-size:22px}
+.login-box input{width:100%;background:#0e0e10;border:1px solid #2a2a2e;color:#fff;border-radius:10px;padding:12px;margin:8px 0}
+.btn{padding:11px 18px;border-radius:10px;font-weight:800;border:0;cursor:pointer;font-size:13px;display:inline-block;text-decoration:none}
+.btn-g{background:#00ff88;color:#000}.btn-w{background:#fff;color:#000}.btn-d{background:#1f1f23;color:#fff;border:1px solid #333}
+.sidebar{width:270px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:16px;overflow-y:auto;display:none}
+.main{margin-left:270px;flex:1;padding:18px;background:#0a0a0b;min-height:100vh;display:none}
+.logo{color:#00ff88;font-weight:800;font-size:18px}
 .small{color:#666;font-size:11px;line-height:1.3}
-.btn-menu{width:100%;padding:10px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer;font-size:12.5px;display:flex;gap:6px}
+.menu{margin-top:16px}
+.btn-menu{width:100%;padding:11px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer;font-size:13px;display:flex;gap:8px}
 .btn-menu.active,.btn-menu:hover{background:#1d1d20;color:#fff}
 .btn-menu.green{color:#00ff88;border:1px solid rgba(0,255,136,.25)}
-.card{background:#151518;border:1px solid #242428;border-radius:14px;padding:14px;margin-bottom:10px}
+.card{background:#151518;border:1px solid #242428;border-radius:16px;padding:16px;margin-bottom:12px}
 .tela{display:none}.tela.ativa{display:block}
-.badge{padding:3px 7px;border-radius:8px;font-size:10px;font-weight:800;display:inline-block}
-.bg-green{background:#00ff88;color:#000}.bg-w{background:#fff;color:#000}.bg-z{background:#25D366;color:#fff}.bg-y{background:#facc15;color:#000}.bg-r{background:#ff4d4d;color:#fff}.bg-b{background:#3b82f6;color:#fff}
-textarea,input,select{width:100%;background:#0e0e10;color:#c7c7c7;border:1px solid #2a2a2e;border-radius:10px;padding:9px;font-size:12px;margin:4px 0}
-.kanban{display:flex;gap:10px;overflow-x:auto}
-.col{min-width:250px;background:#111113;border:1px solid #222;border-radius:12px;padding:8px}
-.col h4{font-size:10px;color:#aaa;margin-bottom:6px;text-transform:uppercase}
-.lead-card{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:10px;padding:8px;margin-bottom:6px;font-size:11px;line-height:1.3}
-.filters{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.filters input,.filters select{width:150px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.hidden{display:none}.progress{height:8px;background:#222;border-radius:10px;overflow:hidden;margin:6px 0}.progress-bar{height:100%;background:#00ff88;width:0%;transition:.3s}
-.checkbox-list{max-height:200px;overflow:auto;border:1px solid #222;border-radius:10px;padding:6px}
+.badge{padding:4px 8px;border-radius:10px;font-size:10px;font-weight:800;display:inline-block}
+.bg-green{background:#00ff88;color:#000}.bg-w{background:#fff;color:#000}.bg-z{background:#25D366;color:#fff}.bg-o{background:#ff9f43;color:#000}.bg-r{background:#ff4d4d;color:#fff}.bg-b{background:#3b82f6;color:#fff}
+textarea,input,select{width:100%;background:#0e0e10;color:#c7c7c7;border:1px solid #2a2a2e;border-radius:10px;padding:10px;font-size:12.5px;margin:4px 0}
+.kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}
+.col{min-width:250px;background:#111113;border:1px solid #222;border-radius:14px;padding:10px}
+.col h4{font-size:12px;color:#aaa;margin-bottom:8px;text-transform:uppercase}
+.lead-card{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:12px;padding:10px;margin-bottom:8px;cursor:grab;font-size:12px}
+.lead-card:hover{border-color:#00ff88}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.filters input,.filters select{width:160px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 </style>
 </head>
 <body>
 <div id="loginScreen" class="login-screen">
 <div class="login-box">
-<h1>🙏 EKKLESIA V8 MASTER</h1>
-<p style="color:#888;font-size:11px">ID 156503 - Só MedSeg - Master RDsc8125@</p>
-<p style="color:#00ff88;font-size:11px;margin-bottom:10px">Rômulo Sousa | RDsc8125@ | Disparos em Massa</p>
-<div id="loginForm">
-<input id="loginUser" placeholder="ID: Rômulo Sousa" value="Rômulo Sousa">
-<input id="loginPass" type="password" placeholder="Senha: RDsc8125@" value="RDsc8125@">
-<button class="btn btn-g" style="width:100%;margin-top:8px" onclick="fazerLogin()">Entrar Master RDsc8125@</button>
-<button class="btn btn-d" style="width:100%;margin-top:6px" onclick="mostrarCadastro()">Novo usuário - Solicitar acesso</button>
-<p style="color:#555;font-size:9px;margin-top:8px">Master aprova e define abas | 27981244268 | 27998242975</p>
-</div>
-<div id="cadastroForm" class="hidden">
-<h3 style="color:#facc15;font-size:14px">Solicitar Acesso ao Master</h3>
-<input id="cadNome" placeholder="Nome completo">
-<input id="cadId" placeholder="ID / Usuário desejado">
-<input id="cadSenha" type="password" placeholder="Senha desejada">
-<input id="cadWhats" placeholder="WhatsApp">
-<button class="btn btn-g" style="width:100%;margin-top:8px" onclick="solicitarAcesso()">Solicitar acesso</button>
-<button class="btn btn-d" style="width:100%;margin-top:6px" onclick="mostrarLogin()">Voltar</button>
+<h1>🙏 EKKLESIA CRM</h1>
+<p style="color:#666;font-size:12px;margin:6px 0 16px">Equipe Rômulo Sousa - ID 156503 - MedSeg</p>
+<input id="loginUser" placeholder="Usuário: admin">
+<input id="loginPass" type="password" placeholder="Senha: 123456">
+<button class="btn btn-g" style="width:100%;margin-top:10px" onclick="fazerLogin()">Entrar no CRM</button>
+<p style="color:#555;font-size:11px;margin-top:12px">Usuários ilimitados: configure em Usuários e Permissões<br>Assessoria 27981244268 | Atendimento 27998242975</p>
 </div>
 </div>
-</div>
-
 <div id="sidebar" class="sidebar">
-<div class="logo">EKKLESIA V8 MASTER RDsc8125@</div>
-<div class="small" id="userInfo">MASTER: Rômulo Sousa<br>Senha: RDsc8125@<br>ID 156503<br>27981244268 | 27998242975</div>
-<div style="margin-top:10px">
+<div class="logo">EKKLESIA CRM</div>
+<div class="small">Equipe Rômulo Sousa<br>ID 156503 travado - Só MedSeg (não VTN)<br>Assessoria 27981244268<br>Atendimento 27998242975</div>
+<div class="menu">
 <button class="btn-menu active" onclick="abrir('dashboard')">📊 Dashboard</button>
-<button class="btn-menu green" onclick="abrir('kanban')">💬 Kanban IA</button>
-<button class="btn-menu" onclick="abrir('leads')">👥 Leads CNPJ/Cidade</button>
-<button class="btn-menu" onclick="abrir('clientes')">📋 Fechados / Não Fechados</button>
-<button class="btn-menu" onclick="abrir('disparos')">🚀 Disparos em Massa</button>
-<button class="btn-menu" onclick="abrir('agenda')">📅 Agenda 27981244268</button>
-<button class="btn-menu" onclick="abrir('treinamento')">🧠 Treinamento IA + LINK</button>
-<button class="btn-menu" onclick="abrir('usuarios')">👤 Usuários - Liberação Master + Abas</button>
-<button class="btn-menu" onclick="abrir('config')">⚙️ Config</button>
+<button class="btn-menu green" onclick="abrir('kanban')">💬 Conversas WhatsApp - Kanban IA</button>
+<button class="btn-menu" onclick="abrir('leads')">👥 Leads - Filtro CNPJ/Cidade/Estado</button>
+<button class="btn-menu" onclick="abrir('agenda')">📅 Agenda e Eventos</button>
+<button class="btn-menu" onclick="abrir('treinamento')">🧠 Treinamento de IA - 9 Agentes</button>
+<button class="btn-menu" onclick="abrir('usuarios')">👤 Usuários Ilimitados - Permissões</button>
+<button class="btn-menu" onclick="abrir('config')">⚙️ Configurações</button>
 <button class="btn-menu" onclick="sair()">🚪 Sair</button>
 </div>
+<div style="margin-top:10px;padding:10px;background:#1a1a1d;border-radius:12px;border:1px solid #222">
+<a href="https://wa.me/5527981244268" target="_blank" class="btn btn-w" style="width:100%;text-align:center;font-size:11px">Assessoria 27981244268</a>
+<a href="https://wa.me/5527998242975" target="_blank" class="btn" style="width:100%;text-align:center;margin-top:6px;background:#25D366;color:#fff;font-size:11px">Atendimento 27998242975</a>
+<a href="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT" target="_blank" class="btn btn-g" style="width:100%;text-align:center;margin-top:6px;font-size:11px">LINK TRAVADO 156503</a>
 </div>
-
+</div>
 <div id="main" class="main">
 <div id="dashboard" class="tela ativa">
-<div class="card"><h2>V8 MASTER Rômulo Sousa / RDsc8125@ - Disparos</h2><p style="color:#999;font-size:11px">ID 156503 travado | Só MedSeg | Assessoria 27981244268 | Atendimento 27998242975</p><p style="margin-top:6px"><span class="badge bg-green">MASTER RDsc8125@</span> <span class="badge bg-green">ID 156503</span> <span class="badge bg-w">27981244268</span> <span class="badge bg-z">27998242975</span> <span class="badge bg-y">DISPAROS</span></p></div>
-<div class="grid3">
-<div class="card"><small>Total Leads</small><div style="font-size:22px;font-weight:800" id="kpiLeads">0</div></div>
-<div class="card"><small>Fechados</small><div style="font-size:22px;font-weight:800;color:#00ff88" id="kpiFechados">0</div></div>
-<div class="card"><small>Não Fechados</small><div style="font-size:22px;font-weight:800;color:#ff9f43" id="kpiNaoFechados">0</div></div>
+<div class="card"><h2>Dashboard ID 156503 - Só MedSeg</h2><p style="color:#999;font-size:12px">Assessoria 27981244268 | Atendimento 27998242975 | MedSeg independente (sem VTN)</p><div style="margin-top:8px"><span class="badge bg-green">ID 156503 TRAVADO</span> <span class="badge bg-w">Assessoria 27981244268</span> <span class="badge bg-z">Atendimento 27998242975</span> <span class="badge bg-b">MedSeg</span></div></div>
 </div>
-<div class="grid3">
-<div class="card"><small>Disparos</small><div style="font-size:22px;font-weight:800;color:#facc15" id="kpiDisparos">0</div></div>
-<div class="card"><small>Pendentes</small><div style="font-size:22px;font-weight:800;color:#facc15" id="kpiPendentes">0</div></div>
-<div class="card"><small>Usuários</small><div style="font-size:22px;font-weight:800" id="kpiUsuarios">0</div></div>
-</div>
-</div>
-
 <div id="kanban" class="tela">
-<div class="card"><h2>💬 Kanban IA - Histórico</h2><div class="filters"><input id="fBusca" placeholder="Buscar" oninput="renderLeads()"><select id="fEstado" onchange="renderLeads()"><option value="">UF</option><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select><input id="fCidade" placeholder="Cidade" oninput="renderLeads()"></div></div>
-<div class="kanban"><div class="col" data-col="novo"><h4>🆕 Novo</h4><div id="col-novo"></div></div><div class="col" data-col="atendimento"><h4>Atendimento</h4><div id="col-atendimento"></div></div><div class="col" data-col="documentos"><h4>Docs</h4><div id="col-documentos"></div></div><div class="col" data-col="orcamento"><h4>Orçamento</h4><div id="col-orcamento"></div></div><div class="col" data-col="assessoria"><h4>Assessoria 27981244268</h4><div id="col-assessoria"></div></div><div class="col" data-col="fechado"><h4>✅ Fechado</h4><div id="col-fechado"></div></div><div class="col" data-col="recusou"><h4>❌ Não Fechou</h4><div id="col-recusou"></div></div></div>
+<div class="card"><h2>💬 Conversas WhatsApp - Monitoramento IA - MedSeg</h2><p style="color:#999;font-size:12px">IA lê mensagens e move automaticamente entre colunas com base nas tags. Assessoria 27981244268 | Atendimento 27998242975 | ID 156503</p>
+<div class="filters">
+<input id="fBusca" placeholder="Buscar nome/CNPJ/telefone" oninput="filtrarLeads()">
+<select id="fEstado" onchange="filtrarLeads()"><option value="">Estado (UF)</option><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select>
+<select id="fCidade" onchange="filtrarLeads()"><option value="">Cidade / Município</option><option>Serra</option><option>Vila Velha</option><option>Vitoria</option><option>Cariacica</option></select>
+<select id="fServico" onchange="filtrarLeads()"><option value="">Serviço</option><option>Green até 10k</option><option>Livre acima 10k</option><option>Placas</option><option>Telecom</option><option>Seguros</option><option>Expansão ID 156503</option><option>MedSeg - PGR/PCMSO/LTCAT/ASO</option><option>Agenda e Eventos - Assessoria</option></select>
 </div>
-
+</div>
+<div class="kanban" id="kanbanBoard">
+<div class="col" data-col="novo"><h4>🆕 Novo Lead</h4><div class="lead-list" id="col-novo"></div></div>
+<div class="col" data-col="atendimento"><h4>👨‍💼 Cliente em Atendimento</h4><div class="lead-list" id="col-atendimento"></div></div>
+<div class="col" data-col="documentos"><h4>📄 Já enviou documentos</h4><div class="lead-list" id="col-documentos"></div></div>
+<div class="col" data-col="orcamento"><h4>💰 Solicitou Orçamento</h4><div class="lead-list" id="col-orcamento"></div></div>
+<div class="col" data-col="assessoria"><h4>📅 Enviado p/ Assessoria (27981244268)</h4><div class="lead-list" id="col-assessoria"></div></div>
+<div class="col" data-col="fechado"><h4>✅ Cliente Fechado / Finalizado</h4><div class="lead-list" id="col-fechado"></div></div>
+<div class="col" data-col="recusou"><h4>❌ Recusou / Perdido</h4><div class="lead-list" id="col-recusou"></div></div>
+</div>
+</div>
 <div id="leads" class="tela">
-<div class="card"><h2>👥 Leads CNPJ/Cidade/Estado</h2>
-<div class="grid2"><div><input id="leadCNPJ" placeholder="CNPJ/CPF"></div><div><input id="leadNome" placeholder="Nome/Razão"></div><div><select id="leadUF"><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select></div><div><input id="leadCidade" placeholder="Cidade/Município"></div><div><input id="leadTel" placeholder="Tel WhatsApp 2799..."></div><div><select id="leadServ"><option>Green até 10k - 27998242975</option><option>Livre acima 10k - 27998242975</option><option>Placas - 27998242975</option><option>Telecom - 27998242975</option><option>Seguros - 27998242975</option><option>Expansão 156503 - 27998242975</option><option>MedSeg Só MedSeg - 27998242975</option><option>Agenda 27981244268</option></select></div></div>
-<button class="btn btn-g" style="margin-top:8px" onclick="addLead()">+ Add Lead</button>
-<div id="tabelaLeads" style="margin-top:10px"></div>
-</div>
-</div>
-
-<div id="clientes" class="tela">
-<div class="card"><h2>📋 Fechados / Não Fechados + Histórico</h2>
-<div class="grid3"><div><input id="cliCNPJ" placeholder="CNPJ"></div><div><input id="cliNome" placeholder="Nome"></div><div><input id="cliTel" placeholder="Tel"></div><div><select id="cliUF"><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option></select></div><div><input id="cliCidade" placeholder="Cidade"></div><div><select id="cliServ"><option>Green</option><option>Livre</option><option>Placas</option><option>Telecom</option><option>Seguros</option><option>Expansão 156503</option><option>MedSeg</option><option>Agenda</option></select></div><div><select id="cliStatus"><option value="fechado">Fechado</option><option value="nao_fechado">Não Fechado</option></select></div><div><input id="cliMotivo" placeholder="Motivo/Valor"></div><div><input id="cliFeito" placeholder="O que foi feito"></div></div>
-<button class="btn btn-g" style="margin-top:8px" onclick="addCliente()">+ Salvar com Histórico</button>
-<div id="listaClientes" style="margin-top:10px"></div>
-</div>
-</div>
-
-<div id="disparos" class="tela">
-<div class="card"><h2>🚀 Disparos em Massa - Prospecção</h2><p style="color:#999;font-size:10px">Assessoria 27981244268 | Atendimento 27998242975 | Só MedSeg | ID 156503 | Anti-bloqueio com intervalo</p></div>
+<div class="card"><h2>👥 Leads - Monitoramento CNPJ / Estado / Cidade / Município</h2>
 <div class="grid2">
-<div class="card">
-<h3 style="font-size:13px">📝 Mensagem</h3>
-<select id="dispServico" onchange="atualizarModelo()"><option value="green">Green até 10k - 27998242975</option><option value="livre">Livre acima 10k</option><option value="placas">Placas</option><option value="telecom">Telecom</option><option value="seguros">Seguros</option><option value="expansao">Expansão 156503</option><option value="medseg">MedSeg Só MedSeg - PGR/PCMSO</option><option value="agenda">Agenda 27981244268</option></select>
-<input id="dispLink" placeholder="Link do serviço">
-<textarea id="dispMensagem" rows="7" placeholder="Use {nome} {cidade} {cnpj}"></textarea>
-<div class="grid2"><div><input id="dispIntervalo" type="number" value="30" placeholder="Intervalo seg"></div><div><select id="dispNumero"><option value="27998242975">27998242975 - Atend</option><option value="27981244268">27981244268 - Assessoria</option></select></div></div>
-<button class="btn btn-y" style="width:100%;margin-top:6px" onclick="iniciarDisparo()">🚀 Iniciar Disparo</button>
-<button class="btn btn-d" style="width:100%;margin-top:4px" onclick="pararDisparo()">⏹️ Parar</button>
-<div class="progress"><div id="progressBar" class="progress-bar"></div></div>
-<p style="font-size:10px;color:#888" id="progressText">0 / 0 - Aguardando</p>
+<div><label style="font-size:11px;color:#888">CNPJ / CPF</label><input id="leadCNPJ" placeholder="00.000.000/0001-00 ou CPF"></div>
+<div><label style="font-size:11px;color:#888">Razão Social / Nome</label><input id="leadNome" placeholder="Nome ou Razão"></div>
+<div><label style="font-size:11px;color:#888">Estado (UF)</label><select id="leadUF"><option>ES</option><option>MG</option><option>BA</option><option>RJ</option><option>SP</option><option>Outros</option></select></div>
+<div><label style="font-size:11px;color:#888">Cidade / Município</label><input id="leadCidade" placeholder="Ex: Serra"></div>
+<div><label style="font-size:11px;color:#888">Telefone</label><input id="leadTel" placeholder="2799..."></div>
+<div><label style="font-size:11px;color:#888">Serviço</label><select id="leadServ"><option>Green até 10k - 100kWh - 27998242975</option><option>Livre acima 10k - 27998242975</option><option>Placas - 27998242975</option><option>Telecom - 27998242975</option><option>Seguros Carro/Moto/Caminhão - 27998242975</option><option>Expansão ID 156503 - 27998242975</option><option>MedSeg - PGR/PCMSO/LTCAT/ASO - 27998242975 - INDEPENDENTE</option><option>Agenda e Eventos - 27981244268</option></select></div>
 </div>
-<div class="card">
-<h3 style="font-size:13px">👥 Lista para Disparo</h3>
-<div class="filters"><input id="dispFiltro" placeholder="Filtrar" oninput="renderDisparosLista()"><select id="dispFiltroStatus" onchange="renderDisparosLista()"><option value="">Todos</option><option value="novo">Novos</option><option value="recusou">Não Fechados</option><option value="nao_fechado">Clientes Não Fechados</option></select></div>
-<div style="margin:6px 0"><button class="btn btn-d" style="font-size:10px" onclick="selecionarTodos(true)">✅ Todos filtrados</button> <button class="btn btn-d" style="font-size:10px;margin-left:4px" onclick="selecionarTodos(false)">❌ Desmarcar</button> <span id="selCount" style="font-size:10px;color:#facc15;margin-left:6px">0 sel</span></div>
-<div class="checkbox-list" id="listaDisparos"></div>
-<div id="relatorioDisparos" style="font-size:10px;color:#aaa;margin-top:8px">Nenhum disparo</div>
+<button class="btn btn-g" style="margin-top:10px" onclick="addLead()">+ Adicionar Lead (teste)</button>
+<div id="tabelaLeads" style="margin-top:12px"></div>
 </div>
 </div>
-</div>
-
-<div id="agenda" class="tela"><div class="card"><h2>📅 Agenda 27981244268 - Histórico</h2><div id="listaAgenda"></div></div></div>
-
+<div id="agenda" class="tela"><div class="card"><h2>📅 Agenda e Eventos - Assessoria 27981244268</h2><p style="font-size:12px;color:#aaa">Tudo que cair na coluna "Enviado p/ Assessoria" vem pra cá. Contato: <a href="https://wa.me/5527981244268" style="color:#00ff88">27981244268</a></p><div id="listaAgenda"></div></div></div>
 <div id="treinamento" class="tela">
-<div class="card"><h2>🧠 Treinamento IA + LINK por Serviço - RDsc8125@ - ID 156503</h2><p style="font-size:10px;color:#999">Cada agente tem link editável - AMANDA abertura 6 opções - 27981244268 / 27998242975</p></div>
+<div class="card"><h2>🧠 Treinamento de IA - 9 Agentes - ID 156503 - Só MedSeg</h2><p style="color:#999;font-size:12px">AMANDA + 8 - Assessoria 27981244268 | Atendimento 27998242975 | MedSeg independente (sem VTN) | Link travado ID 156503</p></div>
 <div id="listaTreinamento"></div>
 </div>
-
 <div id="usuarios" class="tela">
-<div class="card"><h2>👤 Usuários - Liberação Master Rômulo Sousa / RDsc8125@ + Abas</h2><p style="font-size:10px;color:#999">Você é o Master. Define abas que cada usuário acessa.</p>
-<div id="pendentes"></div>
-<hr style="margin:10px 0;border:0;border-top:1px solid #222">
-<h3 style="font-size:13px;color:#00ff88">➕ Criar usuário já liberado</h3>
-<div class="grid2"><div><input id="uNome" placeholder="Nome"></div><div><input id="uLogin" placeholder="ID/Login"></div><div><input id="uSenha" type="password" placeholder="Senha"></div><div><input id="uWhats" placeholder="WhatsApp"></div></div>
-<div style="margin:8px 0"><label style="font-size:11px;color:#00ff88">🔐 Abas liberadas:</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px">
-<label style="font-size:11px"><input type="checkbox" id="perm_dashboard" checked> Dashboard</label>
-<label style="font-size:11px"><input type="checkbox" id="perm_kanban" checked> Kanban</label>
-<label style="font-size:11px"><input type="checkbox" id="perm_leads" checked> Leads</label>
-<label style="font-size:11px"><input type="checkbox" id="perm_clientes" checked> Clientes</label>
-<label style="font-size:11px"><input type="checkbox" id="perm_disparos"> Disparos</label>
-<label style="font-size:11px"><input type="checkbox" id="perm_agenda"> Agenda</label>
-<label style="font-size:11px"><input type="checkbox" id="perm_treinamento"> Treinamento</label>
-<label style="font-size:11px"><input type="checkbox" id="perm_config"> Config</label>
-</div></div>
-<button class="btn btn-g" style="width:100%;margin-top:6px" onclick="addUsuario()">+ Criar Usuário Liberado</button>
-<div id="listaUsuarios" style="margin-top:10px"></div>
+<div class="card"><h2>👤 Usuários Ilimitados - Controle de Acesso</h2><div class="grid2">
+<div><label style="font-size:11px;color:#888">Nome do usuário</label><input id="uNome" placeholder="Ex: Vendedor 1"></div>
+<div><label style="font-size:11px;color:#888">Login</label><input id="uLogin" placeholder="Ex: vendedor1"></div>
+<div><label style="font-size:11px;color:#888">Senha</label><input id="uSenha" placeholder="123"></div>
+<div><label style="font-size:11px;color:#888">Permissões</label><select id="uPerm" multiple style="height:100px"><option value="dashboard" selected>Dashboard</option><option value="kanban" selected>Conversas WhatsApp Kanban</option><option value="leads" selected>Leads CNPJ/Cidade</option><option value="agenda">Agenda e Eventos</option><option value="treinamento">Treinamento IA</option><option value="config">Configurações</option></select></div>
+</div>
+<button class="btn btn-g" style="margin-top:10px" onclick="addUsuario()">+ Adicionar Usuário Ilimitado</button>
+<div id="listaUsuarios" style="margin-top:12px"></div>
 </div>
 </div>
-
-<div id="config" class="tela"><div class="card"><h2>⚙️ Config V8 MASTER RDsc8125@</h2><div class="grid2"><div><input value="Master: Rômulo Sousa" disabled></div><div><input value="Senha: RDsc8125@" disabled></div><div><input value="ID 156503" disabled></div><div><input value="Assessoria 27981244268" disabled></div><div><input value="Atendimento 27998242975" disabled></
+<div id="config" class="tela">
+<div class="card"><h2>⚙️ Configurações - Só MedSeg</h2>
+<div class="grid2">
+<div><label>ID iGreen travado</label><input value="156503" disabled></div>
+<div><label>Assessoria Agenda/Eventos</label><input value="27981244268"></div>
+<div><label>Atendimento iGreen + MedSeg</label><input value="27998242975"></div>
+<div><label>Link Expansão</label><input value="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT"></div>
+<div><label>Nome empresa MedSeg (só MedSeg)</label><input id="nomeMedSeg" value="MedSeg - Medicina e Segurança do Trabalho"></div>
+</div>
+<button class="btn btn-g" style="margin-top:10px" onclick="alert('Configurações salvas! ID 156503 - Assessoria 27981244268 - Atendimento 27998242975 - Só MedSeg')">💾 Salvar</button>
+</div>
+</div>
+</div>
+<script>
+const LINK_EXP="https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT";
+const WA_ASSESSORIA="https://wa.me/5527981244268";
+const WA_ATEND="https://wa.me/5527998242975";
+const ASSESSORIA_NUM="27981244268";
+const ATEND_NUM="27998242975";
+function fazerLogin(){document.getElementById('loginScreen').style.display='none';document.getElementById('sidebar').style.display='block';document.getElementById('main').style.display='block';localStorage.setItem('ekklesia_logado','true');renderTreinamento();renderUsuarios();renderLeads();}
+function sair(){localStorage.removeItem('ekklesia_logado');location.reload();}
+if(localStorage.getItem('ekklesia_logado')==='true'){document.getElementById('loginScreen').style.display='none';document.getElementById('sidebar').style.display='block';document.getElementById('main').style.display='block';}
+const AGENTES=[
+{id:"amanda",nome:"0 - AMANDA Central Geral",numero:"Assessoria 27981244268 / Atendimento 27998242975",badge:"AMANDA",prompt:"Você é a AMANDA Central Equipe Rômulo Sousa ID 156503. Abertura 6 opções: 1 Economia luz 2 Seguro Carro/Moto/Caminhão 3 Telecom 4 Parceiro iGreen 5 MedSeg PGR/PCMSO 6 Agenda e Eventos. Se 6 -> 27981244268 https://wa.me/5527981244268. Se 1-5 -> 27998242975 https://wa.me/5527998242975. Final: Ou fala com atendente humano ou aguarda que vou verificar sua situação e já volto te chamar. Link ID 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT",msg:"Olá! Bem-vindo à Equipe Rômulo Sousa! Sou a Amanda. Me diz: 1 Economia luz 2 Seguro 3 Telecom 4 Parceiro iGreen 5 MedSeg PGR/PCMSO 6 Agenda e Eventos",follow:"Ou fala com atendente humano ou aguarda que vou verificar sua situação e já volto te chamar | 27981244268 | 27998242975 | ID 156503"},
+{id:"agente1",nome:"1 - Agenda Rômulo Sousa",numero:ASSESSORIA_NUM,badge:"ASSESSORIA 27981244268",prompt:"Você é Agenda Rômulo Sousa - Só direciona para 27981244268 https://wa.me/5527981244268 - ID 156503 - Final: Ou fala com atendente humano ou aguarda que vou verificar",msg:"Olá! Sou assistente de Agenda e Eventos - Direciono para assessoria 27981244268",follow:"Vou te direcionar para assessoria 27981244268 https://wa.me/5527981244268 - Ou fala com atendente humano ou aguarda"},
+{id:"agente2",nome:"2 - Isa Green até 10k - 100kWh",numero:ATEND_NUM,badge:"GREEN ATE 10K",prompt:"Você é a Isa Green ID 156503 - Mono/Bi/Tri 100kWh até 10k 20% sem obra - 27998242975 https://wa.me/5527998242975",msg:"Olá! Sou a Isa Green - 20% sem obra - 100kWh até 10k - Nome, CPF, valor conta, Cidade/Estado, foto conta - 27998242975",follow:"Follow ID 156503"},
+{id:"agente3",nome:"3 - Cris Livre acima 10k",numero:ATEND_NUM,badge:"LIVRE +10K",prompt:"Você é a Cris Livre ID 156503 - Só acima 10k Mercado Livre 25-40% - 27998242975",msg:"Olá! Sou a Cris Livre - ACIMA 10k 25-40% - 27998242975",follow:"Follow ID 156503"},
+{id:"agente4",nome:"4 - Mateus Placas",numero:ATEND_NUM,badge:"PLACAS",prompt:"Você é o Mateus Placas ID 156503 - 84x - 27998242975",msg:"Olá! Sou o Mateus Placas - 84x - 27998242975",follow:"Follow ID 156503"},
+{id:"agente5",nome:"5 - Bia Telecom",numero:ATEND_NUM,badge:"TELECOM",prompt:"Você é a Bia Telecom ID 156503 - Fibra e chip 50% - 27998242975",msg:"Olá! Sou a Bia Telecom - Fibra e chip 50% - 27998242975",follow:"Follow ID 156503"},
+{id:"agente6",nome:"6 - Léo Seguros Carro/Moto/Caminhão",numero:ATEND_NUM,badge:"SEGUROS",prompt:"Você é o Léo Seguros ID 156503 - 17 seguradoras - 27998242975",msg:"Olá! Sou o Léo Seguros - 17 seguradoras - 27998242975",follow:"Follow ID 156503"},
+{id:"agente7",nome:"7 - Fernanda Expansão ID 156503",numero:ATEND_NUM,badge:"EXPANSAO ID 156503",prompt:"Você é a Fernanda Expansão ID 156503 - Link travado ID 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT - 27998242975",msg:"Olá! Sou a Fernanda Expansão - Link: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT - 27998242975",follow:"Link 156503: https://expansao.igreenenergy.com.br/?id=156503&checkout=true&tipolicenca=CONNECT"},
+{id:"agente8",nome:"8 - Carol MedSeg - SÓ MEDSEG - INDEPENDENTE",numero:ATEND_NUM,badge:"MEDSEG - SÓ MEDSEG",prompt:"Você é a Carol MedSeg - Medicina e Segurança do Trabalho - Empresa INDEPENDENTE SEM VTN, SEM iGreen - Nome correto: MedSeg - PGR, PCMSO, LTCAT, ASO, Exames Admissional/Periodico/Demissional/Retorno/Mudanca, eSocial S-2210 S-2220 S-2240, Treinamentos NR-01 - Multas R$3000/func - Contato MedSeg 27998242975 https://wa.me/5527998242975 - Final: Ou fala com atendente humano ou aguarda que vou verificar sua situação e já volto te chamar",msg:"Olá! Sou a Carol da MedSeg - Medicina e Segurança do Trabalho! Só MedSeg, empresa independente. Fazemos PGR, PCMSO, LTCAT, ASO, Exames e eSocial + NR-01. Me manda: Razão/CNPJ, qtd CLTs, Cidade/Estado, o que precisa (PGR, PCMSO, LTCAT, ASO, eSocial, NR). Contato: 27998242975 - https://wa.me/5527998242975 - Ou fala com atendente humano ou aguarda que vou verificar sua situação e já volto te chamar",follow:"D+1 Conseguiu ver qtd CLTs e PGR/PCMSO? Já gero orçamento MedSeg. D+2 Ministério multando por falta PGR/PCMSO e eSocial. Quer orçamento MedSeg essa semana? D+3 OK? D+7 Encerro - Quando precisar PGR, PCMSO, LTCAT, ASO chama MedSeg 27998242975"}
+];
+function renderTreinamento(){let lista=document.getElementById('listaTreinamento'); if(!lista) return; let html=""; AGENTES.forEach(a=>{html+=`<div class="card"><small style="color:#666">${a.badge}</small><h3>${a.nome}</h3><p style="font-size:11px;color:#25D366">Whats: ${a.numero}</p><hr><p style="font-size:11px;color:#00ff88">PROMPT</p><textarea rows="5">${a.prompt}</textarea><p style="font-size:11px;color:#00ff88">MENSAGEM</p><textarea rows="2">${a.msg}</textarea><p style="font-size:11px;color:#ff9f43">FOLLOW</p><textarea rows="2">${a.follow}</textarea><br><button class="btn btn-g">💾 Salvar</button></div>`;}); lista.innerHTML=html;}
+let leads=JSON.parse(localStorage.getItem('ekklesia_leads_kanban')||'[]');
+function addLead(){let cnpj=document.getElementById('leadCNPJ').value||'12.345.678/0001-99';let nome=document.getElementById('leadNome').value||'Empresa Teste';let uf=document.getElementById('leadUF').value||'ES';let cidade=document.getElementById('leadCidade').value||'Serra';let tel=document.getElementById('leadTel').value||'2799...';let serv=document.getElementById('leadServ').value||'Green';let novo={id:Date.now(),cnpj,nome,uf,cidade,tel,serv,status:'novo'};leads.push(novo);localStorage.setItem('ekklesia_leads_kanban',JSON.stringify(leads));renderLeads();}
+function moverLead(id,st){let l=leads.find(x=>x.id===id);if(l){l.status=st;localStorage.setItem('ekklesia_leads_kanban',JSON.stringify(leads));renderLeads();}}
+function renderLeads(){
+['novo','atendimento','documentos','orcamento','assessoria','fechado','recusou'].forEach(col=>{let el=document.getElementById('col-'+col);if(el) el.innerHTML='';});
+leads.forEach(l=>{
+let el=document.getElementById('col-'+l.status);
+if(el){
+let div=document.createElement('div');div.className='lead-card';div.draggable=true;
+div.innerHTML=`<b>${l.nome}</b><br><small>${l.cnpj} | ${l.cidade}/${l.uf}</small><br><small style="color:#00ff88">${l.serv}</small><br><small>${l.tel}</small><br><button onclick="moverLead(${l.id},'documentos')" style="background:none;border:0;color:#00ff88;font-size:10px">→ Doc</button> <button onclick="moverLead(${l.id},'orcamento')" style="background:none;border:0;color:#ff9f43;font-size:10px">→ Orç</button> <button onclick="moverLead(${l.id},'assessoria')" style="background:none;border:0;color:#3b82f6;font-size:10px">→ Assessoria</button> <button onclick="moverLead(${l.id},'fechado')" style="background:none;border:0;color:#00ff88;font-size:10px">→ Fechado</button>`;
+div.ondragstart=e=>{e.dataTransfer.setData('leadId',l.id);};
+el.appendChild(div);
+}
+});
+let busca=(document.getElementById('fBusca')?.value||'').toLowerCase();
+let html=`<table style="width:100%;font-size:12px;color:#aaa"><tr><th>CNPJ</th><th>Nome</th><th>Cidade/UF</th><th>Serviço</th><th>Status</th></tr>`;
+leads.filter(l=>!busca || l.nome.toLowerCase().includes(busca) || l.cnpj.includes(busca)).forEach(l=>{html+=`<tr><td>${l.cnpj}</td><td>${l.nome}</td><td>${l.cidade}/${l.uf}</td><td>${l.serv}</td><td>${l.status}</td></tr>`});
+html+=`</table>`;document.getElementById('tabelaLeads').innerHTML=html;
+document.getElementById('listaAgenda').innerHTML=leads.filter(l=>l.status==='assessoria').map(l=>`<div class="card"><b>${l.nome}</b> - ${l.cidade}/${l.uf} - <a href="${WA_ASSESSORIA}" target="_blank" style="color:#00ff88">Enviar p/ Assessoria 27981244268</a></div>`).join('') || '<p style="color:#666">Nenhum na assessoria</p>';
+}
+document.querySelectorAll('.col').forEach(col=>{
+col.addEventListener('dragover',e=>e.preventDefault());
+col.addEventListener('drop',e=>{let id=parseInt(e.dataTransfer.getData('leadId'));let st=col.getAttribute('data-col');moverLead(id,st);});
+});
+function filtrarLeads(){renderLeads();}
+let usuarios=JSON.parse(localStorage.getItem('ekklesia_usuarios')||'[]');
+function addUsuario(){let nome=document.getElementById('uNome').value;let login=document.getElementById('uLogin').value;let senha=document.getElementById('uSenha').value;let permEl=document.getElementById('uPerm');let perms=Array.from(permEl.selectedOptions).map(o=>o.value);if(!nome||!login) return alert('Preencha');usuarios.push({id:Date.now(),nome,login,senha,perms});localStorage.setItem('ekklesia_usuarios',JSON.stringify(usuarios));renderUsuarios();}
+function renderUsuarios(){let el=document.getElementById('listaUsuarios');if(!el) return;el.innerHTML=usuarios.map(u=>`<div class="card"><b>${u.nome}</b> - ${u.login}<br><small>${u.perms.join(', ')}</small> <button class="btn btn-d" onclick="usuarios=usuarios.filter(x=>x.id!==${u.id});localStorage.setItem('ekklesia_usuarios',JSON.stringify(usuarios));renderUsuarios();">Remover</button></div>`).join('') || '<p style="color:#666">Nenhum usuário - ilimitado</p>';}
+function abrir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');document.querySelectorAll('.btn-menu').forEach(b=>b.classList.remove('active'));if(id==='treinamento') renderTreinamento();if(id==='usuarios') renderUsuarios();if(id==='leads'||id==='kanban') renderLeads();}
+renderTreinamento();renderUsuarios();renderLeads();
+</script>
+</body>
+</html>
