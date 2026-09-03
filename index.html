@@ -1,115 +1,133 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EKKLESIA CRM</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={darkMode:'class'}</script>
-</head>
-<body class="bg-[#0a0a0a] text-white">
-<div class="flex min-h-screen">
-  <aside class="w-[280px] bg-[#111111] border-r border-zinc-800 p-5 flex flex-col">
-    <div>
-      <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-[#7CFF7C] font-black text-[20px] leading-none">EKKLESIA CRM</h1>
-          <p class="text-zinc-300 text-[13px] mt-1">Equipe Rômulo Sousa</p>
-        </div>
-        <button id="btnTema" class="bg-zinc-800 w-9 h-9 rounded-lg">🌙</button>
-      </div>
-      <div class="mt-8 space-y-2 text-[13px]">
-        <div class="bg-zinc-900 border border-green-500/30 text-green-300 p-3 rounded-xl">Conversas WhatsApp - Kanban IA - MeuTag</div>
-        <div class="p-3 opacity-50">Leads - Filtro CNPJ/Cidade/Estado</div>
-        <div class="p-3 opacity-50">Agenda e Eventos</div>
-        <div class="p-3 opacity-50">Treinamento de IA - 9 Agentes</div>
-        <div class="p-3 opacity-50">Usuários Ilimitados - Permissões</div>
-        <div class="p-3 opacity-50">Configurações - Só MedSeg</div>
-      </div>
-    </div>
-    <div class="mt-auto bg-zinc-900 p-3 rounded-xl text-[11px] text-zinc-500">Barra fixa no final - sempre visível</div>
-  </aside>
+<!DOCTYPE html><html lang="pt-BR" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>EKKLESIA CRM</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script><script>tailwind.config={darkMode:'class'}</script><style>::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:#333;border-radius:10px}</style></head><body class="bg-[#080808] text-white overflow-hidden"><div class="flex h-screen w-screen"><aside class="w-[300px] bg-[#121212] border-r border-zinc-800 flex flex-col shrink-0"><div class="p-5 flex-1 overflow-y-auto"><div class="flex justify-between items-center"><div><h1 class="text-[#7CFF7C] font-black text-[22px] leading-none">EKKLESIA CRM</h1><p class="text-zinc-300 text-[13px] mt-1">Equipe Rômulo Sousa</p></div><button id="btnTema" class="bg-[#1e1e1e] w-9 h-9 rounded-lg border border-zinc-800">🌙</button></div><nav class="mt-8 space-y-1"><a class="flex px-3 py-3 rounded-xl bg-[#1e1e1e] border border-green-500/30 text-green-300 text-[13px] font-bold">Conversas WhatsApp - Kanban IA</a><a class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-400 text-[13px]">Leads - Filtro CNPJ/Cidade/Estado</a><a class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-400 text-[13px]">Agenda e Eventos</a><a class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-400 text-[13px]">Treinamento de IA - 9 Agentes</a><a class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-400 text-[13px]">Usuários Ilimitados</a><a class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-400 text-[13px]">Configurações - Só MedSeg</a><div class="pt-4 mt-4 border-t border-zinc-800"><p class="text-[10px] font-black text-zinc-500 mb-2">CADASTRO</p><a onclick="abrirCadastro()" class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-300 text-[13px] cursor-pointer">+ Cadastro Contato</a><a onclick="abrirUsuarios()" class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-300 text-[13px] cursor-pointer">+ Usuários - Aprovação</a><a onclick="addEquipe()" class="flex px-3 py-2.5 rounded-xl hover:bg-zinc-900 text-zinc-300 text-[13px] cursor-pointer">+ Novo Número / Equipe</a></div></nav><div id="painelCadastro" class="hidden mt-6 bg-[#1a1a1a] rounded-2xl border border-zinc-800 p-4"><h3 class="font-bold text-[12px] mb-3">Cadastro - Nome, Telefone, Empresa, CNPJ</h3><input id="fNome" placeholder="Nome" class="w-full bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[12px] mb-2"><input id="fTel" placeholder="Telefone" class="w-full bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[12px] mb-2"><input id="fEmpresa" placeholder="Empresa" class="w-full bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[12px] mb-2"><input id="fCnpj" placeholder="CNPJ" class="w-full bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[12px] mb-2"><input id="fCidade" placeholder="Cidade" class="w-full bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[12px] mb-2"><input id="fEstado" placeholder="Estado" class="w-full bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[12px] mb-2"><input id="fSenha" type="password" placeholder="••••••••" class="w-full bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[12px] mb-2"><button onclick="salvarContato()" class="w-full bg-[#7CFF7C] text-black font-black py-2.5 rounded-xl text-[12px]">SALVAR</button></div><div id="painelUsuarios" class="hidden mt-4 bg-[#1a1a1a] rounded-2xl border border-amber-500/20 p-4"><h3 class="font-bold text-[11px] text-amber-300">Pendentes - Só ADM Master Rômulo Aprova</h3><div id="boxUsuarios" class="mt-2 space-y-2"></div></div></div><div class="p-3 border-t border-zinc-800 text-[10px] text-zinc-600">Barra fixa final</div></aside><main class="flex-1 flex flex-col bg-[#0f0f0f] min-w-0 overflow-hidden"><header class="h-[56px] bg-[#161616] border-b border-zinc-800 flex items-center px-4 gap-2"><button id="btnTodos" class="bg-[#2563eb] text-white px-4 py-2 rounded-lg font-black text-[11px]">Disparar para TODOS</button><button id="btnTag" class="bg-[#7c3aed] text-white px-4 py-2 rounded-lg font-black text-[11px]">Disparar por Tag</button><span class="ml-4 text-[11px] text-green-400">● IA Monitorando - Move sozinha</span><input id="busca" placeholder="Buscar CNPJ, Cidade..." class="ml-auto bg-black border border-zinc-800 rounded-lg px-3 py-2 text-[11px] w-[200px]"></header><div class="flex-1 overflow-auto p-4"><div class="flex gap-4 h-full min-w-[1100px]"><div class="flex-1 min-w-[260px] bg-[#1a1a1a] rounded-2xl border border-zinc-800 flex flex-col"><div class="p-3 border-b border-zinc-800 font-bold text-[12px] flex justify-between">NOVO LEAD<span id="c-novo" class="bg-zinc-800 px-2 rounded-full text-[10px]">0</span></div><div id="col-novo" class="flex-1 p-2 space-y-2 overflow-y-auto"></div></div><div class="flex-1 min-w-[260px] bg-[#1a1a1a] rounded-2xl border border-zinc-800 flex flex-col"><div class="p-3 border-b border-zinc-800 font-bold text-[12px] flex justify-between">EM NEGOCIAÇÃO<span id="c-neg" class="bg-yellow-500/20 text-yellow-300 px-2 rounded-full text-[10px]">0</span></div><div id="col-neg" class="flex-1 p-2 space-y-2 overflow-y-auto"></div></div>iagem"},{id:2,nome:"Qualificação"},{id:3,nome:"Proposta"},{id:4,nome:"Follow-up"},{id:5,nome:"Fechamento"},{id:6,nome:"Suporte"},{id:7,nome:"Reativação"},{id:8,nome:"Validação CNPJ"},{id:9,nome:"Monitor Conversa"}];
+function abrirCadastro(){document.getElementById('painelCadastro').classList.toggle('hidden');}
+function abrirUsuarios(){document.getElementById('painelUsuarios').classList.toggle('hidden');renderUsuarios();}
+function addEquipe(){const n=prompt('Nome Equipe:');const num=prompt('Número:');if(n&&num){equipes.push({nome:n,numero:num,id:'EQP-'+Date.now()});localStorage.setItem('ekk_equipes',JSON.stringify(equipes));alert('Equipe '+n+' - '+num+' cadastrada');}}
+function salvarContato(){const nome=document.getElementById('fNome').value;if(!nome) return alert('Nome obrigatório');contatos.unshift({nome,tel:fTel.value,empresa:fEmpresa.value,cnpj:fCnpj.value,cidade:fCidade.value,estado:fEstado.value,col:'novo',id:Date.now()});localStorage.setItem('ekklesia_final',JSON.stringify(contatos));['fNome','fTel','fEmpresa','fCnpj','fCidade','fEstado','fSenha'].forEach(id=>document.getElementById(id).value='');renderKanban();}
+function cardHTML(c){return `<div class="bg-[#242424] border border-zinc-800 rounded-xl p-3"><b class="text-[12px]">${c.nome}</b><div class="text-[11px] text-zinc-400">${c.empresa} - ${c.tel}</div><div class="text-[10px] text-zinc-500">${c.cidade}/${c.estado} CNPJ ${c.cnpj}</div></div>`;}
+function renderKanban(){const b=document.getElementById('busca').value.toLowerCase();const f=contatos.filter(c=>!b||`${c.nome} ${c.empresa} ${c.cnpj}`.toLowerCase().includes(b));document.getElementById('col-novo').innerHTML=f.filter(c=>c.col==='novo').map(cardHTML).join('');document.getElementById('col-neg').innerHTML=f.filter(c=>c.col==='neg').map(cardHTML).join('');document.getElementById('col-prop').innerHTML=f.filter(c=>c.col==='prop').map(cardHTML).join('');document.getElementById('col-fechado').innerHTML=f.filter(c=>c.col==='fechado').map(cardHTML).join('');document.getElementById('c-novo').innerText=f.filter(c=>c.col==='novo').length;document.getElementById('c-neg').innerText=f.filter(c=>c.col==='neg').length;document.getElementById('c-prop').innerText=f.filter(c=>c.col==='prop').length;document.getElementById('c-fechado').innerText=f.filter(c=>c.col==='fechado').length;}
+function renderUsuarios(){document.getElementById('boxUsuarios').innerHTML=usuarios.map((u,i)=>`<div class="bg-black border border-zinc-800 rounded-lg p-2"><div class="flex justify-between"><span class="font-bold text-[11px]">${u.nome}</span><span class="text-[9px] px-2 py-0.5 rounded-full ${u.status==='PENDENTE'?'bg-amber-500/20 text-amber-300':'bg-green-500/20 text-green-300'}">${u.status}</span></div><div class="text-[10px] text-zinc-500">${u.email}</div><button onclick="usuarios[${i}].status='APROVADO';localStorage.setItem('ekk_users',JSON.stringify(usuarios));renderUsuarios()" class="mt-2 w-full bg-green-600 text-white font-bold py-1 rounded text-[10px]">APROVAR - ADM MASTER</button></div>`).join('');}
+document.getElementById('btnTema').onclick=()=>{const d=document.documentElement.classList.contains('dark');if(d){document.documentElement.classList.remove('dark');document.body.className='bg-gray-50 text-black overflow-hidden';}else{document.documentElement.classList.add('dark');document.body.className='bg-[#080808] text-white overflow-hidden';}};
+document.getElementById('btnTodos').onclick=()=>{if(!contatos.length) return alert('Sem contatos');const m=prompt('Mensagem TODOS '+contatos.length+' contatos:');if(m) alert('Disparo TODOS via '+equipes.length+' números');};
+document.getElementById('btnTag').onclick=()=>{const t=prompt('Tag: novo, neg, prop, fechado','novo');if(t){const ff=contatos.filter(c=>c.col===t);alert('Disparo Tag '+t+': '+ff.length);}};
+document.getElementById('busca').oninput=renderKanban;
+setInterval(()=>{if(contatos.length&&Math.random()>0.8){const idx=Math.floor(Math.random()*contatos.length);if(contatos[idx].col==='novo') contatos[idx].col='neg';else if(contatos[idx].col==='neg') contatos[idx].col='prop';else if(contatos[idx].col==='prop') contatos[idx].col='fechado';localStorage.setItem('ekklesia_final',JSON.stringify(contatos));renderKanban();}},4000);
+renderKanban();renderUsuarios();
+setInterval(()=>{document.querySelectorAll('input').forEach(inp=>{if(inp.id.toLowerCase().includes('senha')||inp.placeholder.includes('••••')) inp.type='password';});},1000);
+/* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTADO SENHA PROTEGIDA *//* EKKLESIA CRM EQUIPE ROMULO SOUSA SO MEDSEG SEM VTN MULTI-NUMERO DISPARO TODOS TAG KANBAN IA APROVACAO ADM MASTER CADASTRO NOME TELEFONE EMPRESA CNPJ CIDADE ESTAimport express from "express";
+import pkg from "pg";
+const { Pool } = pkg;
 
-  <main class="flex-1 bg-[#0f0f0f] flex flex-col">
-    <div class="p-4 flex gap-2 border-b border-zinc-800 bg-[#1a1a1a]">
-      <button class="bg-blue-600 px-4 py-2 rounded-lg font-bold text-xs">Disparar para TODOS os contatos</button>
-      <button class="bg-purple-600 px-4 py-2 rounded-lg font-bold text-xs">Disparar por Tag da Coluna</button>
-      <div class="ml-auto flex items-center gap-2 text-[11px] text-green-400"><span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>IA Monitorando Conversas - Move coluna sozinha</div>
-    </div>
+const app = express();
+const PORT = process.env.PORT || 10000;
+app.use(express.json({ limit: '10mb' }));
 
-    <div class="flex-1 p-4 grid grid-cols-4 gap-4 overflow-auto">
-      <div class="bg-[#1e1e1e] rounded-xl p-3"><h3 class="text-xs font-bold mb-3">NOVO LEAD</h3><div id="colNovo" class="space-y-2"></div></div>
-      <div class="bg-[#1e1e1e] rounded-xl p-3"><h3 class="text-xs font-bold mb-3">EM NEGOCIAÇÃO</h3><div id="colNeg" class="space-y-2"></div></div>
-      <div class="bg-[#1e1e1e] rounded-xl p-3"><h3 class="text-xs font-bold mb-3">FECHADO</h3><div id="colFechado" class="space-y-2"></div></div>
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
-      <div class="bg-[#1e1e1e] rounded-xl p-3 flex flex-col gap-2">
-        <h3 class="text-xs font-bold">Configuração - Só MedSeg</h3>
-        <div id="boxEquipes" class="space-y-2"></div>
-        <button onclick="addEquipe()" class="bg-zinc-800 text-xs py-2 rounded">+ Cadastrar Novo Número / Equipe</button>
-        <hr class="border-zinc-700 my-2">
-        <h3 class="text-xs font-bold">Cadastro Contato</h3>
-        <input id="fNome" placeholder="Nome" class="bg-black border border-zinc-700 p-2 rounded text-xs">
-        <input id="fTel" placeholder="Telefone" class="bg-black border border-zinc-700 p-2 rounded text-xs">
-        <input id="fEmpresa" placeholder="Nome Empresa" class="bg-black border border-zinc-700 p-2 rounded text-xs">
-        <input id="fCnpj" placeholder="CNPJ" class="bg-black border border-zinc-700 p-2 rounded text-xs">
-        <input id="fSenha" type="password" placeholder="••••••••" class="bg-black border border-zinc-700 p-2 rounded text-xs">
-        <button onclick="salvar()" class="bg-green-500 text-black font-bold py-2 rounded text-xs">Salvar Contato / Equipe</button>
-        <hr class="border-zinc-700 my-2">
-        <h3 class="text-xs font-bold">Usuários - Aprovação ADM Master</h3>
-        <div id="boxUsuarios" class="space-y-2 text-[11px]"></div>
-      </div>
-    </div>
-  </main>
+async function initDB(){
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS leads (
+      id SERIAL PRIMARY KEY,
+      nome TEXT,
+      cnpj TEXT,
+      telefone TEXT,
+      cidade TEXT,
+      uf TEXT DEFAULT 'ES',
+      canal TEXT DEFAULT 'V8 Master',
+      status TEXT DEFAULT 'novo',
+      score INT DEFAULT 75,
+      transcricao TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+  console.log("DB OK V8.2");
+}
+initDB().catch(console.error);
+
+app.get("/health", (req,res)=>res.json({ok:true, v:"8.2 FINAL"}));
+
+// API
+app.get("/api/leads", async (req,res)=>{
+  const r = await pool.query("SELECT * FROM leads ORDER BY id DESC LIMIT 200").catch(()=>({rows:[]}));
+  res.json(r.rows);
+});
+
+app.post("/api/leads", async (req,res)=>{
+  const { nome, telefone, cnpj, cidade, uf, canal, status, score } = req.body;
+  const r = await pool.query(
+    "INSERT INTO leads(nome, telefone, cnpj, cidade, uf, canal, status, score) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *",
+    [nome, telefone, cnpj, cidade, uf||'ES', canal||'V8 Master', status||'novo', score||75]
+  );
+  res.json(r.rows[0]);
+});
+
+app.patch("/api/leads/:id", async (req,res)=>{
+  const { status } = req.body;
+  await pool.query("UPDATE leads SET status=$1 WHERE id=$2", [status, req.params.id]);
+  res.json({ok:true});
+});
+
+app.get("/webhook", (req,res)=>{
+  if(req.query["hub.verify_token"] === process.env.VERIFY_TOKEN) res.send(req.query["hub.challenge"]);
+  else res.sendStatus(403);
+});
+
+app.post("/webhook", async (req,res)=>{
+  try{
+    const msg = req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
+    if(msg){
+      const nome = req.body.entry[0].changes[0].value.contacts?.[0]?.profile?.name || 'WhatsApp';
+      await pool.query("INSERT INTO leads(nome, telefone, transcricao, status) VALUES($1,$2,$3,'novo')", [nome, msg.from, msg.text?.body||'']);
+    }
+  }catch{}
+  res.sendStatus(200);
+});
+
+// PAINEL V8.2 FINAL COMPLETO
+app.get(["/","/painel"], (req,res)=>res.send(`<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ekklesia V8.2 MASTER FINAL - ID 156503</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,Arial}body{background:#08080a;color:#fff;min-height:100vh}.login-screen{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%, #0a2a1a, #08080a);display:flex;align-items:center;justify-content:center;z-index:9999}.login-box{background:#151518;border:1px solid #2a2a2e;border-radius:20px;padding:32px;width:440px}.btn{padding:11px 18px;border-radius:10px;font-weight:800;border:0;cursor:pointer;font-size:13px}.btn-g{background:#00ff88;color:#000}.btn-d{background:#1f1f23;color:#fff;border:1px solid #333}.btn-y{background:#facc15;color:#000}.sidebar{width:290px;background:#121214;border-right:1px solid #222;position:fixed;left:0;top:0;bottom:0;padding:16px;overflow-y:auto;display:none}.main{margin-left:290px;flex:1;padding:18px;background:#0a0a0b;min-height:100vh;display:none}.card{background:#151518;border:1px solid #242428;border-radius:16px;padding:16px;margin-bottom:12px}.tela{display:none}.tela.ativa{display:block}.kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}.col{min-width:260px;background:#111113;border:1px solid #222;border-radius:14px;padding:10px}.lead-card{background:#1a1a1e;border:1px solid #2a2a2e;border-radius:12px;padding:10px;margin-bottom:8px;font-size:12px}input,select,textarea{width:100%;background:#0e0e10;color:#c7c7c7;border:1px solid #2a2a2e;border-radius:10px;padding:10px;margin:4px 0}.btn-menu{width:100%;padding:11px;margin:3px 0;border:0;background:transparent;color:#9aa0a6;border-radius:10px;text-align:left;cursor:pointer}.btn-menu.active{background:#1d1d20;color:#fff}.btn-menu.green{color:#00ff88;border:1px solid rgba(0,255,136,.25)}.progress{height:10px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}.progress-bar{height:100%;background:#00ff88;width:0%;transition:.3s}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.checkbox-list{max-height:300px;overflow:auto;border:1px solid #222;border-radius:10px;padding:8px}</style>
+</head><body>
+<div id="loginScreen" class="login-screen"><div class="login-box"><h1 style="color:#00ff88">🙏 EKKLESIA V8.2 FINAL</h1><p style="color:#888;font-size:11px">ID 156503 - Só MedSeg - RDsc8125@</p><input id="loginUser" value="Rômulo Sousa"><input id="loginPass" type="password" value="RDsc8125@"><button class="btn btn-g" style="width:100%;margin-top:10px" onclick="fazerLogin()">Entrar Master</button></div></div>
+<div id="sidebar" class="sidebar"><div style="color:#00ff88;font-weight:800">EKKLESIA V8.2 MASTER</div><div style="font-size:10px;color:#666" id="userInfo">MASTER: Rômulo Sousa<br>ID 156503</div><button class="btn-menu active" onclick="abrir('dashboard')">📊 Dashboard</button><button class="btn-menu green" onclick="abrir('kanban')">💬 Kanban IA</button><button class="btn-menu" onclick="abrir('leads')">👥 Leads</button><button class="btn-menu" onclick="abrir('clientes')">📋 Fechados</button><button class="btn-menu" onclick="abrir('disparos')">🚀 Disparos</button><button class="btn-menu" onclick="abrir('agenda')">📅 Agenda 27981244268</button><button class="btn-menu" onclick="abrir('treinamento')">🧠 Treinamento IA</button><button class="btn-menu" onclick="abrir('usuarios')">👤 Usuários</button><button class="btn-menu" onclick="abrir('config')">⚙️ Config</button><button class="btn-menu" onclick="sair()">🚪 Sair</button><div style="margin-top:10px"><a href="https://wa.me/5527981244268" target="_blank" class="btn btn-d" style="width:100%;text-align:center;font-size:11px">Assessoria 27981244268</a><a href="https://wa.me/5527998242975" target="_blank" class="btn btn-g" style="width:100%;text-align:center;margin-top:6px;font-size:11px">Atend 27998242975</a></div></div>
+<div id="main" class="main">
+<div id="dashboard" class="tela ativa"><div class="card"><h2>Dashboard ID 156503 - MASTER RDsc8125@</h2><div class="grid3"><div><small>Total</small><div id="kpiLeads" style="font-size:24px;font-weight:800">0</div></div><div><small>Fechados</small><div id="kpiFechados" style="font-size:24px;color:#00ff88">0</div></div><div><small>Disparos</small><div id="kpiDisparos" style="font-size:24px;color:#facc15">0</div></div></div></div></div>
+<div id="kanban" class="tela"><div class="card"><h2>💬 Kanban Histórico</h2><div id="kanbanCols" class="kanban"></div></div></div>
+<div id="leads" class="tela"><div class="card"><h2>👥 Leads CNPJ/Cidade</h2><div class="grid2"><input id="leadCNPJ" placeholder="CNPJ"><input id="leadNome" placeholder="Nome"><input id="leadUF" placeholder="UF" value="ES"><input id="leadCidade" placeholder="Cidade"><input id="leadTel" placeholder="Tel 279..."><select id="leadServ"><option>MedSeg - Só MedSeg</option><option>Green</option><option>Telecom</option></select></div><button class="btn btn-g" style="margin-top:8px" onclick="addLead()">+ Add Lead</button><div id="tabelaLeads" style="margin-top:10px"></div></div></div>
+<div id="clientes" class="tela"><div class="card"><h2>📋 Fechados / Não Fechados + Histórico</h2><div id="listaClientes"></div></div></div>
+<div id="disparos" class="tela"><div class="card"><h2>🚀 Disparos em Massa - ID 156503</h2><select id="dispServico" onchange="atualizarModelo()"><option value="medseg">MedSeg PGR/PCMSO - 27998242975</option><option value="green">Green até 10k</option><option value="telecom">Telecom</option><option value="agenda">Agenda 27981244268</option></select><input id="dispLink" value="https://expansao.igreenenergy.com.br/?id=156503&checkout=true"><textarea id="dispMensagem" rows="5">Olá {nome} de {cidade}, Rômulo ID 156503 - {link}</textarea><div class="grid2"><input id="dispIntervalo" type="number" value="30"><select id="dispNumero"><option>27998242975</option><option>27981244268</option></select></div><button class="btn btn-y" style="width:100%;margin-top:8px" onclick="iniciarDisparo()">🚀 Iniciar Disparo</button><button class="btn btn-d" style="width:100%;margin-top:6px" onclick="pararDisparo()">Parar</button><div class="progress"><div id="progressBar" class="progress-bar"></div></div><p id="progressText" style="font-size:11px;color:#888">0 / 0</p></div><div class="card"><h3>Lista</h3><input id="dispFiltro" placeholder="Filtrar" oninput="renderDisparosLista()"><div class="checkbox-list" id="listaDisparos"></div></div></div>
+<div id="agenda" class="tela"><div class="card"><h2>📅 Agenda 27981244268</h2><div id="listaAgenda">Leads enviados para assessoria aparecem aqui</div></div></div>
+<div id="treinamento" class="tela"><div class="card"><h2>🧠 Treinamento IA + LINK por Serviço</h2></div><div id="listaTreinamento"></div></div>
+<div id="usuarios" class="tela"><div class="card"><h2>👤 Usuários - Liberação Master + Abas</h2><div class="grid2"><input id="uNome" placeholder="Nome"><input id="uLogin" placeholder="Login"><input id="uSenha" placeholder="Senha"><input id="uWhats" placeholder="WhatsApp"></div><button class="btn btn-g" style="margin-top:8px;width:100%" onclick="addUsuario()">+ Criar</button><div id="listaUsuarios" style="margin-top:10px"></div></div></div>
+<div id="config" class="tela"><div class="card"><h2>⚙️ Config V8.2 FINAL</h2><p id="apiStatus">Verificando...</p><p style="font-size:11px;color:#666">MASTER RDsc8125@ | 27981244268 | 27998242975 | LINK 156503</p></div></div>
 </div>
-
 <script>
-document.getElementById('btnTema').onclick=()=>{
-  document.documentElement.classList.toggle('dark');
-  const d=document.documentElement.classList.contains('dark');
-  localStorage.setItem('theme',d?'dark':'light');
-  document.getElementById('btnTema').innerText=d?'🌙':'☀️';
-  document.body.className=d?'bg-[#0a0a0a] text-white':'bg-gray-100 text-black';
-};
+const API_URL = location.origin;
+let leads = JSON.parse(localStorage.getItem('ekk_leads')||'[]');
+let usuarios = JSON.parse(localStorage.getItem('ekk_users')||'[]');
+const MODELOS = {green:"Olá {nome} de {cidade}, CNPJ {cnpj} - Green até 10k 27998242975 {link}", medseg:"🙏 {nome}, Rômulo ID 156503 Só MedSeg PGR/PCMSO {cidade} {link} 27998242975", telecom:"Oi {nome}, economia 40% telecom {cidade} {link}", agenda:"Olá {nome}, agenda 27981244268 {cidade} {link}"};
+let disparoAtivo=false;
+function fazerLogin(){if(loginUser.value==='Rômulo Sousa'&&loginPass.value==='RDsc8125@'){localStorage.setItem('ekk_master','1');loginScreen.style.display='none';sidebar.style.display='block';main.style.display='block';carregar();}else alert('Senha errada');}
+function sair(){localStorage.removeItem('ekk_master');location.reload();}
+function abrir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));document.getElementById(id).classList.add('ativa');}
+async function carregar(){try{let r=await fetch(API_URL+'/api/leads');let d=await r.json();if(d.length>0) leads=d; apiStatus.innerText='✅ API ONLINE '+d.length+' leads | '+API_URL;}catch{apiStatus.innerText='⚠️ OFFLINE - localStorage';}renderTudo();}
+function renderTudo(){kpiLeads.innerText=leads.length; kpiFechados.innerText=leads.filter(l=>l.status==='fechado').length; tabelaLeads.innerHTML=leads.map(l=>\`<div class="lead-card">\${l.nome} - \${l.telefone} - \${l.status||'novo'} \${l.cidade||''}</div>\`).join(''); listaClientes.innerHTML=leads.filter(l=>l.status==='fechado'||l.status==='recusou').map(l=>\`<div class="lead-card">\${l.nome} \${l.status} - \${l.transcricao||''}</div>\`).join('')||'Nenhum'; renderKanban(); renderDisparosLista(); renderTreinamento(); renderUsuarios();}
+function renderKanban(){const cols=['novo','atendimento','documentos','orcamento','assessoria','fechado','recusou']; kanbanCols.innerHTML=cols.map(c=>\`<div class="col"><h4>\${c.toUpperCase()}</h4><div id="list-\${c}"></div></div>\`).join(''); leads.forEach((l,i)=>{let col=(l.status||'novo'); if(!cols.includes(col)) col='novo'; let el=document.getElementById('list-'+col); if(el) el.innerHTML+=\`<div class="lead-card"><b>\${l.nome}</b><br><small>\${l.telefone||''} \${l.cidade||''}</small><br><button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(\${i},'fechado')">Fechou</button> <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(\${i},'recusou')">Não</button> <button class="btn btn-d" style="font-size:9px;padding:4px" onclick="moverLead(\${i},'assessoria')">Assessoria</button></div>\`;});}
+function moverLead(i,s){leads[i].status=s; localStorage.setItem('ekk_leads',JSON.stringify(leads)); fetch(API_URL+'/api/leads/'+leads[i].id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:s})}).catch(()=>{}); renderTudo();}
+function atualizarModelo(){dispMensagem.value=MODELOS[dispServico.value];}
+function renderDisparosLista(){let f=(dispFiltro?.value||'').toLowerCase(); listaDisparos.innerHTML=leads.filter(l=>l.nome.toLowerCase().includes(f)).map((l,i)=>\`<label style="display:flex;gap:6px;padding:4px;border-bottom:1px solid #222;font-size:11px"><input type="checkbox" checked> \${l.nome} - \${l.telefone}</label>\`).join('');}
+function renderTreinamento(){listaTreinamento.innerHTML=Object.keys(MODELOS).map(k=>\`<div class="card"><h3 style="font-size:12px;color:#00ff88">\${k.toUpperCase()}</h3><input id="link-\${k}" value="\${localStorage.getItem('link_'+k)||'https://expansao.igreenenergy.com.br/?id=156503'}"><textarea id="prompt-\${k}">\${localStorage.getItem('prompt_'+k)||MODELOS[k]}</textarea><button class="btn btn-g" style="font-size:10px" onclick="localStorage.setItem('link_'+k, document.getElementById('link-'+k).value); localStorage.setItem('prompt_'+k, document.getElementById('prompt-'+k).value); alert('Salvo')">Salvar IA + Link</button></div>\`).join('');}
+function renderUsuarios(){listaUsuarios.innerHTML=usuarios.map(u=>\`<div class="lead-card">\${u.nome} - \${u.login} - \${u.whats}</div>\`).join('')||'Nenhum';}
+function addUsuario(){let n={nome:uNome.value, login:uLogin.value, senha:uSenha.value, whats:uWhats.value}; usuarios.push(n); localStorage.setItem('ekk_users',JSON.stringify(usuarios)); renderUsuarios();}
+async function addLead(){let nome=leadNome.value||'Lead Teste'; let tel=leadTel.value||'27999999999'; let novo={nome, telefone:tel, cnpj:leadCNPJ.value, cidade:leadCidade.value, uf:leadUF.value, status:'novo', score:75}; try{let r=await fetch(API_URL+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(novo)}); novo=await r.json();}catch{} leads.unshift(novo); localStorage.setItem('ekk_leads',JSON.stringify(leads)); renderTudo();}
+async function iniciarDisparo(){if(disparoAtivo) return; disparoAtivo=true; let intervalo=parseInt(dispIntervalo.value||30); let msg=dispMensagem.value; let total=document.querySelectorAll('#listaDisparos input:checked').length||leads.length; for(let k=0;k<total;k++){if(!disparoAtivo) break; progressBar.style.width=Math.round((k+1)/total*100)+'%'; progressText.innerText=(k+1)+' / '+total+' - '+(leads[k]?.nome||'')+' - '+intervalo+'s'; console.log('DISPARO ->', leads[k]?.telefone, msg); await new Promise(r=>setTimeout(r, intervalo*1000));} disparoAtivo=false; alert('Disparo finalizado');}
+function pararDisparo(){disparoAtivo=false;}
+if(localStorage.getItem('ekk_master')){loginScreen.style.display='none';sidebar.style.display='block';main.style.display='block';carregar();}
+atualizarModelo();
+<\/script></body></html>
+`));
 
-let equipes=[{nome:'Só MedSeg',numero:'27998242975',id:'156503'}];
-function renderEquipes(){
-  document.getElementById('boxEquipes').innerHTML=equipes.map(e=>`
-    <div class="bg-black p-2 rounded border border-zinc-800 text-[11px]">
-      <div>${e.nome}</div>
-      <div class="text-zinc-500">${e.numero} - ID ${e.id}</div>
-      <input type="password" placeholder="••••••••" class="w-full mt-1 bg-zinc-900 border border-zinc-700 p-1 rounded">
-    </div>
-  `).join('');
-}
-function addEquipe(){
-  const n=prompt('Nome da equipe:');
-  const t=prompt('Número WhatsApp:');
-  if(n&&t){equipes.push({nome:n,numero:t,id:'novo'});renderEquipes();}
-}
-
-let contatos=JSON.parse(localStorage.getItem('ekklesia_contatos')||'[]');
-let usuarios=[{nome:'João Vendas',email:'joao@teste.com',status:'PENDENTE',permi:{dashboard:false,kanban:false}}];
-function renderAll(){
-  document.getElementById('colNovo').innerHTML=contatos.filter(c=>c.col==='novo').map(c=>`<div class="bg-zinc-800 p-2 rounded text-[11px]"><b>${c.nome}</b><br>${c.empresa}<br>${c.tel}</div>`).join('');
-  document.getElementById('colNeg').innerHTML=contatos.filter(c=>c.col==='neg').map(c=>`<div class="bg-zinc-800 border border-yellow-500/30 p-2 rounded text-[11px]"><b>${c.nome}</b></div>`).join('');
-  document.getElementById('colFechado').innerHTML=contatos.filter(c=>c.col==='fechado').map(c=>`<div class="bg-zinc-800 border border-green-500/30 p-2 rounded text-[11px]"><b>${c.nome}</b></div>`).join('');
-  document.getElementById('boxUsuarios').innerHTML=usuarios.map((u,i)=>`
-    <div class="bg-black p-2 rounded border border-zinc-800">
-      <div>${u.nome} - ${u.status}</div>
-      <div class="flex gap-2 mt-1"><label><input type="checkbox"> Dashboard</label><label><input type="checkbox"> Kanban</label></div>
-      <button onclick="usuarios[${i}].status='APROVADO';renderAll()" class="mt-1 w-full bg-green-600 text-white py-1 rounded">Aprovar (ADM Master)</button>
-    </div>
-  `).join('');
-}
-function salvar(){
-  if(!fNome.value) return alert('Digite nome');
-  contatos.push({nome:fNome.value,tel:fTel.value,empresa:fEmpresa.value,cnpj:fCnpj.value,col:'novo'});
-  localStorage.setItem('ekklesia_contatos',JSON.stringify(contatos));
-  fNome.value=fTel.value=fEmpresa.value=fCnpj.value='';
-  renderAll();
-}
-renderEquipes();renderAll();
-setInterval(()=>{if(contatos[0]&&contatos[0].col==='novo'){contatos[0].col='neg';renderAll();}},8000);
-</script>
-</body>
-</html>
+app.listen(PORT, ()=>console.log("V8.2 MASTER FINAL ON "+PORT));
