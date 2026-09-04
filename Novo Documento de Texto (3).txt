@@ -1,0 +1,24 @@
+apps/
+├── web/
+│   ├── index.html
+│   └── src/
+│       └── main.jsx  (login do MASTER)
+├── api/
+│   └── src/
+│       ├── server.ts
+│       └── providers/
+│           ├── whatsapp/interface.ts
+│           └── ai/interface.ts
+└── worker/
+    └── src/worker.js
+
+packages/
+└── database/
+    ├── prisma/schema.prisma
+    └── src/
+        ├── index.ts
+        └── seed.ts
+
+infra/docker/
+├── api.Dockerfile
+└── worker.Dockerfile
