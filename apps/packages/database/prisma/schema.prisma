@@ -1,1 +1,94 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
 
+enum RoleType { MASTER ADMIN MANAGER ATTENDANT }
+enum LeadStatus { NEW CONTACTED QUALIFIED PROPOSAL NEGOTIATION WON LOST }
+
+model Organization {
+  id String @id @default(cuid())
+  name String
+  slug String @unique
+  status String @default("ACTIVE")
+  planId String?
+  plan Plan? @relation(fields: [planId], references: [id])
+  users User[]
+  contacts Contact[]
+  leads Lead[]
+  pipelines Pipeline[]
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id String @id @default(cuid())
+  organizationId String?
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  name String
+  email String @unique
+  passwordHash String
+  role RoleType @default(ATTENDANT)
+  isMaster Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@index([organizationId])
+}
+
+model Plan {
+  id String @id @default(cuid())
+  name String @unique
+  slug String @unique
+  price Int
+  features Json
+  organizations Organization[]
+}
+
+model Pipeline {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id])
+  name String @default("Vendas")
+  stages PipelineStage[]
+}
+
+model PipelineStage {
+  id String @id @default(cuid())
+  pipelineId String
+  pipeline Pipeline @relation(fields: [pipelineId], references: [id])
+  name String
+  order Int
+  color String @default("#6366f1")
+  leads Lead[]
+}
+
+model Contact {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id])
+  name String
+  phone String
+  whatsapp String?
+  email String?
+  companyName String?
+  city String?
+  uf String?
+  tags String[] @default([])
+  createdAt DateTime @default(now())
+  leads Lead[]
+  @@index([organizationId])
+}
+
+model Lead {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id])
+  contactId String?
+  contact Contact? @relation(fields: [contactId], references: [id])
+  pipelineId String?
+  stageId String?
+  stage PipelineStage? @relation(fields: [stageId], references: [id])
+  title String
+  value Int @default(0)
+  status LeadStatus @default(NEW)
+  responsibleId String?
+  createdAt DateTime @default(now())
+  @@index([organizationId])
+  @@index([stageId])
+}
