@@ -1,0 +1,8 @@
+ekklesia/
+├── apps/
+├── packages/
+├── infra/
+├── .env.example
+├── docker-compose.yml
+├── package.json
+└── README.md
